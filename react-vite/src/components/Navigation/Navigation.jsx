@@ -10,7 +10,8 @@ function Navigation() {
       </li>
 
       <li>
-        <ProfileButton />
+        {/* <ProfileButton /> */}
+        <button>Log In</button>
       </li>
     </ul>
   );

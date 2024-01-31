@@ -13,6 +13,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    # party_id = db.Column(db.Integer)
+    # avatar_id = db.Column(db.Integer)
+    # points = db.Column(db.Integer)
+
+    habits = db.relationship('Habit', back_populates='user')
 
     @property
     def password(self):
