@@ -7,11 +7,13 @@ function Navigation() {
     <ul>
       <li>
         <NavLink to="/">Home</NavLink>
+
+      </li>
+      {}<li>
       </li>
 
       <li>
-        {/* <ProfileButton /> */}
-        <button>Log In</button>
+        <ProfileButton />
       </li>
     </ul>
   );

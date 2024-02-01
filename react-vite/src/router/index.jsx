@@ -3,6 +3,8 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 
+import  Habits  from '../components/Habits'
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -19,6 +21,10 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
+      {
+        path: "/habits",
+        element: <Habits />
+      }
     ],
   },
 ]);
