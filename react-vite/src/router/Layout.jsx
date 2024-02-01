@@ -5,6 +5,7 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
 import SignupFormPage from "../components/SignupFormPage";
+import Habits from "../components/Habits";
 
 
 export default function Layout() {
@@ -21,7 +22,8 @@ export default function Layout() {
       <ModalProvider>
         <Navigation />
         {isLoaded && <Outlet />}
-        {sessionUser ? <SignupFormPage /> : null}
+        {sessionUser ? null : <SignupFormPage />}
+        {sessionUser ? <Habits/> : null}
         <Modal />
       </ModalProvider>
     </>

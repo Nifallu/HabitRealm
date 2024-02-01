@@ -1,35 +1,30 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
-class Habit(db.Model):
-    __tablename__='habits'
+class Quest(db.Model):
+    __tablename__='quests'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    frequency = db.Column(db.Integer, nullable=False)
-    count = db.Column(db.Integer)
-    quest_id = db.Column(db.Integer)
+    progress = db.Column(db.Integer)
+    # reward_points = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    user = db.relationship('User', back_populates="habits")
-    # quest = db.relationship('Quest', secondary='quest_habits', back_populates='habits')
+    # user = db.relationship("User", secondary='user_quests', back_populates='quest')
+    # habit = db.relationship("Habit", secondary="quest_habits", back_populates="quest")
 
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description,
-            'user_id': self.user_id,
-            'username': self.user.username,
-            'count': self.count,
-            'frequency': self.frequency,
-            'quest_id': self.quest_id,
+            'progress': self.progress,
+            # 'reward_points': self.reward_points,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

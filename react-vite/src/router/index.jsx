@@ -3,6 +3,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 
+import Quests from '../components/Quests';
 import  Habits  from '../components/Habits'
 
 export const router = createBrowserRouter([
@@ -22,9 +23,14 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "/habits",
+        path: "/habits/:habitId",
         element: <Habits />
+      },
+      {
+        path: "/quests/:questId",
+        element: <Quests />
       }
+
     ],
   },
 ]);
