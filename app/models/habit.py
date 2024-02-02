@@ -18,7 +18,7 @@ class Habit(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     user = db.relationship('User', back_populates="habits")
-    # quest = db.relationship('Quest', secondary='quest_habits', back_populates='habits')
+    quest = db.relationship('Quest', secondary='quest_habits', back_populates='habits')
 
     def to_dict(self):
         return {

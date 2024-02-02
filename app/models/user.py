@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     # points = db.Column(db.Integer)
 
     habits = db.relationship('Habit', back_populates='user')
-    # quest = db.relationship('Quest', secondary='user_quests', back_populates='user')
+    user_quests = db.relationship('Quest', secondary='user_quests', back_populates='users')
 
     @property
     def password(self):

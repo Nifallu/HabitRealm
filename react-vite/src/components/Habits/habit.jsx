@@ -10,7 +10,7 @@ const Habits = () =>{
     const dispatch=useDispatch();
 
     const toggleMenu = (e) => {
-        e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+        e.stopPropagation();
         setShowMenu(!showMenu);
         };
         
@@ -77,10 +77,10 @@ const Habits = () =>{
                             <button> - </button>
                             <button onClick={()=> handleDelete(habit.id)}>Delete</button>
                             <OpenModalMenuItem
-                        itemText="Update Habit"
-                        onItemClick={closeMenu}
-                        modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
-                        />
+                                itemText="Update Habit"
+                                onItemClick={closeMenu}
+                                modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
+                            />
                         </div>
                     ))
                     ) : (

@@ -34,7 +34,6 @@ function HabitModal({fetchHabits, id} ) {
 
     return (
         <>
-        {console.log("id", id)}
         <h1>{id ? 'Update Habit': 'Create Habit'}</h1>
         <form onSubmit={handleSubmit}>
             <label>

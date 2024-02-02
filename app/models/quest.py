@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
+
 class Quest(db.Model):
     __tablename__='quests'
 
@@ -15,8 +16,8 @@ class Quest(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    # user = db.relationship("User", secondary='user_quests', back_populates='quest')
-    # habit = db.relationship("Habit", secondary="quest_habits", back_populates="quest")
+    user = db.relationship("User", secondary="user_quests", back_populates='quest')
+    habit = db.relationship("Habit", secondary="quest_habits", back_populates="quest")
 
     def to_dict(self):
         return {

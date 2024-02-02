@@ -20,10 +20,10 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_habits()
-        # undo_quests()
+        undo_quests()
     seed_users()
     seed_habits()
-    # seed_quests()
+    seed_quests()
     
     # Add other seed functions here
 
