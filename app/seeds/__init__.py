@@ -33,5 +33,5 @@ def seed():
 def undo():
     undo_users()
     undo_habits()
-    # undo_quests()
+    undo_quests()
     # Add other undo functions here

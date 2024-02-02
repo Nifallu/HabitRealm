@@ -50,36 +50,36 @@ def seed_quests():
     habit9 = Habit.query.get(9)
     habit11 = Habit.query.get(11)
 
-    quest1.user_quest.append(user1)
-    quest2.user_quest.append(user2)
-    quest3.user_quest.append(user3)
-    quest4.user_quest.append(user1)
-    quest5.user_quest.append(user2)
-    
+    quest1.user.append(user1)
+    quest2.user.append(user2)
+    quest3.user.append(user3)
+    quest4.user.append(user1)
+    quest5.user.append(user2)
+
     #quest1'Epic Adventure of Wisdom'
-    quest1.habits.append(habit2)
-    quest1.habits.append(habit3)
-    quest1.habits.append(habit9)
+    quest1.habit.append(habit2)
+    quest1.habit.append(habit3)
+    quest1.habit.append(habit9)
 
     #quest2 'Mystical Harmony Journey'
-    quest2.habits.append(habit3)
-    quest2.habits.append(habit6)
-    quest2.habits.append(habit8)
-    quest2.habits.append(habit11)
+    quest2.habit.append(habit3)
+    quest2.habit.append(habit6)
+    quest2.habit.append(habit8)
+    quest2.habit.append(habit11)
 
     #quest3 'Legendary Fitness Expedition'
-    quest3.habits.append(habit1)
-    quest3.habits.append(habit4)
-    quest3.habits.append(habit6)
+    quest3.habit.append(habit1)
+    quest3.habit.append(habit4)
+    quest3.habit.append(habit6)
 
     #quest4 'Galactic Coding Odyssey'
-    quest4.habits.append(habit5)
-    quest4.habits.append(habit9)
+    quest4.habit.append(habit5)
+    quest4.habit.append(habit9)
 
     #quest5 'Sorcerer\'s Mindful Breathing Ritual'
-    quest5.habits.append(habit3)
-    quest5.habits.append(habit7)
-    quest5.habits.append(habit11)
+    quest5.habit.append(habit3)
+    quest5.habit.append(habit7)
+    quest5.habit.append(habit11)
 
 
     db.session.add_all([quest1, quest2, quest3, quest4, quest5])

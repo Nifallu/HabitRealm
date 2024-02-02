@@ -3,6 +3,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 quest_habits = db.Table(
+    "quest_habits",
     db.Column(
         "habit_id",
         db.Integer,
