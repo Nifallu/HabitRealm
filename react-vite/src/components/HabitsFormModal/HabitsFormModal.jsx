@@ -4,7 +4,7 @@ import { createHabit } from "../../redux/habits";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
-function HabitModal(fetchHabits, id=null, ) {
+function HabitModal({fetchHabits, id} ) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [name, setName] = useState("");
@@ -22,9 +22,7 @@ function HabitModal(fetchHabits, id=null, ) {
         frequency,
         };
 
-        const serverResponse = await dispatch(createHabit(habitData));
-        console.log("test", serverResponse.errors)
-
+        const serverResponse = await dispatch(createHabit(habitData, id));
         if (serverResponse.errors) {
         setErrors(serverResponse.errors);
         } else {
@@ -36,8 +34,8 @@ function HabitModal(fetchHabits, id=null, ) {
 
     return (
         <>
-        <h1>Create Habit</h1>
-        {/* {errors && errors.map((message) => <p key={message}>{message}</p>)} */}
+        {console.log("id", id)}
+        <h1>{id ? 'Update Habit': 'Create Habit'}</h1>
         <form onSubmit={handleSubmit}>
             <label>
             Name
@@ -69,7 +67,7 @@ function HabitModal(fetchHabits, id=null, ) {
             />
             </label>
             {errors.frequency && <p>{errors.frequency}</p>}
-            <button type="submit">Create Habit</button>
+            <button type="submit">{id ? 'Update Habit': 'Create Habit'}</button>
         </form>
         </>
     );

@@ -52,7 +52,6 @@ const Habits = () =>{
                 fetchHabits();
             } catch (error) {
                 console.error("Error deleting habit:", error.message);
-                //remember to add error handling
             }
         }
     };
@@ -77,6 +76,11 @@ const Habits = () =>{
                             <li>Frequency: {habit.frequency}</li>
                             <button> - </button>
                             <button onClick={()=> handleDelete(habit.id)}>Delete</button>
+                            <OpenModalMenuItem
+                        itemText="Update Habit"
+                        onItemClick={closeMenu}
+                        modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
+                        />
                         </div>
                     ))
                     ) : (

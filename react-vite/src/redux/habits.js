@@ -5,12 +5,12 @@ const DELETE_HABIT = "DELETE_HABIT";
 const initialState = {
     habits: [],
     errors: [],
-  };
+};
 
 export const createHabit = (habitData, id=null) => async (dispatch) => {
     try {
         
-        const response = await fetch("/api/habits", {
+        const response = await fetch(id ? `/api/habits/${id}` : "/api/habits", {
         method: id ? "PUT" : "POST",
         headers: {
             "Content-Type": "application/json",
@@ -48,20 +48,26 @@ const habitsReducer = (state = initialState, action) => {
             if (action.error) {
             return { ...state, errors: action.payload };
             } else {
-                const habitIndex=state.habits.findIndex(habit => habit.id === action.payload.id)
-                const updateHabits= [...state.habits]
-                
-                if (habitIndex !== -1){
-                    updateHabits[habitIndex] = action.payload;
-                }else{
-                    updateHabits.push(action.payload)
-                }
+            const habitIndex = state.habits.findIndex((habit) => habit.id === action.payload.id);
+            const updatedHabits = [...state.habits];
+    
+            if (habitIndex !== -1) {
+                updatedHabits[habitIndex] = action.payload;
+            } else {
+                updatedHabits.push(action.payload);
+            }
             return {
                 ...state,
-                habits: updateHabits,
+                habits: updatedHabits,
                 errors: [],
             };
             }
+        case DELETE_HABIT:
+            const filteredHabits = state.habits.filter((habit) => habit.id !== action.payload);
+            return {
+            ...state,
+            habits: filteredHabits,
+            };
         default:
             return state;
     }
