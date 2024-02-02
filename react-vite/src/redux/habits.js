@@ -8,18 +8,18 @@ const initialState = {
   };
 
 export const createHabit = (habitData, id=null) => async (dispatch) => {
-  try {
-    
-    const response = await fetch("/api/habits", {
-      method: id ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(habitData),
-    });
+    try {
+        
+        const response = await fetch("/api/habits", {
+        method: id ? "PUT" : "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(habitData),
+        });
 
-    if (!response.ok) {
-      throw new Error(id ? " Failed to update habit" : "Failed to create habit");
+        if (!response.ok) {
+        throw new Error(id ? " Failed to update habit" : "Failed to create habit");
     }
 
     const data = await response.json();

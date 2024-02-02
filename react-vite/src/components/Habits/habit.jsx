@@ -43,7 +43,7 @@ const Habits = () =>{
 
     useEffect(()=>{
         fetchHabits()
-    }, [updateList])
+    }, [])
 
     const handleDelete = async (habitId) => {
         if (window.confirm("Are you sure you want to delete this habit?")) {
@@ -74,7 +74,7 @@ const Habits = () =>{
                             <li className="habitName">{habit.name}</li>
                             <li>{habit.description}</li>
                             <li>{habit.count}</li>
-                            <li>Frequency {habit.frequency}</li>
+                            <li>Frequency: {habit.frequency}</li>
                             <button> - </button>
                             <button onClick={()=> handleDelete(habit.id)}>Delete</button>
                         </div>
