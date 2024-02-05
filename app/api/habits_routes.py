@@ -42,6 +42,19 @@ def get_habits():
     return {"Habits": [habit.to_dict() for habit in habits]}
 
 
+@habits_routes.route("/<int:habit_id>")
+def get_habit_by_id(habit_id):
+    """
+    Get a Habit by its Id
+    """
+    habit = Habit.query.get(habit_id)
+
+    if not habit:
+        return {"message": "Habit not found"}, 404
+    
+    return habit.to_dict(), 200
+
+
 @habits_routes.route("/<int:habit_id>", methods=["PUT"])
 @login_required
 def update_habit(habit_id):
@@ -71,6 +84,9 @@ def update_habit(habit_id):
 @habits_routes.route("/<int:habit_id>", methods=["DELETE"])
 @login_required
 def delete_habit(habit_id):
+    """
+    Delete a Habit
+    """
     habit = Habit.query.get(habit_id)
 
     if not habit:
@@ -80,6 +96,6 @@ def delete_habit(habit_id):
         db.session.delete(habit)
         db.session.commit()
 
-        return {"message": "Success"}, 200
+        return {"message": "Habit Deleted"}, 200
     
     return {"message": "User Unauthorized"}, 401

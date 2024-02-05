@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     # avatar_id = db.Column(db.Integer)
     # points = db.Column(db.Integer)
 
+    my_quests = (db.relationship('Quest', back_populates='creator'))
     habit = db.relationship('Habit', back_populates='user')
     quest = db.relationship('Quest', secondary='user_quests', back_populates='user')
 

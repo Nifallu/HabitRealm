@@ -9,7 +9,7 @@ class Habit(db.Model):
 
     id = db.Column(db.Integer, nullable=False, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     description = db.Column(db.Text, nullable=False)
     frequency = db.Column(db.Integer, nullable=False)
     count = db.Column(db.Integer)

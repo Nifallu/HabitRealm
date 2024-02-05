@@ -24,7 +24,7 @@ function HabitModal({fetchHabits, id} ) {
 
         const serverResponse = await dispatch(createHabit(habitData, id));
         if (serverResponse.errors) {
-        setErrors(serverResponse.errors);
+            setErrors(serverResponse.errors);
         } else {
             fetchHabits()
             closeModal()
@@ -37,33 +37,33 @@ function HabitModal({fetchHabits, id} ) {
         <h1>{id ? 'Update Habit': 'Create Habit'}</h1>
         <form onSubmit={handleSubmit}>
             <label>
-            Name
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-            />
+                Name
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
             </label>
             {errors.name && <p>{errors.name}</p>}
             <label>
-            Description
-            <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-            />
+                Description
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
             </label>
             {errors.description && <p>{errors.description}</p>}
             <label>
-            Frequency
-            <input
-                type="number"
-                value={frequency}
-                onChange={(e) => setFrequency(e.target.value)}
-                required
-            />
+                Frequency
+                <input
+                    type="number"
+                    value={frequency}
+                    onChange={(e) => setFrequency(e.target.value)}
+                    required
+                />
             </label>
             {errors.frequency && <p>{errors.frequency}</p>}
             <button type="submit">{id ? 'Update Habit': 'Create Habit'}</button>

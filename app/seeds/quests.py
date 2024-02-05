@@ -8,31 +8,36 @@ def seed_quests():
     quest1 = Quest(
         name='Epic Adventure of Wisdom',
         description='Embark on a quest for knowledge and enlightenment. Explore the realms of literature, philosophy, and science.',
-        progress=0,
+        creator_id =1,
+        difficulty=7,
     )
 
     quest2 = Quest(
         name='Mystical Harmony Journey',
         description='Embark on a quest to find inner peace and balance. Engage in meditation, mindfulness, and self-discovery.',
-        progress=0,
+        creator_id=2,
+        difficulty=5,
     )
 
     quest3 = Quest(
         name='Legendary Fitness Expedition',
         description='Embark on a quest for physical prowess and well-being. Conquer challenging workouts and build a legendary physique.',
-        progress=0,
+        creator_id=3,
+        difficulty=4,
     )
 
     quest4 = Quest(
         name='Galactic Coding Odyssey',
         description='Embark on a quest to master the secrets of coding and programming. Navigate the galaxies of algorithms and software development.',
-        progress=0,
+        creator_id=1,
+        difficulty=10,
     )
 
     quest5 = Quest(
         name='Sorcerer\'s Mindful Breathing Ritual',
         description='Embark on a quest to harness the power of mindfulness. Master the ancient art of mindful breathing and unlock inner magic.',
-        progress=0,
+        creator_id=2,
+        difficulty=2,
     )
 
     user1 = User.query.get(1)

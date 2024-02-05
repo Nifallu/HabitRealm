@@ -3,10 +3,12 @@ import HabitModal from "../HabitsFormModal/HabitsFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { deleteHabit } from "../../redux/habits";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Habits = () =>{
     const [habits, setHabits] = useState([])
     const [showMenu, setShowMenu] = useState(false);
+    const sessionUser = useSelector(state => state.session.user)
     const dispatch=useDispatch();
 
     const toggleMenu = (e) => {
@@ -42,8 +44,11 @@ const Habits = () =>{
     }
 
     useEffect(()=>{
+        if (!sessionUser){
+            console.log("No session user.")
+        }
         fetchHabits()
-    }, [])
+    }, [sessionUser])
 
     const handleDelete = async (habitId) => {
         if (window.confirm("Are you sure you want to delete this habit?")) {
@@ -57,8 +62,9 @@ const Habits = () =>{
     };
 
     return (
+        
         <div className="habitBlock">
-            {console.log(habits.Habits)}
+            {sessionUser && (
             <ul>
                 <h1>Habits</h1>
                 <OpenModalMenuItem
@@ -87,6 +93,7 @@ const Habits = () =>{
                         <h2>Embark on the exciting journey to habit creation! The canvas is blank, each day a stroke of positive change. Let&apos;s craft a masterpiece of purposeful living, one habit at a time!</h2>
                     )}
             </ul>
+            )}
         </div>
     )
 }
