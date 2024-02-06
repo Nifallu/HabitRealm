@@ -30,10 +30,14 @@ class Quest(db.Model):
             'name': self.name,
             'description': self.description,
             'creator_id': self.creator_id,
+            'creator_id': self.creator_id,
+            'difficulty': self.difficulty,
             'goal': self.description,
             'habit_counter': self.habit_counter,
             'progress': self.progress,
             'reward_points': self.reward_points,
+            'user': [user.to_dict() for user in self.user],
+            'habits': [habit.to_dict()for habit in self.habit],
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

@@ -1,0 +1,41 @@
+.quests {
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    border: 1px #ccc solid;
+    padding: 20px;
+}
+
+.questBox {
+    margin-top:35px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.questDetailBox {
+    display: grid;
+    grid-template-columns: 1fr .75fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 10px;
+    height: 100vh;
+}
+
+.questHabits {
+    grid-column: 1;
+    grid-row: span 2;
+}
+
+.questDetails, .questList {
+    grid-column: 2;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    border: 1px #ccc solid;
+    padding: 20px;
+}
+
+.questHabit {
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 15px;
+}

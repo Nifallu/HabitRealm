@@ -1,0 +1,13 @@
+.habits {
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    border: 1px #ccc solid;
+    padding: 20px;
+}
+
+.habitBox {
+    margin-top:35px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}

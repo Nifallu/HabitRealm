@@ -6,6 +6,7 @@ import Layout from './Layout';
 
 import Quests from '../components/Quests';
 import  Habits  from '../components/Habits'
+import QuestDetails from '../components/Quests/questDetails';
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element:  <>
-                  <h1>Welcome!</h1>
                   <SignupFormPage />
                   <Habits/>
                   </>
@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/quests/:questId",
-        element: <Quests />
+        element: <QuestDetails />
       }
 
     ],

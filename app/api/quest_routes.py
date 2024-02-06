@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
 from app.models import db
+from app.models.user import User
 from app.models.quest import Quest
 from app.models.habit import Habit
 from ..forms.quest_form import QuestForm
@@ -26,7 +27,15 @@ def get_quest_by_id(quest_id):
     quest = Quest.query.get(quest_id)
     if not quest:
         return {'message': "Quest not found"}, 404
-    return quest.to_dict(), 200
+    
+    user = User.query.get(quest.creator_id)
+
+    if not user:
+        return {'message': "No Creator found"}
+    
+    return {"Quest": quest.to_dict(),
+            "User": user.username }, 200
+
 
 
 @quests_routes.route('/current')
@@ -79,7 +88,6 @@ def update_quest(quest_id):
     """
     quest = Quest.query.get(quest_id)
     
-
     if not quest:
         return {"message": "Quest not found"},  404
     
@@ -93,8 +101,11 @@ def update_quest(quest_id):
         quest.name = form.name.data
         quest.description = form.description.data
         quest.difficulty = form.difficulty.data
+        quest.habit_counter=0
         quest.goal = int(form.difficulty.data)*100
         quest.reward_points = int(form.difficulty.data)*5
+        quest.progress=0
+        
 
         db.session.commit()
         return {"Quest": quest.to_dict()}, 200

@@ -4,6 +4,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { deleteHabit } from "../../redux/habits";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import "./habits.css";
 
 const Habits = () =>{
     const [habits, setHabits] = useState([])
@@ -72,14 +73,14 @@ const Habits = () =>{
                     onItemClick={closeMenu}
                     modalComponent={<HabitModal fetchHabits={fetchHabits} />}
                 />
+                <div className="habitBox">
                 {Array.isArray(habits.Habits) && habits.Habits.length > 0 ? (
                     habits.Habits.map((habit) => (
-                        <div key={habit.id}>
+                        <div key={habit.id} className="habits">
                             <button> + </button>
-                            <li className="habitName">{habit.name}</li>
+                            <li className="habitName"><h3>{habit.name}</h3></li>
                             <li>{habit.description}</li>
                             <li>{habit.count}</li>
-                            <li>Frequency: {habit.frequency}</li>
                             <button> - </button>
                             <button onClick={()=> handleDelete(habit.id)}>Delete</button>
                             <OpenModalMenuItem
@@ -92,6 +93,7 @@ const Habits = () =>{
                     ) : (
                         <h2>Embark on the exciting journey to habit creation! The canvas is blank, each day a stroke of positive change. Let&apos;s craft a masterpiece of purposeful living, one habit at a time!</h2>
                     )}
+                    </div>
             </ul>
             )}
         </div>

@@ -1,9 +1,10 @@
-.profile-dropdown {
-  position: absolute;
-}* {
+* {
   color: lightskyblue;
 }
 
+.profile-dropdown {
+  position: absolute;
+}
 body {
   background-color: #0d1016;
 }
@@ -16,17 +17,36 @@ body {
     list-style: none;
     position: absolute;
     right: 20px;
-    top: 65px;
+    top: 90px;
     border-radius: 10px;
-    color:#0d1016;
   }
 
+  .profile-dropdown li {
+    color:#ccc;
+  }
+  .profile-dropdown button {
+    color: #2d2d2d
+  } 
+
+
   .navigationBar {
-    background-color: #2d2d2d;
+    display: flex;
+    background-color: #1245fe;
     width: 100%;
     border-radius: 20px;
   }
+
+  .HabitRealm, .navLinks {
+    color: #ccc;
+    text-decoration: none;
+  }
   
+  .navLinks {
+    position: relative;
+    top: 30px;
+    margin: 25px;
+    cursor: pointer;
+  }
 
   .hidden {
     display: none;
@@ -45,7 +65,7 @@ body {
   .menuButton {
     position: absolute;
     right: 20px;
-    top: 5px;
+    top: 35px;
     font-size: 20px;
     border-radius: 15px;
     padding: 8px;
@@ -56,10 +76,4 @@ body {
 
   .menuList {
     padding: 10px;
-  }
-
-  .logInButtons {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
   }

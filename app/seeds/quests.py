@@ -10,6 +10,9 @@ def seed_quests():
         description='Embark on a quest for knowledge and enlightenment. Explore the realms of literature, philosophy, and science.',
         creator_id =1,
         difficulty=7,
+        goal=700,
+        habit_counter=100,
+        reward_points=35,
     )
 
     quest2 = Quest(
@@ -17,6 +20,9 @@ def seed_quests():
         description='Embark on a quest to find inner peace and balance. Engage in meditation, mindfulness, and self-discovery.',
         creator_id=2,
         difficulty=5,
+        goal=500,
+        habit_counter=25,
+        reward_points=25,
     )
 
     quest3 = Quest(
@@ -24,6 +30,9 @@ def seed_quests():
         description='Embark on a quest for physical prowess and well-being. Conquer challenging workouts and build a legendary physique.',
         creator_id=3,
         difficulty=4,
+        goal=400,
+        habit_counter=60,
+        reward_points=20,
     )
 
     quest4 = Quest(
@@ -31,6 +40,9 @@ def seed_quests():
         description='Embark on a quest to master the secrets of coding and programming. Navigate the galaxies of algorithms and software development.',
         creator_id=1,
         difficulty=10,
+        goal=1000,
+        habit_counter=250,
+        reward_points=50,
     )
 
     quest5 = Quest(
@@ -38,6 +50,9 @@ def seed_quests():
         description='Embark on a quest to harness the power of mindfulness. Master the ancient art of mindful breathing and unlock inner magic.',
         creator_id=2,
         difficulty=2,
+        goal=200,
+        habit_counter=110,
+        reward_points=10,
     )
 
     user1 = User.query.get(1)

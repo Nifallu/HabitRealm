@@ -1,13 +1,21 @@
 import {useState, useEffect} from "react";
 import QuestModal from "../QuestFormModal/questFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { deleteQuest } from "../../redux/quests";
+import { deleteQuest, getQuests } from "../../redux/quests";
 import { useDispatch} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import "./quests.css"
+
 
 const Quests =() => {
     const [quests, setQuests] = useState([])
     const [showMenu, setShowMenu] = useState(false);
+
+    const sessionUser = useSelector(state => state.session.user)
+
     const dispatch=useDispatch();
+    const redirect = useNavigate();
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -39,6 +47,7 @@ const Quests =() => {
             } else{
                 throw new Error('Error fetching quests')
             }
+            // await dispatch(getQuests);
         }
 
         useEffect(()=>{
@@ -61,31 +70,38 @@ const Quests =() => {
         <div className="QuestBlock">
             <ul>
                 <h1>Quests</h1>
-                <OpenModalMenuItem
+                {sessionUser ? <OpenModalMenuItem
                     itemText="Create Quest"
                     onItemClick={{closeMenu}}
                     modalComponent={<QuestModal fetchQuests={fetchQuests} />}
-                />
-                {console.log("quest", quests.Quests)}
+                /> : null }
+                <div className="questBox">
                 {Array.isArray(quests.Quests) && quests.Quests.length > 0 ? (
                     quests.Quests.map((quest) => (
-                        <div key={quest.id}>
-                            <button> + </button>
-                            <li className="questName">{quest.name}</li>
+                        <div key={quest.id} className="quests">
+                        <h2
+                            className="questName"
+                            onClick={sessionUser ? () => redirect(`/quests/${quest.id}`) : null}
+                        >
+                            {quest.name}
+                        </h2>
                             <li>{quest.description}</li>
                             <li>Difficulty {quest.difficulty}</li>
-                            <button> - </button>
+                            <li>Progress (coming soon) {quest.progress}</li>
+                            <li>Reward {quest.reward_points}</li>
+                            {sessionUser && sessionUser.id === quest.creator_id ? <>
                             <button onClick={()=> handleDelete(quest.id)}>Delete</button>
                             <OpenModalMenuItem
                                 itemText="Update Quest"
                                 onItemClick={closeMenu}
                                 modalComponent={<QuestModal fetchQuests={fetchQuests} id={quest.id} />}
-                            />
+                            /></> : null}
                         </div>
                     ))
                 ) : (
                     <h2>Craft your epic quest—forge destiny&apos;s tale!</h2>
                 )}
+                </div>
                 
             </ul>
         </div>
