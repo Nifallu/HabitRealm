@@ -1,29 +1,31 @@
-.signUpModal {
-    display:flex;
+.signupBox {
+    display: flex;
     flex-direction: column;
-    width: 500px;
+    margin: auto;
+    margin-top: 40px;
+    width: 300px;
+    gap: 10px;
     text-align: center;
+    background-color: #2d2d2d;
+    border-radius: 3px;
 }
 
-.signUpModal input {
-    margin: 10px;
-    width: 80%
+.signupInputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.Submit {
-    width: 85%;
-    margin: 10px;
+.inputBox {
+    align-items: center;
+    width: 90%;
+}
+
+.submit {
+    width: 30%;
+    padding: 5px;
+    margin:auto;
+    margin-top: 10px;
     margin-bottom: 20px;
-    height: 50px;
-    font-weight: bolder;
-    font-size: large;
-}
-
-.loginModal {
-    text-align: center;
-}
-
-.loginModal input {
-    width: 80%;
-    margin: 10px;
+    color: #0d1016;
 }

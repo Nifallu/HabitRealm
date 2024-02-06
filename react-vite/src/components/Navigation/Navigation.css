@@ -31,14 +31,16 @@ body {
 
   .navigationBar {
     display: flex;
-    background-color: #1245fe;
-    width: 100%;
-    border-radius: 20px;
+    background-color: #3c0a7d;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 2px;
   }
 
   .HabitRealm, .navLinks {
     color: #ccc;
     text-decoration: none;
+    padding: 15px;
   }
   
   .navLinks {
@@ -52,26 +54,34 @@ body {
     display: none;
   }
 
-  .home {
-    text-decoration: none;
-    font-size: 40px;
-    background-color: #2d2d2d;
-  }
-
   ul {
     list-style: none;
   }
 
   .menuButton {
     position: absolute;
-    right: 20px;
-    top: 35px;
+    right: 0px;
+    top: -5px;
     font-size: 20px;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 8px;
-    width: 100px;
+    width: 120px;
     background-color: #2d2d2d;
     cursor: pointer;
+    text-align: center;
+  }
+
+  .profileButton {
+    position: absolute;
+    right: 25px;
+    top: 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 8px;
+    width: 80px;
+    background-color: #2d2d2d;
+    cursor: pointer;
+    text-align: center;
   }
 
   .menuList {

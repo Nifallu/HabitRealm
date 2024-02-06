@@ -124,11 +124,14 @@ const QuestDetails =() => {
                     <ul>
                         {quest.Quest.habits.map((habit)=> (
                             <div key={habit.id} className="questHabit">
-                            <button> + </button>
+                            
                             <li className="habitName">{habit.name}</li>
-                            <li>{habit.description}</li>
+                            <li className="habitDescription">{habit.description}</li>
                             <li>{habit.count}</li>
+                            <div className="incrementButtons">
+                            <button> + </button>
                             <button> - </button>
+                            </div>
                             {/* <button onClick={()=> handleDelete(habit.id)}>Delete</button>
                             <OpenModalMenuItem
                                 itemText="Update Habit"
@@ -154,7 +157,7 @@ const QuestDetails =() => {
                     ) : null}
                     {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleDelete(quest.Quest.id)}>Delete</button>: null}
                     {quest.Quest && sessionUser.id === quest.Quest.creator_id? <OpenModalMenuItem
-                        itemText="Update Quest"
+                        itemText="Update"
                         onItemClick={closeMenu}
                         modalComponent={<QuestModal fetchQuest={fetchQuest} id={quest.Quest.id} />}
                     />: null}

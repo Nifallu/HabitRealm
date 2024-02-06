@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
+import "./SignupForm.css"
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -41,13 +42,14 @@ function SignupFormPage() {
   };
 
   return (
-    <>
+    <div className="signupBox">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="signupInputBox">
+        <label >
           Email
           <input
+            className="inputBox"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -58,6 +60,7 @@ function SignupFormPage() {
         <label>
           Username
           <input
+            className="inputBox"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -68,6 +71,7 @@ function SignupFormPage() {
         <label>
           Password
           <input
+            className="inputBox"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -78,6 +82,7 @@ function SignupFormPage() {
         <label>
           Confirm Password
           <input
+            className="inputBox"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -85,9 +90,9 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

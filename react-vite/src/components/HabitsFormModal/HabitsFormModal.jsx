@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createHabit } from "../../redux/habits";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import "./HabitsForm.css"
 
 function HabitModal({fetchHabits, id} ) {
     const navigate = useNavigate();
@@ -33,12 +34,13 @@ function HabitModal({fetchHabits, id} ) {
     };
 
     return (
-        <>
+        <div className="createHabitModal">
         <h1>{id ? 'Update Habit': 'Create Habit'}</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="createHabitForm">
             <label>
                 Name
-                <input
+                <input 
+                    className="habitInput"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -49,6 +51,7 @@ function HabitModal({fetchHabits, id} ) {
             <label>
                 Description
                 <input
+                    className="habitInput"
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -59,6 +62,7 @@ function HabitModal({fetchHabits, id} ) {
             <label>
                 Frequency
                 <input
+                    className="habitInput"
                     type="number"
                     value={frequency}
                     onChange={(e) => setFrequency(e.target.value)}
@@ -66,9 +70,9 @@ function HabitModal({fetchHabits, id} ) {
                 />
             </label>
             {errors.frequency && <p>{errors.frequency}</p>}
-            <button type="submit">{id ? 'Update Habit': 'Create Habit'}</button>
+            <button type="submit" className="submit">{id ? 'Update Habit': 'Create Habit'}</button>
         </form>
-        </>
+        </div>
     );
 }
 

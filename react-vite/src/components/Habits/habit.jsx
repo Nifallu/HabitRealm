@@ -77,17 +77,21 @@ const Habits = () =>{
                 {Array.isArray(habits.Habits) && habits.Habits.length > 0 ? (
                     habits.Habits.map((habit) => (
                         <div key={habit.id} className="habits">
-                            <button> + </button>
                             <li className="habitName"><h3>{habit.name}</h3></li>
-                            <li>{habit.description}</li>
-                            <li>{habit.count}</li>
-                            <button> - </button>
+                            <li className="habitDescription">{habit.description}</li>
+                            <div className="incrementButtons">
+                            <button onClick={()=>alert('Feature coming soon')}> + </button>
+                            <button onClick={()=>alert('Feature coming soon')}> - </button>
+                            </div>
+                            <div className="updateDelete">
+                            <li className="habitCount">Count: {habit.count}</li>
                             <button onClick={()=> handleDelete(habit.id)}>Delete</button>
                             <OpenModalMenuItem
-                                itemText="Update Habit"
+                                itemText="Update"
                                 onItemClick={closeMenu}
                                 modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
                             />
+                            </div>
                         </div>
                     ))
                     ) : (

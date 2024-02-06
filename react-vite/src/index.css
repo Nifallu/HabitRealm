@@ -1,1 +1,8 @@
 /* TODO: Add sitewide styles */
+button {
+    color: #0d1016;
+    border: 1px solid #0d1016;
+    border-radius: 5px;
+    padding: 0px 20px;
+    background-color: #cccc;
+}
