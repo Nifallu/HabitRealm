@@ -4,6 +4,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { deleteHabit } from "../../redux/habits";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./habits.css";
 
 const Habits = () =>{
@@ -11,6 +12,7 @@ const Habits = () =>{
     const [quests, setQuests] = useState([])
     const [showMenu, setShowMenu] = useState(false);
     const sessionUser = useSelector(state => state.session.user)
+    const navigate = useNavigate()
     const dispatch=useDispatch();
 
     const toggleMenu = (e) => {
@@ -120,14 +122,17 @@ const Habits = () =>{
                     <div>
                     <div className="habitBlock">
                     <div>
-                        <h3>Quest Habits</h3>
+                        <h2>Quest Habits</h2>
                         <div className="habitBox">
                             {Array.isArray(quests.Quests) && quests.Quests.length > 0 ? (
                                 quests.Quests.map((quest) => (
                                     <>
                                         {quest.user.some(user => user.id === sessionUser.id) ?
                                         <div key={quest.id} className='habitQuests'>
-                                            <h3>{quest.name}</h3> 
+                                            <h3
+                                                className="habitQuestName"
+                                                onClick={() => navigate(`/quests/${quest.id}`)}
+                                            >{quest.name}</h3>                            
                                             {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
                                                 quest.habits.map((habitData) => (
                                                     <div key={habitData.id} className="habits">

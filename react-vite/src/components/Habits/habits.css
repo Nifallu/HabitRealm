@@ -64,3 +64,12 @@
 .habitQuests {
     margin-bottom: 20px;
 }
+
+
+.habitBlock {
+    margin-top: 60px;
+}
+
+.habitQuestName {
+    text-align: center;
+}
