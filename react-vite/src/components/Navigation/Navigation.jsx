@@ -7,10 +7,6 @@ function Navigation() {
     <ul className="navigationBar">
       <li>
         <h1><NavLink className="HabitRealm" to="/">HabitRealm</NavLink></h1>
-
-      </li>
-      <li>
-      <NavLink className="navLinks" to="/">Habits</NavLink>
       </li>
       <li>
         <NavLink className="navLinks"to="/quests">Quests</NavLink>
