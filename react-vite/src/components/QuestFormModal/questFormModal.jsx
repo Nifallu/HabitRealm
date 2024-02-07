@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUpdateQuest } from "../../redux/quests";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import "./questFormModal.css"
 import { useEffect } from "react";
@@ -11,16 +11,15 @@ function QuestModal({fetchQuests, id, quest}){
     const dispatch = useDispatch();
     const[name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [difficulty, setDifficulty] = useState("");
+    const [difficulty, setDifficulty] = useState(1);
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
     useEffect(() => {
-        console.log(quest)
         if (quest) {
             setName(quest.name || "");
             setDescription(quest.description || "");
-            setDifficulty(quest.difficulty ? quest.difficulty.toString() : "");
+            setDifficulty(quest.difficulty ? quest.difficulty.toString() : 1);
         }
     }, [quest]);
 
@@ -39,6 +38,12 @@ function QuestModal({fetchQuests, id, quest}){
         } else {
             fetchQuests()
             closeModal()
+        
+            if (id !==undefined) {
+                navigate(`/quests/${id}`);
+            } else {
+                navigate(`quests/${serverResponse.id}`)
+            }
         }
     };
 

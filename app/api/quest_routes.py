@@ -75,7 +75,8 @@ def create_quest():
         db.session.add(new_quest)
 
         db.session.commit()
-        return {"message": "Quest created"}
+        return {"message": "Quest created",
+                'id': new_quest.id}
     
     return form.errors, 400
 

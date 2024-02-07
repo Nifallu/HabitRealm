@@ -121,12 +121,12 @@ const Habits = () =>{
                     <div className="habitBlock">
                     <div>
                         <h3>Quest Habits</h3>
-                        <div className="questBox">
+                        <div className="habitBox">
                             {Array.isArray(quests.Quests) && quests.Quests.length > 0 ? (
                                 quests.Quests.map((quest) => (
                                     <>
                                         {quest.user.some(user => user.id === sessionUser.id) ?
-                                        <div key={quest.id}>
+                                        <div key={quest.id} className='habitQuests'>
                                             <h3>{quest.name}</h3> 
                                             {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
                                                 quest.habits.map((habitData) => (

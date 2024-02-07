@@ -47,7 +47,6 @@ const Quests =() => {
             } else{
                 throw new Error('Error fetching quests')
             }
-            // await dispatch(getQuests);
         }
 
         useEffect(()=>{
