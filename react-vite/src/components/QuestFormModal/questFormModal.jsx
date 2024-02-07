@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUpdateQuest } from "../../redux/quests";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import "./questFormModal.css"
 
 function QuestModal({fetchQuests, id}){
     const navigate = useNavigate();
@@ -32,12 +33,13 @@ function QuestModal({fetchQuests, id}){
     };
 
     return (
-        <>
+        <div className="createQuestModal">
         <h1> {id ? 'Update Quest': 'Create Quest'}</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="createQuestForm">
             <label>
                 Name
                 <input
+                    className="questInput"
                     type="text"
                     value={name}
                     onChange={(e)=> setName(e.target.value)}
@@ -48,6 +50,7 @@ function QuestModal({fetchQuests, id}){
             <label>
                 Description
                 <input
+                    className="questInput"
                     type="textarea"
                     value={description}
                     onChange={(e)=> setDescription(e.target.value)}
@@ -57,6 +60,7 @@ function QuestModal({fetchQuests, id}){
                 <label>
                     Difficulty
                     <select
+                    className="questInput"
                     value={difficulty}
                     onChange={(e) => setDifficulty(e.target.value)}
                     required
@@ -69,9 +73,9 @@ function QuestModal({fetchQuests, id}){
                     </select>
                 </label>
             {errors.difficulty && <p>{errors.difficulty}</p>}
-            <button type="submit">{id ? 'Update Quest': 'Create Quest'}</button>
+            <button type="submit" className="submit">{id ? 'Update Quest': 'Create Quest'}</button>
         </form>
-        </>
+        </div>
     )
 }
 

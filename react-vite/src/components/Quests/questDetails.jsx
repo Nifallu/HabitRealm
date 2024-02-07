@@ -1,7 +1,9 @@
 import {useState, useEffect} from "react";
 import QuestModal from "../QuestFormModal/questFormModal";
+import HabitModal from "../HabitsFormModal/HabitsFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { joinQuest, abandonQuest, deleteQuest, getQuestHabits } from "../../redux/quests";
+import { deleteHabit } from "../../redux/habits";
 import { useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -61,15 +63,16 @@ const QuestDetails =() => {
             }
         }
 
-        useEffect(()=>{
-            const fetchData = async () => {
-                try {
-                    await fetchQuest(questId);
-                    await dispatch(getQuestHabits(questId))
-                } catch (error) {
-                    console.log("Error fetching Habits", error.message)
-                }
+        const fetchData = async () => {
+            try {
+                await fetchQuest(questId);
+                await dispatch(getQuestHabits(questId))
+            } catch (error) {
+                console.log("Error fetching Habits", error.message)
             }
+        }
+
+        useEffect(()=>{
             fetchData();
         }, [questId, dispatch])
 
@@ -112,6 +115,16 @@ const QuestDetails =() => {
         }
     };
 
+    const handleHabitDelete = async (habitId) => {
+        if (window.confirm("Are you sure you want to delete this habit?")) {
+            try {
+                await dispatch(deleteHabit(habitId));
+            } catch (error) {
+                console.error("Error deleting habit:", error.message);
+            }
+        }
+    };
+
     return (
         <div>
             <div>
@@ -119,25 +132,32 @@ const QuestDetails =() => {
             </div>
             <div className="questDetailBox">
             <div className="questHabits">
-                <h2>Quest Habits</h2>
+                {quest.Quest ? <>
+                    <h2>Quest Habits</h2>
+                    <OpenModalMenuItem
+                        itemText="Create Habit"
+                        onItemClick={closeMenu}
+                        modalComponent={<HabitModal fetchHabits={fetchData} id={null} questId={quest.Quest.id}/>}
+                    />
+                </> : null }
                 {quest.Quest && quest.Quest.habits && quest.Quest.habits.length > 0 ? (
                     <ul>
                         {quest.Quest.habits.map((habit)=> (
                             <div key={habit.id} className="questHabit">
                             
-                            <li className="habitName">{habit.name}</li>
+                            <li className="habitName"><h3>{habit.name}</h3></li>
                             <li className="habitDescription">{habit.description}</li>
-                            <li>{habit.count}</li>
+                            <li>Count: {habit.count}</li>
                             <div className="incrementButtons">
                             <button> + </button>
                             <button> - </button>
                             </div>
-                            {/* <button onClick={()=> handleDelete(habit.id)}>Delete</button>
+                            <button onClick={()=> handleHabitDelete(habit.id)}>Delete</button>
                             <OpenModalMenuItem
                                 itemText="Update Habit"
                                 onItemClick={closeMenu}
-                                modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
-                            /> */}
+                                modalComponent={<HabitModal fetchHabits={fetchData} id={habit.id} />}
+                            />
                         </div>
                         ))}
                     </ul>
@@ -148,19 +168,24 @@ const QuestDetails =() => {
                     <h3>Created by {quest.User}</h3>
                     <p>{quest.Quest ? quest.Quest.description: "No Description"}</p>
                     <p>{quest.Quest ? quest.Quest.progress: "No Progress"}</p>
-                    <p>{quest.Quest ? <p>Reward {quest.Quest.reward}</p>: "No Rewards"}</p>
+                    <div className="difficultReward">
+                        <p>{quest.Quest ? <p>Difficulty: {quest.Quest.difficulty}</p>: "No difficulty"}</p>
+                        <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points}</p>: "No Rewards"}</p>
+                    </div>
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
                     ) : null}
-                    {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
-                        <button onClick={() => handleAbandon(quest.Quest.id)}>Abandon Quest</button>
-                    ) : null}
-                    {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleDelete(quest.Quest.id)}>Delete</button>: null}
-                    {quest.Quest && sessionUser.id === quest.Quest.creator_id? <OpenModalMenuItem
-                        itemText="Update"
-                        onItemClick={closeMenu}
-                        modalComponent={<QuestModal fetchQuest={fetchQuest} id={quest.Quest.id} />}
-                    />: null}
+                    <div className="questButtons">
+                        {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
+                            <button onClick={() => handleAbandon(quest.Quest.id)}>Abandon Quest</button>
+                        ) : null}
+                        {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleDelete(quest.Quest.id)}>Delete</button>: null}
+                        {quest.Quest && sessionUser.id === quest.Quest.creator_id? <OpenModalMenuItem
+                            itemText="Update"
+                            onItemClick={closeMenu}
+                            modalComponent={<QuestModal fetchQuest={fetchQuest} id={quest.Quest.id} />}
+                        />: null}
+                    </div>
                 </div>
                 <div className="questList">
                     <h3>Other Quests</h3>
@@ -168,9 +193,17 @@ const QuestDetails =() => {
                         quests.Quests.map((quest) => (
                             <>{questId == quest.id ? null :
                             <div key={quest.id}>
-                                <h4 className="questName">{quest.name}</h4>
+                                <h4
+                                    className="questName"
+                                    onClick={sessionUser ? () => redirect(`/quests/${quest.id}`) : null}
+                                >
+                                    {quest.name}
+                                </h4>
+                                <div className="difficultyReward">
                                 <li>Difficulty {quest.difficulty}</li>
                                 <li>Reward {quest.reward_points}</li>
+                                </div>
+                                <hr></hr>
                             </div>}
                             </>
                         ))

@@ -1,8 +1,15 @@
 .quests {
+    display: grid;
+    grid-template-columns: 1fr .25fr;
+    grid-template-areas: 
+    "a c"
+    "b c"
+    "e c"
+    "f f";
     background-color: #2d2d2d;
     border-radius: 8px;
-    border: 1px #ccc solid;
     padding: 20px;
+    gap: 5px;
 }
 
 .questBox {
@@ -26,11 +33,12 @@
 }
 
 .questDetails, .questList {
+    display: inline-flex;
+    flex-direction: column;
     grid-column: 2;
     background-color: #2d2d2d;
     border-radius: 8px;
-    border: 1px #ccc solid;
-    padding: 20px;
+    padding: 0px 20px;
 }
 
 .questHabit {
@@ -38,4 +46,41 @@
     border-radius: 5px;
     padding: 20px;
     margin: 15px;
+}
+
+.difficultyReward {
+    display: flex;
+    font-size: 14px;
+    margin-top: 5px;
+    justify-content: space-around;
+}
+
+.questName {
+    margin-top: 5px;
+    grid-area: a;
+    cursor: pointer;
+}
+
+.description {
+    grid-area: b;
+    margin-bottom: 15px;
+}
+
+.questButtons {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.difficultReward {
+    display: flex;
+    justify-content: space-around;
+}
+
+.updateDeleteQuests {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    grid-area: f;
 }

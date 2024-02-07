@@ -1,0 +1,17 @@
+.createQuestModal {
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+}
+
+.createQuestForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.questInput {
+    width: 220px;
+    margin: 10px;
+}

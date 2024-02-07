@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import "./HabitsForm.css"
 
-function HabitModal({fetchHabits, id} ) {
+function HabitModal({fetchHabits, id, questId} ) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [name, setName] = useState("");
@@ -15,6 +15,7 @@ function HabitModal({fetchHabits, id} ) {
     const { closeModal } = useModal();
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         const habitData = {
@@ -23,7 +24,17 @@ function HabitModal({fetchHabits, id} ) {
         frequency,
         };
 
-        const serverResponse = await dispatch(createHabit(habitData, id));
+        const validatedFrequency = parseInt(frequency, 10);
+        if (validatedFrequency < 1) {
+            setErrors({ frequency: "Frequency must be a positive number" });
+            return;
+        }
+
+        if (name.length < 4) {
+            return setErrors({ name: "Name must be at least 4 characters long" });
+        }
+
+        const serverResponse = await dispatch(createHabit(habitData, id, questId));
         if (serverResponse.errors) {
             setErrors(serverResponse.errors);
         } else {

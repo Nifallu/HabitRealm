@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
-import "./SignupForm.css"
+import validator from 'validator';
+import "./SignupForm.css";
+
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -18,6 +20,14 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validator.isEmail(email)) {
+      return setErrors({ email: "Please enter a valid email address" });
+    }
+
+    if (password.length < 6) {
+      return setErrors({ password: "Password must be at least 6 characters long" });
+    }
 
     if (password !== confirmPassword) {
       return setErrors({

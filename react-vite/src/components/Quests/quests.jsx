@@ -61,7 +61,6 @@ const Quests =() => {
                     fetchQuests();
             } catch (error) {
                 console.error("Error deleting quest:", error.message);
-
             }
         }
     };
@@ -85,17 +84,19 @@ const Quests =() => {
                         >
                             {quest.name}
                         </h2>
-                            <li>{quest.description}</li>
-                            <li>Difficulty {quest.difficulty}</li>
+                            <li className="description">{quest.description}</li>
+                            <li>Difficulty: {quest.difficulty}</li>
+                            <li>Reward: {quest.reward_points}</li>
                             <li>Progress (coming soon) {quest.progress}</li>
-                            <li>Reward {quest.reward_points}</li>
+                            <div className="updateDeleteQuests">
                             {sessionUser && sessionUser.id === quest.creator_id ? <>
                             <button onClick={()=> handleDelete(quest.id)}>Delete</button>
                             <OpenModalMenuItem
-                                itemText="Update Quest"
+                                itemText="Update"
                                 onItemClick={closeMenu}
                                 modalComponent={<QuestModal fetchQuests={fetchQuests} id={quest.id} />}
                             /></> : null}
+                            </div>
                         </div>
                     ))
                 ) : (

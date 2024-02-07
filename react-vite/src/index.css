@@ -5,4 +5,18 @@ button {
     border-radius: 5px;
     padding: 0px 20px;
     background-color: #cccc;
+    cursor: pointer;
+    font-family:'Roboto', sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+
+* {
+    font-family: 'Kurale', serif;
+}
+
+h1, h2, h3, h4 {
+    font-family:'Roboto', sans-serif;
 }

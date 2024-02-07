@@ -37,6 +37,9 @@ body {
     border-radius: 2px;
   }
 
+  .HabitRealm {
+    font-family: 'Montserrat Subrayada', sans-serif;
+  }
   .HabitRealm, .navLinks {
     color: #ccc;
     text-decoration: none;

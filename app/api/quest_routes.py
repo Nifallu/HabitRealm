@@ -145,7 +145,7 @@ def get_quest_habits(quest_id):
     return {"Habits": [habit.to_dict() for habit in habits]}
 
 
-@quests_routes.route('/<int:quest_id>/habits')
+@quests_routes.route('/<int:quest_id>/habits', methods=["POST"])
 @login_required
 def add_habit_to_quest(quest_id):
     """
@@ -156,12 +156,15 @@ def add_habit_to_quest(quest_id):
         return {"message": "Quest not found"}, 404
     
     form = HabitForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         new_habit = Habit(
             name = form.name.data,
             description = form.description.data,
-            frequency = form.frequency.data
+            user_id=current_user.id,
+            frequency = form.frequency.data,
+            count=0
         )
 
         quest.habit.append(new_habit)

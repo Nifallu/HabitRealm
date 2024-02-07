@@ -7,10 +7,14 @@ const initialState = {
     errors: [],
 };
 
-export const createHabit = (habitData, id=null) => async (dispatch) => {
+export const createHabit = (habitData, id=null, questId=null) => async (dispatch) => {
     try {
+        let apiUrl = "/api/habits";
+        if (questId) {
+            apiUrl = `/api/quests/${questId}/habits`;
+        }
         
-        const response = await fetch(id ? `/api/habits/${id}` : "/api/habits", {
+        const response = await fetch(id ? `/api/habits/${id}` : apiUrl, {
         method: id ? "PUT" : "POST",
         headers: {
             "Content-Type": "application/json",
