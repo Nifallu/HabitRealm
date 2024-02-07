@@ -152,12 +152,15 @@ const QuestDetails =() => {
                             <button> + </button>
                             <button> - </button>
                             </div>
-                            <button onClick={()=> handleHabitDelete(habit.id)}>Delete</button>
+                            {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleHabitDelete(habit.id)}>Delete</button> : null}
+                            {quest.Quest && sessionUser.id === quest.Quest.creator_id ? 
+                            <>
                             <OpenModalMenuItem
-                                itemText="Update Habit"
+                                itemText="Update"
                                 onItemClick={closeMenu}
                                 modalComponent={<HabitModal fetchHabits={fetchData} id={habit.id} />}
                             />
+                            </> : null }
                         </div>
                         ))}
                     </ul>
