@@ -92,23 +92,26 @@ const Habits = () =>{
                 <div className="habitBox">
                 {Array.isArray(habits.Habits) && habits.Habits.length > 0 ? (
                     habits.Habits.map((habit) => (
-                        <div key={habit.id} className="habits">
-                            <li className="habitName"><h3>{habit.name}</h3></li>
-                            <li className="habitDescription">{habit.description}</li>
-                            <div className="incrementButtons">
-                            <button onClick={()=>alert('Feature coming soon')}> + </button>
-                            <button onClick={()=>alert('Feature coming soon')}> - </button>
-                            </div>
-                            <div className="updateDelete">
-                            <li className="habitCount">Count: {habit.count}</li>
-                            <button onClick={()=> handleDelete(habit.id)}>Delete</button>
-                            <OpenModalMenuItem
-                                itemText="Update"
-                                onItemClick={closeMenu}
-                                modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
-                            />
-                            </div>
-                        </div>
+                        <>
+                        {habit.quests.length < 1 ? 
+                            <div key={habit.id} className="habits">
+                                <li className="habitName"><h3>{habit.name}</h3></li>
+                                <li className="habitDescription">{habit.description}</li>
+                                <div className="incrementButtons">
+                                <button onClick={()=>alert('Feature coming soon')}> + </button>
+                                <button onClick={()=>alert('Feature coming soon')}> - </button>
+                                </div>
+                                <div className="updateDelete">
+                                <li className="habitCount">Count: {habit.count}</li>
+                                <button onClick={()=> handleDelete(habit.id)}>Delete</button>
+                                <OpenModalMenuItem
+                                    itemText="Update"
+                                    onItemClick={closeMenu}
+                                    modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
+                                />
+                                </div>
+                            </div> : null}
+                        </>
                     ))
                     ) : (
                         <h2>Embark on the exciting journey to habit creation! The canvas is blank, each day a stroke of positive change. Let&apos;s craft a masterpiece of purposeful living, one habit at a time!</h2>
@@ -121,26 +124,26 @@ const Habits = () =>{
                         <div className="questBox">
                             {Array.isArray(quests.Quests) && quests.Quests.length > 0 ? (
                                 quests.Quests.map((quest) => (
-                                    <div key={quest.id}>
-                                        {console.log('Quest User', quest.user)}
-                                        {console.log(quest.user.some(user => user.id === sessionUser.id))}
-                                        <h3>{quest.name}</h3>
-                                        {console.log(quest.habits)}
-                                        {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
-                                            quest.habits.map((habitData) => (
-                                                <div key={habitData.id} className="habits">
-                                                    <h4>{habitData.name}</h4>
-                                                    <p>{habitData.description}</p>
-                                                    <div className="incrementButtons">
-                                                        <button onClick={()=>alert('Feature coming soon')}> + </button>
-                                                        <button onClick={()=>alert('Feature coming soon')}> - </button>
+                                    <>
+                                        {quest.user.some(user => user.id === sessionUser.id) ?
+                                        <div key={quest.id}>
+                                            <h3>{quest.name}</h3> 
+                                            {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
+                                                quest.habits.map((habitData) => (
+                                                    <div key={habitData.id} className="habits">
+                                                        <h4>{habitData.name}</h4>
+                                                        <p>{habitData.description}</p>
+                                                        <div className="incrementButtons">
+                                                            <button onClick={()=>alert('Feature coming soon')}> + </button>
+                                                            <button onClick={()=>alert('Feature coming soon')}> - </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>No habits for this quest</p>
-                                        )}
-                                    </div>
+                                                ))
+                                            ) : (
+                                                <p>No habits for this quest</p>
+                                            )}
+                                        </div> : null}
+                                    </>
                                 ))
                             ) : (
                                 <p>No quests available</p>
