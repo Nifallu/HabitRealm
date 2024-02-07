@@ -23,3 +23,9 @@
     margin-bottom: 20px;
     color: #0d1016;
 }
+
+.DemoButton {
+    width: 100px;
+    padding: 5px;
+    margin: auto;
+}

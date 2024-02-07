@@ -119,6 +119,7 @@ const QuestDetails =() => {
         if (window.confirm("Are you sure you want to delete this habit?")) {
             try {
                 await dispatch(deleteHabit(habitId));
+                fetchData();
             } catch (error) {
                 console.error("Error deleting habit:", error.message);
             }
@@ -149,9 +150,10 @@ const QuestDetails =() => {
                             <li className="habitDescription">{habit.description}</li>
                             <li>Count: {habit.count}</li>
                             <div className="incrementButtons">
-                            <button> + </button>
-                            <button> - </button>
+                            <button onClick={()=>alert('Feature coming soon')}> + </button>
+                            <button onClick={()=>alert('Feature coming soon')}> - </button>
                             </div>
+                            <div className="updateDeleteHabits">
                             {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleHabitDelete(habit.id)}>Delete</button> : null}
                             {quest.Quest && sessionUser.id === quest.Quest.creator_id ? 
                             <>
@@ -161,6 +163,7 @@ const QuestDetails =() => {
                                 modalComponent={<HabitModal fetchHabits={fetchData} id={habit.id} />}
                             />
                             </> : null }
+                            </div>
                         </div>
                         ))}
                     </ul>
@@ -175,10 +178,11 @@ const QuestDetails =() => {
                         <p>{quest.Quest ? <p>Difficulty: {quest.Quest.difficulty}</p>: "No difficulty"}</p>
                         <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points}</p>: "No Rewards"}</p>
                     </div>
+                    <p>Progress(coming soon) {quest.Quest ? quest.Quest.progress : null}</p>
+                    <div className="questButtons">
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
                     ) : null}
-                    <div className="questButtons">
                         {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                             <button onClick={() => handleAbandon(quest.Quest.id)}>Abandon Quest</button>
                         ) : null}

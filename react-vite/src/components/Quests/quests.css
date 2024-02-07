@@ -12,6 +12,18 @@
     gap: 5px;
 }
 
+.questHabit {
+    display:grid;
+    grid-template-areas: 
+    "a d"
+    "b d"
+    "c d";
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    padding: 20px;
+    gap: 5px;
+}
+
 .questBox {
     margin-top:35px;
     display: grid;
@@ -83,4 +95,9 @@
     display: flex;
     justify-content: space-between;
     grid-area: f;
+}
+
+.updateDeleteHabits {
+    display: flex;
+    gap: 20px;
 }
