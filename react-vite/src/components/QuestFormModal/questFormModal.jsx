@@ -4,8 +4,9 @@ import { createUpdateQuest } from "../../redux/quests";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import "./questFormModal.css"
+import { useEffect } from "react";
 
-function QuestModal({fetchQuests, id}){
+function QuestModal({fetchQuests, id, quest}){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const[name, setName] = useState("");
@@ -13,6 +14,15 @@ function QuestModal({fetchQuests, id}){
     const [difficulty, setDifficulty] = useState("");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        console.log(quest)
+        if (quest) {
+            setName(quest.name || "");
+            setDescription(quest.description || "");
+            setDifficulty(quest.difficulty ? quest.difficulty.toString() : "");
+        }
+    }, [quest]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

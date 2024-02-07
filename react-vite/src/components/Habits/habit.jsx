@@ -107,7 +107,7 @@ const Habits = () =>{
                                 <OpenModalMenuItem
                                     itemText="Update"
                                     onItemClick={closeMenu}
-                                    modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} />}
+                                    modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} questId={null} habit={habit} />}
                                 />
                                 </div>
                             </div> : null}

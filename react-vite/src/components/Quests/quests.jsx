@@ -94,7 +94,7 @@ const Quests =() => {
                             <OpenModalMenuItem
                                 itemText="Update"
                                 onItemClick={closeMenu}
-                                modalComponent={<QuestModal fetchQuests={fetchQuests} id={quest.id} />}
+                                modalComponent={<QuestModal fetchQuests={fetchQuests} id={quest.id} quest={quest}/>}
                             /></> : null}
                             </div>
                         </div>
@@ -103,7 +103,6 @@ const Quests =() => {
                     <h2>Craft your epic quest—forge destiny&apos;s tale!</h2>
                 )}
                 </div>
-                
             </ul>
         </div>
     )
