@@ -113,6 +113,7 @@ def update_habit_count(habit_id):
 
     if not habit:
         return {"message": "habit not found"}, 404
+    
     if habit.user.id == current_user.id:
         data=request.get_json()
 
@@ -124,14 +125,17 @@ def update_habit_count(habit_id):
 
         if action == 'plus':
             habit.count += value
+            print(habit.count)
         elif action == 'minus':
             habit.count -= value
         else:
             return {"message": "Invalid action"}, 400
         
-        # if habit.frequency and (datetime.now() - habit.last_reset) >= habit.frequency:
-        #     habit.count = 0
-        #     habit.last_reset = datetime.now()
+        if habit.frequency and (datetime.now() - habit.last_reset).days >= habit.frequency:
+            print(f'Resetting count for habit {habit.id}')
+            habit.count = 0
+            habit.last_reset = datetime.now()
+
         
         db.session.commit()
 

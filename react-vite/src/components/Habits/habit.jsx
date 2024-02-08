@@ -62,7 +62,7 @@ const Habits = () =>{
     }
 
     const handleUpdateCount = async (habitId, action) =>{
-        dispatch(updateCount(habitId, action))
+        await dispatch(updateCount(habitId, action));
         fetchHabits()
     }
 
