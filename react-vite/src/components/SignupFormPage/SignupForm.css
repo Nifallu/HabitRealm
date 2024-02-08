@@ -19,6 +19,8 @@
 .inputBox {
     align-items: center;
     width: 90%;
+    font-weight: bold;
+    color: #0d1016
 }
 
 .submit {

@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./quests.css"
+import DeleteQuestsHabits from "../DeleteModal/deleteModal";
 
 const QuestDetails =() => {
     const { questId } = useParams()
@@ -103,29 +104,6 @@ const QuestDetails =() => {
             }
         }
 
-        const handleDelete = async(questId) => {
-            if (window.confirm ("Are you sure you want to delete this quest?")) {
-                try {
-                    await dispatch(deleteQuest(questId));
-                    redirect('/quests')
-            } catch (error) {
-                console.error("Error deleting quest:", error.message);
-
-            }
-        }
-    };
-
-    const handleHabitDelete = async (habitId) => {
-        if (window.confirm("Are you sure you want to delete this habit?")) {
-            try {
-                await dispatch(deleteHabit(habitId));
-                fetchData();
-            } catch (error) {
-                console.error("Error deleting habit:", error.message);
-            }
-        }
-    };
-
     return (
         <div>
             <div>
@@ -154,7 +132,14 @@ const QuestDetails =() => {
                             <button onClick={()=>alert('Feature coming soon')}> - </button>
                             </div>
                             <div className="updateDeleteHabits">
-                            {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleHabitDelete(habit.id)}>Delete</button> : null}
+                            {quest.Quest && sessionUser.id === quest.Quest.creator_id ? 
+                                <>
+                                    <OpenModalMenuItem
+                                        itemText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteQuestsHabits fetches={fetchData} habitId={habit.id} />}
+                                />
+                            </> : null}
                             {quest.Quest && sessionUser.id === quest.Quest.creator_id ? 
                             <>
                             <OpenModalMenuItem
@@ -186,7 +171,14 @@ const QuestDetails =() => {
                         {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                             <button onClick={() => handleAbandon(quest.Quest.id)}>Abandon Quest</button>
                         ) : null}
-                        {quest.Quest && sessionUser.id === quest.Quest.creator_id ? <button onClick={()=> handleDelete(quest.Quest.id)}>Delete</button>: null}
+                        {quest.Quest && sessionUser.id === quest.Quest.creator_id ?
+                            <>
+                                    <OpenModalMenuItem
+                                        itemText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteQuestsHabits fetches={fetchQuest} HabitId={null} questId={quest.Quest.id} questDetailPage={true} />}
+                                />
+                            </>: null}
                         {quest.Quest && sessionUser.id === quest.Quest.creator_id? <OpenModalMenuItem
                             itemText="Update"
                             onItemClick={closeMenu}

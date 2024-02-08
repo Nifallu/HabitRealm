@@ -1,10 +1,12 @@
 import {useState, useEffect} from "react";
-import QuestModal from "../QuestFormModal/questFormModal";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { deleteQuest, getQuests } from "../../redux/quests";
 import { useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import QuestModal from "../QuestFormModal/questFormModal";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteQuestsHabits from "../DeleteModal/deleteModal";
+
 import "./quests.css"
 
 
@@ -53,16 +55,16 @@ const Quests =() => {
             fetchQuests()
         }, [])
 
-        const handleDelete = async(questId) => {
-            if (window.confirm ("Are you sure you want to delete this quest?")) {
-                try {
-                    await dispatch(deleteQuest(questId));
-                    fetchQuests();
-            } catch (error) {
-                console.error("Error deleting quest:", error.message);
-            }
-        }
-    };
+    //     const handleDelete = async(questId) => {
+    //         if (window.confirm ("Are you sure you want to delete this quest?")) {
+    //             try {
+    //                 await dispatch(deleteQuest(questId));
+    //                 fetchQuests();
+    //         } catch (error) {
+    //             console.error("Error deleting quest:", error.message);
+    //         }
+    //     }
+    // };
 
     return (
         <div className="QuestBlock">
@@ -91,12 +93,16 @@ const Quests =() => {
                             </div>
                             <div className="updateDeleteQuests">
                             {sessionUser && sessionUser.id === quest.creator_id ? <>
-                            <button onClick={()=> handleDelete(quest.id)}>Delete</button>
-                            <OpenModalMenuItem
-                                itemText="Update"
-                                onItemClick={closeMenu}
-                                modalComponent={<QuestModal fetchQuests={fetchQuests} id={quest.id} quest={quest}/>}
-                            /></> : null}
+                                <OpenModalMenuItem
+                                        itemText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteQuestsHabits fetches={fetchQuests} habitId={null} questId={quest.id}/>}
+                                />
+                                <OpenModalMenuItem
+                                    itemText="Update"
+                                    onItemClick={closeMenu}
+                                    modalComponent={<QuestModal fetchQuests={fetchQuests} id={quest.id} quest={quest}/>}
+                                /></> : null}
                             </div>
                         </div>
                     ))

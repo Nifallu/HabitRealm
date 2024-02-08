@@ -1,10 +1,13 @@
 import {useState, useEffect} from "react";
-import HabitModal from "../HabitsFormModal/HabitsFormModal";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { deleteHabit } from "../../redux/habits";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import HabitModal from "../HabitsFormModal/HabitsFormModal";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteQuestsHabits from "../DeleteModal/deleteModal";
+
 import "./habits.css";
 
 const Habits = () =>{
@@ -69,16 +72,16 @@ const Habits = () =>{
         fetchHabits()
     }, [sessionUser])
 
-    const handleDelete = async (habitId) => {
-        if (window.confirm("Are you sure you want to delete this habit?")) {
-            try {
-                await dispatch(deleteHabit(habitId));
-                fetchHabits();
-            } catch (error) {
-                console.error("Error deleting habit:", error.message);
-            }
-        }
-    };
+    // const handleDelete = async (habitId) => {
+    //     if (window.confirm("Are you sure you want to delete this habit?")) {
+    //         try {
+    //             await dispatch(deleteHabit(habitId));
+    //             fetchHabits();
+    //         } catch (error) {
+    //             console.error("Error deleting habit:", error.message);
+    //         }
+    //     }
+    // };
 
     return (
         
@@ -105,7 +108,11 @@ const Habits = () =>{
                                 </div>
                                 <div className="updateDelete">
                                 <li className="habitCount">Count: {habit.count}</li>
-                                <button onClick={()=> handleDelete(habit.id)}>Delete</button>
+                                <OpenModalMenuItem
+                                        itemText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteQuestsHabits fetches={fetchHabits} habitId={habit.id}/>}
+                                />
                                 <OpenModalMenuItem
                                     itemText="Update"
                                     onItemClick={closeMenu}

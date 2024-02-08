@@ -45,6 +45,28 @@ export const createHabit = (habitData, id=null, questId=null) => async (dispatch
     }
 };
 
+export const deleteHabit = (habitId) => async (dispatch) => {
+    try {
+        const response = await fetch(`/api/habits/${habitId}`, {
+            method: "DELETE",
+        });
+    
+        if (!response.ok) {
+            throw new Error("Failed to delete habit");
+        }
+    
+        dispatch({
+            type: DELETE_HABIT,
+            payload: habitId,
+        });
+    
+        return habitId;
+        } catch (error) {
+        console.error(error.message);
+        }
+    };
+
+
 
 const habitsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -76,26 +98,5 @@ const habitsReducer = (state = initialState, action) => {
             return state;
     }
 };
-
-export const deleteHabit = (habitId) => async (dispatch) => {
-    try {
-        const response = await fetch(`/api/habits/${habitId}`, {
-            method: "DELETE",
-        });
-    
-        if (!response.ok) {
-            throw new Error("Failed to delete habit");
-        }
-    
-        dispatch({
-            type: DELETE_HABIT,
-            payload: habitId,
-        });
-    
-        return habitId;
-        } catch (error) {
-        console.error(error.message);
-        }
-    };
 
 export default habitsReducer;
