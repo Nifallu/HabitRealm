@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-import { deleteHabit } from "../../redux/habits";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,6 @@ const Habits = () =>{
     const [showMenu, setShowMenu] = useState(false);
     const sessionUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
-    const dispatch=useDispatch();
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -71,18 +69,6 @@ const Habits = () =>{
         }
         fetchHabits()
     }, [sessionUser])
-
-    // const handleDelete = async (habitId) => {
-    //     if (window.confirm("Are you sure you want to delete this habit?")) {
-    //         try {
-    //             await dispatch(deleteHabit(habitId));
-    //             fetchHabits();
-    //         } catch (error) {
-    //             console.error("Error deleting habit:", error.message);
-    //         }
-    //     }
-    // };
-
     return (
         
         <div className="habitBlock">
@@ -126,6 +112,7 @@ const Habits = () =>{
                         <h2>Embark on the exciting journey to habit creation! The canvas is blank, each day a stroke of positive change. Let&apos;s craft a masterpiece of purposeful living, one habit at a time!</h2>
                     )}
                     </div>
+                    <hr></hr>
                     <div>
                     <div className="habitBlock">
                     <div>

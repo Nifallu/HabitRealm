@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { createHabit } from "../../redux/habits";
-import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import "./HabitsForm.css"
 import { useEffect } from "react";
 
 function HabitModal({fetchHabits, id, questId, habit} ) {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");

@@ -202,7 +202,7 @@ const questReducer = (state = initialState, action) => {
                 if (quest.id === action.payload) {
                     return {
                         ...quest,
-                        user: quest.user.filter((userID) => userId !== action.payload.userId), 
+                        user: quest.user.filter((userId) => userId !== action.payload.userId), 
                     };
                 }
                 return quest;

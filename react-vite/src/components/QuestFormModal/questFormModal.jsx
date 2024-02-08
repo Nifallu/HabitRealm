@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createUpdateQuest } from "../../redux/quests";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import "./questFormModal.css"
 import { useEffect } from "react";

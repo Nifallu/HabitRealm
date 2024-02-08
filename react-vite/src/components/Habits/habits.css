@@ -1,6 +1,7 @@
 
 .habitBox {
     margin-top:35px;
+    margin-bottom: 35px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;

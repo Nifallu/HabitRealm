@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-import { useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -16,7 +15,6 @@ const Quests =() => {
 
     const sessionUser = useSelector(state => state.session.user)
 
-    const dispatch=useDispatch();
     const redirect = useNavigate();
 
     const toggleMenu = (e) => {
@@ -54,17 +52,6 @@ const Quests =() => {
         useEffect(()=>{
             fetchQuests()
         }, [])
-
-    //     const handleDelete = async(questId) => {
-    //         if (window.confirm ("Are you sure you want to delete this quest?")) {
-    //             try {
-    //                 await dispatch(deleteQuest(questId));
-    //                 fetchQuests();
-    //         } catch (error) {
-    //             console.error("Error deleting quest:", error.message);
-    //         }
-    //     }
-    // };
 
     return (
         <div className="QuestBlock">
