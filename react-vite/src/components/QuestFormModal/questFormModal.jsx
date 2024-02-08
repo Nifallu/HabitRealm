@@ -36,7 +36,7 @@ function QuestModal({fetchQuests, id, quest}){
         if (serverResponse.errors) {
             setErrors(serverResponse.errors);
         } else {
-            fetchQuests()
+            id? fetchQuests(id): fetchQuests()
             closeModal()
         
             if (id !==undefined) {

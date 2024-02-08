@@ -35,7 +35,7 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
 
         const validatedFrequency = parseInt(frequency, 10);
         if (validatedFrequency < 1) {
-            setErrors({ frequency: "Frequency must be a positive number" });
+            setErrors({ frequency: "Reset must be a positive number" });
             return;
         }
 
@@ -80,7 +80,7 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
             </label>
             {errors.description && <p>{errors.description}</p>}
             <label>
-                Frequency
+                Reset Interval in Days
                 <input
                     className="habitInput"
                     type="number"

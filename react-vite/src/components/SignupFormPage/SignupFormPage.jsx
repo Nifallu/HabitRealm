@@ -28,6 +28,9 @@ function SignupFormPage() {
     if (password.length < 6) {
       return setErrors({ password: "Password must be at least 6 characters long" });
     }
+    if (username.length < 3 || username.length > 20){
+      return setErrors({ username: "Username must be 3 to 20 characters long"})
+    }
 
     if (password !== confirmPassword) {
       return setErrors({

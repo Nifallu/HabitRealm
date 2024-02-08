@@ -10,6 +10,7 @@
     border-radius: 8px;
     padding: 20px;
     gap: 5px;
+    border: 1px solid #cccc;
 }
 
 .questHabit {
@@ -100,4 +101,14 @@
 .updateDeleteHabits {
     display: flex;
     gap: 20px;
+}
+
+.rewardDifficulty {
+    display: flex;
+    flex-direction: column;
+    grid-area: c;
+    border-left: 1px solid #cccc;
+    padding-left: 10px;
+    height: 100%;
+    gap: 20px
 }

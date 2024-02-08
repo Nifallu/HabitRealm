@@ -190,7 +190,7 @@ const QuestDetails =() => {
                         {quest.Quest && sessionUser.id === quest.Quest.creator_id? <OpenModalMenuItem
                             itemText="Update"
                             onItemClick={closeMenu}
-                            modalComponent={<QuestModal fetchQuest={fetchQuest} id={quest.Quest.id} />}
+                            modalComponent={<QuestModal fetchQuests={fetchQuest} id={quest.Quest.id} quest={quest.Quest}/>}
                         />: null}
                     </div>
                 </div>

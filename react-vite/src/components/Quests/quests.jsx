@@ -84,9 +84,11 @@ const Quests =() => {
                             {quest.name}
                         </h2>
                             <li className="description">{quest.description}</li>
+                            <div className="rewardDifficulty">
                             <li>Difficulty: {quest.difficulty}</li>
                             <li>Reward: {quest.reward_points}</li>
                             <li>Progress (coming soon) {quest.progress}</li>
+                            </div>
                             <div className="updateDeleteQuests">
                             {sessionUser && sessionUser.id === quest.creator_id ? <>
                             <button onClick={()=> handleDelete(quest.id)}>Delete</button>
