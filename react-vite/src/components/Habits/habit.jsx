@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HabitModal from "../HabitsFormModal/HabitsFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteQuestsHabits from "../DeleteModal/deleteModal";
+import { updateCount } from "../../redux/habits";
 
 import "./habits.css";
 
@@ -15,6 +16,7 @@ const Habits = () =>{
     const [showMenu, setShowMenu] = useState(false);
     const sessionUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -59,6 +61,11 @@ const Habits = () =>{
         }
     }
 
+    const handleUpdateCount = async (habitId, action) =>{
+        dispatch(updateCount(habitId, action))
+        fetchHabits()
+    }
+
     useEffect(()=>{
         fetchQuests()
     }, [])
@@ -69,6 +76,8 @@ const Habits = () =>{
         }
         fetchHabits()
     }, [sessionUser])
+
+
     return (
         
         <div className="habitBlock">
@@ -89,8 +98,8 @@ const Habits = () =>{
                                 <li className="habitName"><h3>{habit.name}</h3></li>
                                 <li className="habitDescription">{habit.description}</li>
                                 <div className="incrementButtons">
-                                <button onClick={()=>alert('Feature coming soon')}> + </button>
-                                <button onClick={()=>alert('Feature coming soon')}> - </button>
+                                <button onClick={()=>handleUpdateCount(habit.id, "plus")} > + </button>
+                                <button onClick={()=>handleUpdateCount(habit.id, "minus")}> - </button>
                                 </div>
                                 <div className="updateDelete">
                                 <li className="habitCount">Count: {habit.count}</li>

@@ -13,6 +13,7 @@ class Habit(db.Model):
     description = db.Column(db.Text, nullable=False)
     frequency = db.Column(db.Integer, nullable=False)
     count = db.Column(db.Integer)
+    last_reset = db.Column(db.DateTime, default=datetime.now) 
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -28,6 +29,7 @@ class Habit(db.Model):
             'username': self.user.username,
             'count': self.count,
             'frequency': self.frequency,
+            'last_reset': self.last_reset,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'quests': [quest.id for quest in self.quest],

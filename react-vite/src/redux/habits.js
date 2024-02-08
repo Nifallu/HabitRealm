@@ -1,6 +1,7 @@
 
 const CREATE_HABIT = "CREATE_HABIT";
 const DELETE_HABIT = "DELETE_HABIT";
+const UPDATE_COUNT = "UPDATE_COUNT";
 
 const initialState = {
     habits: [],
@@ -24,7 +25,7 @@ export const createHabit = (habitData, id=null, questId=null) => async (dispatch
 
         if (!response.ok) {
         throw new Error(id ? " Failed to update habit" : "Failed to create habit");
-    }
+        }
 
     const data = await response.json();
 
@@ -66,7 +67,32 @@ export const deleteHabit = (habitId) => async (dispatch) => {
         }
     };
 
+export const updateCount = (habitId, action) => async (dispatch) => {
+    try {
+        const response = await fetch (`api/habits/${habitId}/update-count`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: action,
+                value: 1,
+            })
+        })
 
+        if (!response.ok){
+            throw new Error("Failed to update habit count");
+        }
+
+        dispatch({
+            type: UPDATE_COUNT,
+            payload: {habitId, action}
+        })
+
+    } catch (error) {
+        console.error("Error updating habit count:", error)
+    }
+}
 
 const habitsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -94,6 +120,21 @@ const habitsReducer = (state = initialState, action) => {
             ...state,
             habits: filteredHabits,
             };
+        case UPDATE_COUNT:
+            const updatedHabits = state.habits.map((habit) => {
+                if(habit.id === action.payload.habitId) {
+                    if(action.payload.action === "plus") {
+                        return {...habit, count: habit.count + 1}
+                    } else if (action.payload.action === "minus") {
+                        return {...habit, count: habit.count -1}
+                    }
+                }
+                return habit;
+            });
+            return {
+                ...state,
+                habits: updatedHabits,
+            }
         default:
             return state;
     }

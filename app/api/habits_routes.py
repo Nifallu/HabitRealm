@@ -1,5 +1,7 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
+from datetime import datetime
+
 
 from app.models import db
 from app.models.habit import Habit
@@ -99,3 +101,41 @@ def delete_habit(habit_id):
         return {"message": "Habit Deleted"}, 200
     
     return {"message": "User Unauthorized"}, 401
+
+
+@habits_routes.route("/<int:habit_id>/update-count", methods=["PATCH"])
+@login_required
+def update_habit_count(habit_id):
+    """
+    Update the count of a Habit
+    """
+    habit = Habit.query.get(habit_id)
+
+    if not habit:
+        return {"message": "habit not found"}, 404
+    if habit.user.id == current_user.id:
+        data=request.get_json()
+
+        if 'action' not in data or 'value' not in data:
+            return {"message": "Invalid request format"}, 400
+        
+        action = data['action']
+        value = data['value']
+
+        if action == 'plus':
+            habit.count += value
+        elif action == 'minus':
+            habit.count -= value
+        else:
+            return {"message": "Invalid action"}, 400
+        
+        # if habit.frequency and (datetime.now() - habit.last_reset) >= habit.frequency:
+        #     habit.count = 0
+        #     habit.last_reset = datetime.now()
+        
+        db.session.commit()
+
+        return habit.to_dict(), 200
+    
+    return {"message": "user unauthorized"}, 401
+        
