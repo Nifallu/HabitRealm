@@ -254,16 +254,12 @@ def quest_habit_progress(quest_id, habit_id):
     habit = Habit.query.get(habit_id)
 
     quest= Quest.query.get(quest_id)
-
+    
     if not habit:
         return {"message": "Habit not found"}, 404
     
     if not quest:
         return {"message": "Quest not found"}
-    
-    if quest.creator_id != current_user.id:
-        return {"message": "Unauthorized"}, 400
-    
 
     action = request.json.get('action')
 
@@ -277,6 +273,5 @@ def quest_habit_progress(quest_id, habit_id):
     progress_percentage = round((quest.habit_counter / quest.goal) * 100, 2)
 
     quest.progress= min(100, progress_percentage) #should make sure progress doesn't exceed 100
-
     db.session.commit()
     return quest.to_dict(), 200

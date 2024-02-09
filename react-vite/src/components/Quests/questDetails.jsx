@@ -118,11 +118,12 @@ const QuestDetails =() => {
             <div className="questHabits">
                 {quest.Quest ? <>
                     <h2>Quest Habits</h2>
+                    {sessionUser.id == quest.Quest.creator_id ?
                     <OpenModalMenuItem
                         itemText="Create Habit"
                         onItemClick={closeMenu}
                         modalComponent={<HabitModal fetchHabits={fetchData} id={null} questId={quest.Quest.id}/>}
-                    />
+                    /> : null}
                 </> : null }
                 {quest.Quest && quest.Quest.habits && quest.Quest.habits.length > 0 ? (
                     <ul>
@@ -131,10 +132,11 @@ const QuestDetails =() => {
                             
                             <li className="habitName"><h3>{habit.name}</h3></li>
                             <li className="habitDescription">{habit.description}</li>
+                            {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ?
                             <div className="incrementButtons">
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "plus")}> + </button>
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "minus")}> - </button>
-                            </div>
+                            </div> : null}
                             <div className="updateDeleteHabits">
                             {quest.Quest && sessionUser.id === quest.Quest.creator_id ? 
                                 <>
@@ -174,6 +176,7 @@ const QuestDetails =() => {
                         >{quest.Quest.progress}%</div>
                         </div> ) : null }
                     <div className="questButtons">
+                        
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
                     ) : null}
