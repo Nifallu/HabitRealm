@@ -75,3 +75,7 @@
 .habitQuestName {
     text-align: center;
 }
+
+.backProgressBar {
+    margin-bottom: 15px;
+}

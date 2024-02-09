@@ -243,3 +243,40 @@ def abandon_quest(quest_id):
     db.session.commit()
 
     return {"message": "Quest Abandoned"}
+
+
+@quests_routes.route('/<int:quest_id>/habits/<int:habit_id>', methods=['PATCH'])
+@login_required
+def quest_habit_progress(quest_id, habit_id):
+    """
+    Update the progress of a quest
+    """
+    habit = Habit.query.get(habit_id)
+
+    quest= Quest.query.get(quest_id)
+
+    if not habit:
+        return {"message": "Habit not found"}, 404
+    
+    if not quest:
+        return {"message": "Quest not found"}
+    
+    if quest.creator_id != current_user.id:
+        return {"message": "Unauthorized"}, 400
+    
+
+    action = request.json.get('action')
+
+    if action == 'plus':
+        quest.habit_counter += 1
+    elif action == 'minus':
+        quest.habit_counter -= 1
+    else:
+        return {"message": "Not plus or minus"}
+    
+    progress_percentage = round((quest.habit_counter / quest.goal) * 100, 2)
+
+    quest.progress= min(100, progress_percentage) #should make sure progress doesn't exceed 100
+
+    db.session.commit()
+    return quest.to_dict(), 200

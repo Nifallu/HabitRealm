@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./quests.css"
 import DeleteQuestsHabits from "../DeleteModal/deleteModal";
+import { updatedQuestProgress } from "../../redux/quests";
 
 const QuestDetails =() => {
     const { questId } = useParams()
@@ -41,7 +42,7 @@ const QuestDetails =() => {
         
         const closeMenu = () => setShowMenu(false);
 
-        const fetchQuest = async (questId) => {
+        const fetchAQuest = async (questId) => {
             const response = await fetch(`/api/quests/${questId}`)
 
             if(response.ok){
@@ -65,11 +66,16 @@ const QuestDetails =() => {
 
         const fetchData = async () => {
             try {
-                await fetchQuest(questId);
+                await fetchAQuest(questId);
                 await dispatch(getQuestHabits(questId))
             } catch (error) {
                 console.log("Error fetching Habits", error.message)
             }
+        }
+
+        const handleUpdateQuestProgress = async (questId, habitId, action) => {
+            await dispatch(updatedQuestProgress(questId, habitId, action));
+            fetchAQuest(questId)
         }
 
         useEffect(()=>{
@@ -77,7 +83,7 @@ const QuestDetails =() => {
         }, [questId, dispatch])
 
         useEffect(()=>{
-            fetchQuest(questId)
+            fetchAQuest(questId)
         }, [questId])
 
         useEffect(()=>{
@@ -87,7 +93,7 @@ const QuestDetails =() => {
         const handleJoin = async (questId)=> {
             try {
                 await dispatch(joinQuest(questId, sessionUser.id));
-                fetchQuest(questId)
+                fetchAQuest(questId)
             } catch (error) {
                 console.log("Error joining quest:", error.message)
             }
@@ -96,7 +102,7 @@ const QuestDetails =() => {
             if (window.confirm("Are you sure you want to abandon this quest?")){
                 try {
                     await dispatch(abandonQuest(questId, sessionUser.id))
-                    fetchQuest(questId)
+                    fetchAQuest(questId)
                 } catch (error){
                     console.error("Error abandoning quest:", error.message)
                 }
@@ -125,10 +131,9 @@ const QuestDetails =() => {
                             
                             <li className="habitName"><h3>{habit.name}</h3></li>
                             <li className="habitDescription">{habit.description}</li>
-                            <li>Count: {habit.count}</li>
                             <div className="incrementButtons">
-                            <button onClick={()=>alert('Feature coming soon')}> + </button>
-                            <button onClick={()=>alert('Feature coming soon')}> - </button>
+                            <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "plus")}> + </button>
+                            <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "minus")}> - </button>
                             </div>
                             <div className="updateDeleteHabits">
                             {quest.Quest && sessionUser.id === quest.Quest.creator_id ? 
@@ -157,12 +162,17 @@ const QuestDetails =() => {
                     <h2>{quest.Quest ? quest.Quest.name : "Quest not found"}</h2>
                     <h3>Created by {quest.User}</h3>
                     <p>{quest.Quest ? quest.Quest.description: "No Description"}</p>
-                    <p>{quest.Quest ? quest.Quest.progress: "No Progress"}</p>
                     <div className="difficultReward">
                         <p>{quest.Quest ? <p>Difficulty: {quest.Quest.difficulty}</p>: "No difficulty"}</p>
                         <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points}</p>: "No Rewards"}</p>
                     </div>
-                    <p>Progress(coming soon) {quest.Quest ? quest.Quest.progress : null}</p>
+                    <p className="progressWord">Progress</p>
+                    {quest.Quest ? (
+                    <div className="backProgressBar">
+                        <div className="progressBar"
+                            style={{width: `${quest.Quest.progress *5}px`}}
+                        >{quest.Quest.progress}%</div>
+                        </div> ) : null }
                     <div className="questButtons">
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
@@ -175,13 +185,13 @@ const QuestDetails =() => {
                                     <OpenModalMenuItem
                                         itemText="Delete"
                                         onItemClick={closeMenu}
-                                        modalComponent={<DeleteQuestsHabits fetches={fetchQuest} HabitId={null} questId={quest.Quest.id} questDetailPage={true} />}
+                                        modalComponent={<DeleteQuestsHabits fetches={fetchAQuest} HabitId={null} questId={quest.Quest.id} questDetailPage={true} />}
                                 />
                             </>: null}
                         {quest.Quest && sessionUser.id === quest.Quest.creator_id? <OpenModalMenuItem
                             itemText="Update"
                             onItemClick={closeMenu}
-                            modalComponent={<QuestModal fetchQuests={fetchQuest} id={quest.Quest.id} quest={quest.Quest}/>}
+                            modalComponent={<QuestModal fetchQuests={fetchAQuest} id={quest.Quest.id} quest={quest.Quest}/>}
                         />: null}
                     </div>
                 </div>

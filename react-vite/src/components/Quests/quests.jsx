@@ -76,7 +76,7 @@ const Quests =() => {
                             <div className="rewardDifficulty">
                             <li>Difficulty: {quest.difficulty}</li>
                             <li>Reward: {quest.reward_points}</li>
-                            <li>Progress (coming soon) {quest.progress}</li>
+                            <li>Progress:  {quest.progress}%</li>
                             </div>
                             <div className="updateDeleteQuests">
                             {sessionUser && sessionUser.id === quest.creator_id ? <>
