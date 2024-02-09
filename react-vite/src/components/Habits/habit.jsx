@@ -141,8 +141,12 @@ const Habits = () =>{
                                             <h3
                                                 className="habitQuestName"
                                                 onClick={() => navigate(`/quests/${quest.id}`)}
-                                            >{quest.name}</h3> 
-                                            <h4>Progress {quest.progress}</h4>                           
+                                            >{quest.name}</h3>
+                                            <p>Progress</p> 
+                                            <div className="backProgressBar">
+                                            <div className="progressBar"
+                                                style={{width: `${quest.progress *5}px`}}>{quest.progress}%</div>
+                                            </div>                           
                                             {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
                                                 quest.habits.map((habitData) => (
                                                     <div key={habitData.id} className="habits">

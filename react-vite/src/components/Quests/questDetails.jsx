@@ -131,7 +131,6 @@ const QuestDetails =() => {
                             
                             <li className="habitName"><h3>{habit.name}</h3></li>
                             <li className="habitDescription">{habit.description}</li>
-                            <li>Count: {habit.count}</li>
                             <div className="incrementButtons">
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "plus")}> + </button>
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "minus")}> - </button>
@@ -163,12 +162,17 @@ const QuestDetails =() => {
                     <h2>{quest.Quest ? quest.Quest.name : "Quest not found"}</h2>
                     <h3>Created by {quest.User}</h3>
                     <p>{quest.Quest ? quest.Quest.description: "No Description"}</p>
-                    <p>{quest.Quest ? quest.Quest.progress: "No Progress"}</p>
                     <div className="difficultReward">
                         <p>{quest.Quest ? <p>Difficulty: {quest.Quest.difficulty}</p>: "No difficulty"}</p>
                         <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points}</p>: "No Rewards"}</p>
                     </div>
-                    <div id="questBar">Progress {quest.Quest ? quest.Quest.progress : null}%</div>
+                    <p className="progressWord">Progress</p>
+                    {quest.Quest ? (
+                    <div className="backProgressBar">
+                        <div className="progressBar"
+                            style={{width: `${quest.Quest.progress *5}px`}}
+                        >{quest.Quest.progress}%</div>
+                        </div> ) : null }
                     <div className="questButtons">
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
