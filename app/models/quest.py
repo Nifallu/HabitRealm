@@ -15,7 +15,7 @@ class Quest(db.Model):
     difficulty = db.Column(db.Integer, nullable=False)
     goal = db.Column(db.Integer)
     habit_counter= db.Column(db.Integer)
-    progress = db.Column(db.Integer)
+    progress = db.Column(db.Float)
     reward_points = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
