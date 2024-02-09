@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import HabitModal from "../HabitsFormModal/HabitsFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteQuestsHabits from "../DeleteModal/deleteModal";
-import { updateCount } from "../../redux/habits";
-import { updatedQuestProgress } from "../../redux/quests";
 
 import "./habits.css";
 
@@ -17,7 +15,6 @@ const Habits = () =>{
     const [showMenu, setShowMenu] = useState(false);
     const sessionUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -62,16 +59,6 @@ const Habits = () =>{
         }
     }
 
-    const handleUpdateCount = async (habitId, action) =>{
-        await dispatch(updateCount(habitId, action))
-        fetchHabits()
-    }
-
-    const handleUpdateQuestProgress = async (questId, habitId, action) => {
-        await dispatch(updatedQuestProgress(questId, habitId, action));
-        fetchQuests()
-    }
-
     useEffect(()=>{
         fetchQuests()
     }, [])
@@ -82,8 +69,6 @@ const Habits = () =>{
         }
         fetchHabits()
     }, [sessionUser])
-
-
     return (
         
         <div className="habitBlock">
@@ -104,8 +89,8 @@ const Habits = () =>{
                                 <li className="habitName"><h3>{habit.name}</h3></li>
                                 <li className="habitDescription">{habit.description}</li>
                                 <div className="incrementButtons">
-                                <button onClick={()=>handleUpdateCount(habit.id, "plus")} > + </button>
-                                <button onClick={()=>handleUpdateCount(habit.id, "minus")}> - </button>
+                                <button onClick={()=>alert('Feature coming soon')}> + </button>
+                                <button onClick={()=>alert('Feature coming soon')}> - </button>
                                 </div>
                                 <div className="updateDelete">
                                 <li className="habitCount">Count: {habit.count}</li>
@@ -141,20 +126,15 @@ const Habits = () =>{
                                             <h3
                                                 className="habitQuestName"
                                                 onClick={() => navigate(`/quests/${quest.id}`)}
-                                            >{quest.name}</h3>
-                                            <p>Progress</p> 
-                                            <div className="backProgressBar">
-                                            <div className="progressBar"
-                                                style={{width: `${quest.progress *5}px`}}>{quest.progress}%</div>
-                                            </div>                           
+                                            >{quest.name}</h3>                            
                                             {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
                                                 quest.habits.map((habitData) => (
                                                     <div key={habitData.id} className="habits">
                                                         <h4>{habitData.name}</h4>
                                                         <p>{habitData.description}</p>
                                                         <div className="incrementButtons">
-                                                            <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "plus")}> + </button>
-                                                            <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "minus")}> - </button>
+                                                            <button onClick={()=>alert('Feature coming soon')}> + </button>
+                                                            <button onClick={()=>alert('Feature coming soon')}> - </button>
                                                         </div>
                                                     </div>
                                                 ))
