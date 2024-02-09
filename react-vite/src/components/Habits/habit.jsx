@@ -113,8 +113,10 @@ const Habits = () =>{
                                 <li className="habitName"><h3>{habit.name}</h3></li>
                                 <li className="habitDescription">{habit.description}</li>
                                 <div className="incrementButtons">
-                                <button onClick={()=>handleUpdateCount(habit.id, "plus")} > + </button>
-                                <button onClick={()=>handleUpdateCount(habit.id, "minus")}> - </button>
+                                {/* <button onClick={()=>handleUpdateCount(habit.id, "plus")} > + </button> */}
+                                {/* <button onClick={()=>handleUpdateCount(habit.id, "minus")}> - </button> */}
+                                <button style={{ cursor: 'not-allowed' }}> + </button>
+                                <button style={{ cursor: 'not-allowed' }}> - </button>
                                 </div>
                                 <div className="updateDelete">
                                 <li className="habitCount">Count: {habit.count}</li>
@@ -163,8 +165,10 @@ const Habits = () =>{
                                                         <h4>{habitData.name}</h4>
                                                         <p>{habitData.description}</p>
                                                         <div className="incrementButtons">
-                                                        <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "plus")}> + </button>
-                                                            <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "minus")}> - </button>
+                                                            {/* <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "plus")}> + </button>
+                                                            <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "minus")}> - </button> */}
+                                                        <button style={{ cursor: 'not-allowed' }}> + </button>
+                                                        <button style={{ cursor: 'not-allowed' }}> - </button>
                                                         </div>
                                                     </div>
                                                 ))
