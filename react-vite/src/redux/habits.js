@@ -2,11 +2,30 @@
 const CREATE_HABIT = "CREATE_HABIT";
 const DELETE_HABIT = "DELETE_HABIT";
 const UPDATE_COUNT = "UPDATE_COUNT";
+const GET_HABITS = "GET_HABITS"
 
 const initialState = {
     habits: [],
     errors: [],
 };
+
+export const getHabits = () => async dispatch => {
+    try {
+        const response = await fetch('api/quests');
+
+        if(response.ok) {
+            const data = await response.json();
+            dispatch({
+                type: GET_HABITS,
+                payload: data,
+            })
+        } else {
+            throw new Error('Error fetching habits')
+        }
+    } catch (error) {
+        console.error('Error fetching habits:', error);
+    }
+}
 
 export const createHabit = (habitData, id=null, questId=null) => async (dispatch) => {
     try {
@@ -96,23 +115,28 @@ export const updateCount = (habitId, action) => async (dispatch) => {
 
 const habitsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_HABITS:
+            return {
+                ...state,
+                habits: action.payload,
+            }
         case CREATE_HABIT:
             if (action.error) {
             return { ...state, errors: action.payload };
             } else {
             const habitIndex = state.habits.findIndex((habit) => habit.id === action.payload.id);
             const updatedHabits = [...state.habits];
-    
-            if (habitIndex !== -1) {
-                updatedHabits[habitIndex] = action.payload;
-            } else {
-                updatedHabits.push(action.payload);
-            }
-            return {
-                ...state,
-                habits: updatedHabits,
-                errors: [],
-            };
+        
+                if (habitIndex !== -1) {
+                    updatedHabits[habitIndex] = action.payload;
+                } else {
+                    updatedHabits.push(action.payload);
+                }
+                return {
+                    ...state,
+                    habits: updatedHabits,
+                    errors: [],
+                };
             }
         case DELETE_HABIT:
             const filteredHabits = state.habits.filter((habit) => habit.id !== action.payload);

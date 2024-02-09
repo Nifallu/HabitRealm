@@ -112,7 +112,7 @@ def update_habit_count(habit_id):
     habit = Habit.query.get(habit_id)
 
     if not habit:
-        return {"message": "habit not found"}, 404
+        return {"message": "Habit not found"}, 404
     
     if habit.user.id == current_user.id:
         data=request.get_json()
@@ -136,7 +136,6 @@ def update_habit_count(habit_id):
             habit.count = 0
             habit.last_reset = datetime.now()
 
-        
         db.session.commit()
 
         return habit.to_dict(), 200

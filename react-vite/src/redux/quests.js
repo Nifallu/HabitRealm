@@ -6,12 +6,14 @@ const GET_QUESTS = "GET_QUESTS"
 const JOIN_QUEST = "JOIN_QUEST"
 const ABANDON_QUEST = "ABANDON_QUEST"
 const GET_HABITS = "GET_HABITS"
+const UPDATE_QUEST_PROGRESS = "UPDATE_QUEST_PROGRESS"
 
 
 const initialState = {
     quests: [],
     errors: []
 }
+
 
 export const joinQuest = (questId, userId) => async (dispatch)=> {
     try {
@@ -36,6 +38,7 @@ export const joinQuest = (questId, userId) => async (dispatch)=> {
     }
 }
 
+
 export const abandonQuest = (questId, userId )=> async (dispatch)=> {
     try {
         const response = await fetch(`/api/quests/${questId}/abandon`, {
@@ -54,6 +57,7 @@ export const abandonQuest = (questId, userId )=> async (dispatch)=> {
         console.error(error.message);
     }
 }
+
 
 export const getQuests=()=> async (dispatch) => {
     try {
@@ -75,6 +79,7 @@ export const getQuests=()=> async (dispatch) => {
         return {errors: ["Failed to get quest"]}
     }
 }
+
 
 export const createUpdateQuest = (questData, id=null) => async (dispatch) => {
     try {
@@ -108,6 +113,7 @@ export const createUpdateQuest = (questData, id=null) => async (dispatch) => {
     }
 };
 
+
 export const deleteQuest = (questId) => async (dispatch) => {
     try {
         const response = await fetch(`/api/quests/${questId}`, {
@@ -129,6 +135,7 @@ export const deleteQuest = (questId) => async (dispatch) => {
     }
 }
 
+
 export const getQuestHabits = (questId) => async (dispatch) => {
     try {
         const response = await fetch(`/api/quests/${questId}/habits`);
@@ -144,6 +151,41 @@ export const getQuestHabits = (questId) => async (dispatch) => {
         console.error(error.message);
     }
 };
+
+
+export const updatedQuestProgress = (questId, habitId, action) => async (dispatch) => {
+    try {
+        const response = await fetch(`/api/quests/${questId}/habits/${habitId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ action }),
+        })
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            console.error(`Failed to update quest progress: ${response.status} - ${errorMessage}`)
+
+            throw new Error("Failed to update quest progress")
+            
+        }
+
+        const data = await response.json();
+
+        dispatch({
+            type: UPDATE_QUEST_PROGRESS,
+            payload: {
+                questId,
+                habitCounter: data.habit_counter,
+                progress: data.progress,
+            }
+        })
+        return data;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
 
 const questReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -228,6 +270,22 @@ const questReducer = (state = initialState, action) => {
                 ...state,
                 quests: updatedQuests,
             };
+            case UPDATE_QUEST_PROGRESS:
+                const updatedQuestProgress = state.quests.map((quest)=> {
+                    if (quest.id == action.payload.questId) {
+                        return {
+                            ...quest,
+                            habit_counter: action.payload.habit_counter,
+                            progress: action.payload.progress,
+                        }
+                    }
+                    return quest;
+                })
+
+                return {
+                    ...state,
+                    quest: updatedQuestProgress,
+                }
                 
         default:
             return state;

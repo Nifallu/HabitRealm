@@ -7,6 +7,7 @@ import HabitModal from "../HabitsFormModal/HabitsFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteQuestsHabits from "../DeleteModal/deleteModal";
 import { updateCount } from "../../redux/habits";
+import { updatedQuestProgress } from "../../redux/quests";
 
 import "./habits.css";
 
@@ -62,8 +63,13 @@ const Habits = () =>{
     }
 
     const handleUpdateCount = async (habitId, action) =>{
-        await dispatch(updateCount(habitId, action));
+        dispatch(updateCount(habitId, action))
         fetchHabits()
+    }
+
+    const handleUpdateQuestProgress = async (questId, habitId, action) => {
+        await dispatch(updatedQuestProgress(questId, habitId, action));
+        fetchQuests()
     }
 
     useEffect(()=>{
@@ -135,15 +141,16 @@ const Habits = () =>{
                                             <h3
                                                 className="habitQuestName"
                                                 onClick={() => navigate(`/quests/${quest.id}`)}
-                                            >{quest.name}</h3>                            
+                                            >{quest.name}</h3> 
+                                            <h4>Progress {quest.progress}</h4>                           
                                             {Array.isArray(quest.habits) && quest.habits.length > 0 ? (
                                                 quest.habits.map((habitData) => (
                                                     <div key={habitData.id} className="habits">
                                                         <h4>{habitData.name}</h4>
                                                         <p>{habitData.description}</p>
                                                         <div className="incrementButtons">
-                                                            <button onClick={()=>alert('Feature coming soon')}> + </button>
-                                                            <button onClick={()=>alert('Feature coming soon')}> - </button>
+                                                            <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "plus")}> + </button>
+                                                            <button onClick={()=>handleUpdateQuestProgress(quest.id, habitData.id, "minus")}> - </button>
                                                         </div>
                                                     </div>
                                                 ))

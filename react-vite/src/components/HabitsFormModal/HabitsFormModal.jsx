@@ -37,8 +37,8 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
             return;
         }
 
-        if (name.length < 4) {
-            return setErrors({ name: "Name must be at least 4 characters long" });
+        if (name.length < 4 || name.length > 40) {
+            return setErrors({ name: "Name must be between 4 - 40 characters" });
         }
 
         const serverResponse = await dispatch(createHabit(habitData, id, questId));
@@ -78,7 +78,7 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
             </label>
             {errors.description && <p>{errors.description}</p>}
             <label>
-                Reset Interval in Days
+                Count Reset Interval in Days
                 <input
                     className="habitInput"
                     type="number"
