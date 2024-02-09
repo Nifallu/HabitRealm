@@ -12,6 +12,7 @@ def seed_quests():
         difficulty=7,
         goal=700,
         habit_counter=100,
+        progress=14.28,
         reward_points=35,
     )
 
@@ -22,6 +23,7 @@ def seed_quests():
         difficulty=5,
         goal=500,
         habit_counter=25,
+        progress= 5.0,
         reward_points=25,
     )
 
@@ -32,6 +34,7 @@ def seed_quests():
         difficulty=4,
         goal=400,
         habit_counter=60,
+        progress= 15.0,
         reward_points=20,
     )
 
@@ -42,6 +45,7 @@ def seed_quests():
         difficulty=10,
         goal=1000,
         habit_counter=250,
+        progress= 25.0,
         reward_points=50,
     )
 
@@ -52,8 +56,66 @@ def seed_quests():
         difficulty=2,
         goal=200,
         habit_counter=110,
+        progress= 55.0,
         reward_points=10,
     )
+
+
+    quest6 = Quest(
+        name='Artisanal Crafting Expedition',
+        description='Embark on a quest to discover the art of crafting. Create unique and beautiful handmade items through various crafting techniques.',
+        creator_id=3,
+        difficulty=6,
+        goal=600,
+        habit_counter=40,
+        progress=6.67,
+        reward_points=30,
+    )
+
+    quest7 = Quest(
+        name='Enchanted Language Mastery',
+        description='Embark on a quest to become a language maestro. Conquer the realms of grammar, vocabulary, and cultural understanding in multiple languages.',
+        creator_id=1,
+        difficulty=8,
+        goal=800,
+        habit_counter=80,
+        progress=10.0,
+        reward_points=40,
+    )
+
+    quest8 = Quest(
+        name='Astronomical Stargazing Expedition',
+        description='Embark on a quest to explore the cosmos through stargazing. Learn constellations, planets, and the wonders of the universe.',
+        creator_id=2,
+        difficulty=3,
+        goal=300,
+        habit_counter=30,
+        progress=10.0,
+        reward_points=15,
+    )
+
+    quest9 = Quest(
+        name='Sustainable Living Crusade',
+        description='Embark on a quest to live sustainably and protect the environment. Adopt eco-friendly habits and make a positive impact on the planet.',
+        creator_id=3,
+        difficulty=7,
+        goal=700,
+        habit_counter=50,
+        progress=7.14,
+        reward_points=35,
+    )
+
+    quest10 = Quest(
+        name='Potion Brewing Mastery',
+        description='Embark on a quest to master the ancient art of potion brewing. Learn the secrets of herbs, concoctions, and magical elixirs.',
+        creator_id=1,
+        difficulty=9,
+        goal=900,
+        habit_counter=120,
+        progress=13.33,
+        reward_points=45,
+    )
+
 
     user1 = User.query.get(1)
     user2 = User.query.get(2)
@@ -102,7 +164,7 @@ def seed_quests():
     quest5.habit.append(habit11)
 
 
-    db.session.add_all([quest1, quest2, quest3, quest4, quest5])
+    db.session.add_all([quest1, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10])
     db.session.commit()
 
 def undo_quests():

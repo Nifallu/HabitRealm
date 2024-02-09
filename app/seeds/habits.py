@@ -40,7 +40,7 @@ def seed_habits():
         name='Coding',
         user_id=2,
         description='Spend 1 hour coding each day.',
-        frequency=2,
+        frequency=1,
         count=0
     )
 
@@ -64,7 +64,7 @@ def seed_habits():
         name='Digital Detox',
         user_id=2,
         description='Avoid screens for an hour before bedtime.',
-        frequency=7,
+        frequency=1,
         count=0 
     )
 
@@ -72,7 +72,7 @@ def seed_habits():
         name='Learning',
         user_id=1,
         description='Learn something new every day.',
-        frequency=2,
+        frequency=1,
         count=0
     )
 
@@ -96,11 +96,107 @@ def seed_habits():
         name='Budgeting',
         user_id=2,
         description='Review and update your budget weekly.',
-        frequency=3,
+        frequency=7,
+        count=0
+    )
+
+    habit13 = Habit(
+        name='Yoga',
+        user_id=1,
+        description='Attend a yoga class twice a week.',
+        frequency=7,
+        count=0
+    )
+
+    habit14 = Habit(
+        name='Creative Writing',
+        user_id=2,
+        description='Write for 30 minutes every morning.',
+        frequency=1,
+        count=50
+    )
+
+    habit15 = Habit(
+        name='Mindfulness Meditation',
+        user_id=3,
+        description='Practice mindfulness meditation for 15 minutes daily.',
+        frequency=1,
+        count=20
+    )
+
+    habit16 = Habit(
+        name='Healthy Snacking',
+        user_id=1,
+        description='Replace one unhealthy snack with a nutritious one each day.',
+        frequency=1,
+        count=5
+    )
+
+    habit17 = Habit(
+        name='Language Learning',
+        user_id=2,
+        description='Study a new language for 20 minutes every evening.',
+        frequency=1,
+        count=0
+    )
+
+    habit18 = Habit(
+        name='Sleep Hygiene',
+        user_id=3,
+        description='Establish a consistent sleep schedule and aim for 7-8 hours of sleep.',
+        frequency=1,
+        count=0
+    )
+
+    habit19 = Habit(
+        name='Hiking',
+        user_id=1,
+        description='Go for a hike on weekends.',
+        frequency=7,
+        count=0
+    )
+
+    habit20 = Habit(
+        name='Volunteering',
+        user_id=2,
+        description='Volunteer for a community service project once a month.',
+        frequency=30,
+        count=0
+    )
+
+    habit21 = Habit(
+        name='Daily Reflection',
+        user_id=3,
+        description='Reflect on your day for 10 minutes each night.',
+        frequency=1,
+        count=0
+    )
+
+    habit22 = Habit(
+        name='Fitness Class',
+        user_id=1,
+        description='Attend a fitness class (e.g., spin, dance, or HIIT) three times a week.',
+        frequency=7,
+        count=0
+    )
+
+    habit23 = Habit(
+        name='Limiting Social Media',
+        user_id=2,
+        description='Limit social media usage to 30 minutes per day.',
+        frequency=1,
+        count=0
+    )
+
+    habit24 = Habit(
+        name='Cooking at Home',
+        user_id=3,
+        description='Cook a homemade meal at least four times a week.',
+        frequency=7,
         count=0
     )
     
-    db.session.add_all([habit1, habit2, habit3, habit4, habit5, habit6, habit7, habit8, habit9, habit10, habit11, habit12])
+    db.session.add_all([habit1, habit2, habit3, habit4, habit5, habit6, habit7, habit8, habit9, habit10, habit11, habit12, habit13, habit14, habit15, habit16, habit17, habit18, habit19, habit20, habit21, habit22, habit23, habit24])
     db.session.commit()
 
 
