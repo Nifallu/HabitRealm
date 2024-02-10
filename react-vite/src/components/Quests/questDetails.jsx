@@ -66,8 +66,8 @@ const QuestDetails =() => {
 
         const fetchData = async () => {
             try {
-                await fetchAQuest(questId);
                 await dispatch(getQuestHabits(questId))
+                await fetchAQuest(questId);
             } catch (error) {
                 console.log("Error fetching Habits", error.message)
             }
@@ -122,10 +122,10 @@ const QuestDetails =() => {
                     <OpenModalMenuItem
                         itemText="Create Habit"
                         onItemClick={closeMenu}
-                        modalComponent={<HabitModal fetchHabits={fetchData} id={null} questId={quest.Quest.id}/>}
+                        modalComponent={<HabitModal fetchHabits={fetchData} habitId={null} questId={quest.Quest.id}/>}
                     /> : null}
                 </> : null }
-                {quest.Quest && quest.Quest.habits && quest.Quest.habits.length > 0 ? (
+                {quest.Quest && quest.Quest.habits && Array.isArray(quest.Quest.habits) && quest.Quest.habits.length > 0 ? (
                     <ul>
                         {quest.Quest.habits.map((habit)=> (
                             <div key={habit.id} className="questHabit">
@@ -151,7 +151,7 @@ const QuestDetails =() => {
                             <OpenModalMenuItem
                                 itemText="Update"
                                 onItemClick={closeMenu}
-                                modalComponent={<HabitModal fetchHabits={fetchData} id={habit.id} questId={null} habit={habit} />}
+                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={null} habit={habit} />}
                             />
                             </> : null }
                             </div>

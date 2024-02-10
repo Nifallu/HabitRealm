@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import "./HabitsForm.css"
 import { useEffect } from "react";
 
-function HabitModal({fetchHabits, id, questId, habit} ) {
+function HabitModal({fetchHabits, habitId, questId, habit} ) {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -41,7 +41,7 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
             return setErrors({ name: "Name must be between 4 - 40 characters" });
         }
 
-        const serverResponse = await dispatch(createHabit(habitData, id, questId));
+        const serverResponse = await dispatch(createHabit(habitData, habitId, questId));
         if (serverResponse.errors) {
             setErrors(serverResponse.errors);
         } else {
@@ -53,7 +53,7 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
 
     return (
         <div className="createHabitModal">
-        <h1>{id ? 'Update Habit': 'Create Habit'}</h1>
+        <h1>{habitId ? 'Update Habit': 'Create Habit'}</h1>
         <form onSubmit={handleSubmit} className="createHabitForm">
             <label>
                 Name
@@ -88,7 +88,7 @@ function HabitModal({fetchHabits, id, questId, habit} ) {
                 />
             </label>
             {errors.frequency && <p>{errors.frequency}</p>}
-            <button type="submit" className="submit">{id ? 'Update Habit': 'Create Habit'}</button>
+            <button type="submit" className="submit">{habitId ? 'Update Habit': 'Create Habit'}</button>
         </form>
         </div>
     );

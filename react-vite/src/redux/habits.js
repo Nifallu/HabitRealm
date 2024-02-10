@@ -27,26 +27,26 @@ export const getHabits = () => async dispatch => {
     }
 }
 
-export const createHabit = (habitData, id=null, questId=null) => async (dispatch) => {
+export const createHabit = (habitData, habitId=null, questId=null) => async (dispatch) => {
     try {
         let apiUrl = "/api/habits";
         if (questId) {
             apiUrl = `/api/quests/${questId}/habits`;
         }
         
-        const response = await fetch(id ? `/api/habits/${id}` : apiUrl, {
-        method: id ? "PUT" : "POST",
+        const response = await fetch(habitId ? `/api/habits/${habitId}` : apiUrl, {
+        method: habitId ? "PUT" : "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(habitData),
         });
-
         if (!response.ok) {
-        throw new Error(id ? " Failed to update habit" : "Failed to create habit");
+        throw new Error(habitId? " Failed to update habit" : "Failed to create habit");
         }
 
     const data = await response.json();
+    console.log("data", data)
 
     dispatch({
         type: CREATE_HABIT,
@@ -55,13 +55,14 @@ export const createHabit = (habitData, id=null, questId=null) => async (dispatch
 
         return data;
     } catch (error) {
+        console.log("error in createHabit", error)
         dispatch({
         type: CREATE_HABIT,
         error: true,
-        payload: [id ? "Failed to update habit": "Failed to create habit"],
+        payload: [habitId ? "Failed to update habit": "Failed to create habit"],
         });
 
-        return { errors: [id ? "Failed to update habit" : "Failed to create habit"] };
+        return { errors: [habitId ? "Failed to update habit" : "Failed to create habit"] };
     }
 };
 
@@ -108,7 +109,7 @@ export const updateCount = (habitId, action) => async (dispatch) => {
             payload: {habitId, action}
         })
 
-    } catch (error) {
+    } catch (error) {findIndex
         console.error("Error updating habit count:", error)
     }
 }
@@ -121,8 +122,12 @@ const habitsReducer = (state = initialState, action) => {
                 habits: action.payload,
             }
         case CREATE_HABIT:
+            console.log("Current State:", state);
+            console.log("Action Payload:", action.payload);
+            state = initialState
             if (action.error) {
-            return { ...state, errors: action.payload };
+                console.log("errors", action.error)
+                return { ...state, errors: action.payload };
             } else {
             const habitIndex = state.habits.findIndex((habit) => habit.id === action.payload.id);
             const updatedHabits = [...state.habits];

@@ -46,11 +46,8 @@ const Habits = () =>{
         
         if (response.ok) {
             const data = await response.json();
-            console.log('habit', data)
             const habitsArray = Array.isArray(data.Habits) ? data.Habits : [];
-            console.log('habit array', habitsArray)
             const orderedHabits = habitsArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            console.log('ordered habits', orderedHabits);
             setHabits({'Habits': orderedHabits});
         } else {
             throw new Error('Error fetching habits');
@@ -62,11 +59,11 @@ const Habits = () =>{
     
         if (response.ok) {
             const data = await response.json();
-            console.log("quest data", data)
+
             const questsArray = Array.isArray(data.Quests) ? data.Quests : [];
-            console.log("quest array", questsArray)
+
             const orderedQuests = questsArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            console.log("ordered quest", orderedQuests)
+
             setQuests({"Quests": orderedQuests});
         } else {
             throw new Error('Error fetching quests');
@@ -128,7 +125,7 @@ const Habits = () =>{
                                 <OpenModalMenuItem
                                     itemText="Update"
                                     onItemClick={closeMenu}
-                                    modalComponent={<HabitModal fetchHabits={fetchHabits} id={habit.id} questId={null} habit={habit} />}
+                                    modalComponent={<HabitModal fetchHabits={fetchHabits} habitId={habit.id} questId={null} habit={habit} />}
                                 />
                                 </div>
                             </div> : null}
