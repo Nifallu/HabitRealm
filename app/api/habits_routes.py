@@ -40,7 +40,7 @@ def get_habits():
     """
     Get all User Habits
     """
-    habits = Habit.query.filter_by(user_id=current_user.id).all()
+    habits = Habit.query.filter_by(user_id=current_user.id).order_by(Habit.id.desc()).all()
     return {"Habits": [habit.to_dict() for habit in habits]}
 
 

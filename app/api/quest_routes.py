@@ -15,7 +15,7 @@ def get_all_quests():
     """
     Get all the Quests
     """
-    quests= Quest.query.all()
+    quests= Quest.query.order_by(Quest.id.desc()).all()
     return {"Quests": [quest.to_dict()for quest in quests]}
 
 
@@ -66,8 +66,10 @@ def create_quest():
             description=form.description.data,
             creator_id = current_user.id,
             difficulty = form.difficulty.data,
+            habit_counter=0,
             goal = int(form.difficulty.data) * 100,
             reward_points= int(form.difficulty.data) * 5,
+            progress=0
         )
         
         new_quest.user.append(current_user)
@@ -102,11 +104,8 @@ def update_quest(quest_id):
         quest.name = form.name.data
         quest.description = form.description.data
         quest.difficulty = form.difficulty.data
-        quest.habit_counter=0
         quest.goal = int(form.difficulty.data)*100
         quest.reward_points = int(form.difficulty.data)*5
-        quest.progress=0
-        
 
         db.session.commit()
         return {"Quest": quest.to_dict()}, 200
