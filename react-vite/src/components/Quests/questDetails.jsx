@@ -134,7 +134,7 @@ const QuestDetails =() => {
                             <li className="habitDescription">{habit.description}</li>
                             {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ?
                             <div className="incrementButtons">
-                                {console.log(quest.Quest.habit_counter, quest.Quest.goal, quest.Quest.progress)}
+                                {/* {console.log(quest.Quest.habit_counter, quest.Quest.goal, quest.Quest.progress)} */}
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "plus")}> + </button>
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "minus")}> - </button>
                             </div> : null}
