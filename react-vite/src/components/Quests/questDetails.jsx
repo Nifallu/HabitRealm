@@ -1,8 +1,9 @@
 import {useState, useEffect} from "react";
 import QuestModal from "../QuestFormModal/questFormModal";
 import HabitModal from "../HabitsFormModal/HabitsFormModal";
+import AbandonQuest from "../AbandonModal/abandonModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { joinQuest, abandonQuest, getQuestHabits } from "../../redux/quests";
+import { joinQuest, getQuestHabits } from "../../redux/quests";
 import { useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -98,16 +99,16 @@ const QuestDetails =() => {
                 console.log("Error joining quest:", error.message)
             }
         }
-        const handleAbandon = async(questId) => {
-            if (window.confirm("Are you sure you want to abandon this quest?")){
-                try {
-                    await dispatch(abandonQuest(questId, sessionUser.id))
-                    fetchAQuest(questId)
-                } catch (error){
-                    console.error("Error abandoning quest:", error.message)
-                }
-            }
-        }
+        // const handleAbandon = async(questId) => {
+        //     if (window.confirm("Are you sure you want to abandon this quest?")){
+        //         try {
+        //             await dispatch(abandonQuest(questId, sessionUser.id))
+        //             fetchAQuest(questId)
+        //         } catch (error){
+        //             console.error("Error abandoning quest:", error.message)
+        //         }
+        //     }
+        // }
 
     return (
         <div>
@@ -181,9 +182,17 @@ const QuestDetails =() => {
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
                     ) : null}
-                        {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
+                        {/* {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                             <button onClick={() => handleAbandon(quest.Quest.id)}>Abandon Quest</button>
-                        ) : null}
+                        ) : null} */}
+                        {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? 
+                        <>
+                        <OpenModalMenuItem
+                            itemText="Abandon Quest"
+                            onItemClick={closeMenu}
+                            modalComponent={<AbandonQuest fetches={fetchAQuest} questId={quest.Quest.id}/>}
+                        />
+                        </> : null }
                         {quest.Quest && sessionUser.id === quest.Quest.creator_id ?
                             <>
                                     <OpenModalMenuItem
