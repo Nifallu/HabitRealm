@@ -1,13 +1,15 @@
-.profile-dropdown {
-  position: absolute;
-}* {
+* {
   color: lightskyblue;
 }
 
+.profile-dropdown {
+  position: absolute;
+}
 body {
   background-color: #0d1016;
 }
-
+/* possible light mode background ivory */
+/* */
 .profile-dropdown {
     width: 150px;
     background-color: #2d2d2d;
@@ -16,26 +18,44 @@ body {
     list-style: none;
     position: absolute;
     right: 20px;
-    top: 65px;
+    top: 90px;
     border-radius: 10px;
-    color:#0d1016;
   }
 
+  .profile-dropdown li {
+    color:#ccc;
+  }
+  .profile-dropdown button {
+    color: #2d2d2d
+  } 
+
+
   .navigationBar {
-    background-color: #2d2d2d;
-    width: 100%;
-    border-radius: 20px;
+    display: flex;
+    background-color: #3c0a7d;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 2px;
+  }
+
+  .HabitRealm {
+    font-family: 'Montserrat Subrayada', sans-serif;
+  }
+  .HabitRealm, .navLinks {
+    color: #ccc;
+    text-decoration: none;
+    padding: 15px;
   }
   
+  .navLinks {
+    position: relative;
+    top: 30px;
+    margin: 25px;
+    cursor: pointer;
+  }
 
   .hidden {
     display: none;
-  }
-
-  .home {
-    text-decoration: none;
-    font-size: 40px;
-    background-color: #2d2d2d;
   }
 
   ul {
@@ -44,22 +64,30 @@ body {
 
   .menuButton {
     position: absolute;
-    right: 20px;
-    top: 5px;
+    right: 0px;
+    top: -5px;
     font-size: 20px;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 8px;
-    width: 100px;
+    width: 120px;
     background-color: #2d2d2d;
     cursor: pointer;
+    text-align: center;
+  }
+
+  .profileButton {
+    position: absolute;
+    right: 25px;
+    top: 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 8px;
+    width: 80px;
+    background-color: #2d2d2d;
+    cursor: pointer;
+    text-align: center;
   }
 
   .menuList {
     padding: 10px;
-  }
-
-  .logInButtons {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
   }

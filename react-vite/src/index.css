@@ -1,1 +1,24 @@
 /* TODO: Add sitewide styles */
+button {
+    color: #0d1016;
+    border: 1px solid #0d1016;
+    border-radius: 5px;
+    padding: 0px 20px;
+    background-color: #cccc;
+    cursor: pointer;
+    font-family:'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+li {
+    list-style-type: none;
+}
+
+* {
+    font-family: 'Kurale', serif;
+    word-break: break-all;
+}
+
+h1, h2, h3, h4 {
+    font-family:'Roboto', sans-serif;
+}

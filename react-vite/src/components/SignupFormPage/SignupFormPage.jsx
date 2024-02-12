@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
+import validator from 'validator';
+import "./SignupForm.css";
+
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -17,6 +20,17 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validator.isEmail(email)) {
+      return setErrors({ email: "Please enter a valid email address" });
+    }
+
+    if (password.length < 6) {
+      return setErrors({ password: "Password must be at least 6 characters long" });
+    }
+    if (username.length < 3 || username.length > 20){
+      return setErrors({ username: "Username must be 3 to 20 characters long"})
+    }
 
     if (password !== confirmPassword) {
       return setErrors({
@@ -41,13 +55,14 @@ function SignupFormPage() {
   };
 
   return (
-    <>
+    <div className="signupBox">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="signupInputBox">
+        <label >
           Email
           <input
+            className="inputBox"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -58,6 +73,7 @@ function SignupFormPage() {
         <label>
           Username
           <input
+            className="inputBox"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -68,6 +84,7 @@ function SignupFormPage() {
         <label>
           Password
           <input
+            className="inputBox"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -78,6 +95,7 @@ function SignupFormPage() {
         <label>
           Confirm Password
           <input
+            className="inputBox"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -85,9 +103,9 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

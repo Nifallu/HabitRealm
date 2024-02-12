@@ -3,22 +3,39 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 
+
+import Quests from '../components/Quests';
+import  Habits  from '../components/Habits'
+import QuestDetails from '../components/Quests/questDetails';
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element:  <>
+                  <SignupFormPage />
+                  <Habits/>
+                  </>
       },
       {
         path: "login",
         element: <LoginFormPage />,
       },
       {
-        path: "signup",
-        element: <SignupFormPage />,
+        path: "/habits/:habitId",
+        element: <Habits />
       },
+      {
+        path: "/quests",
+        element: <Quests/>
+      },
+      {
+        path: "/quests/:questId",
+        element: <QuestDetails />
+      }
+
     ],
   },
 ]);

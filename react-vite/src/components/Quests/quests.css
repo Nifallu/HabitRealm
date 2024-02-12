@@ -1,0 +1,139 @@
+.quests {
+    display: grid;
+    grid-template-columns: 1fr .25fr;
+    grid-template-areas: 
+    "a c"
+    "b c"
+    "e c"
+    "f f";
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    padding: 20px;
+    gap: 5px;
+    border: 1px solid #cccc;
+}
+
+.questHabit {
+    display:grid;
+    grid-template-areas: 
+    "a d"
+    "b d"
+    "c d";
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    padding: 20px;
+    gap: 5px;
+}
+
+.questBox {
+    margin-top:35px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.questDetailBox {
+    display: grid;
+    grid-template-columns: 1fr .75fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 10px;
+    height: 100vh;
+}
+
+.questHabits {
+    grid-column: 1;
+    grid-row: span 2;
+}
+
+.questDetails, .questList {
+    display: inline-flex;
+    flex-direction: column;
+    grid-column: 2;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    padding: 0px 20px;
+}
+
+.questHabit {
+    border: 1px #cccc solid;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 15px;
+}
+
+.difficultyReward {
+    display: flex;
+    font-size: 14px;
+    margin-top: 5px;
+    justify-content: space-around;
+}
+
+.questName {
+    margin-top: 5px;
+    grid-area: a;
+    cursor: pointer;
+}
+
+.description {
+    grid-area: b;
+    margin-bottom: 15px;
+}
+
+.questButtons {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.difficultReward {
+    display: flex;
+    justify-content: space-around;
+}
+
+.updateDeleteQuests {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    grid-area: f;
+}
+
+.updateDeleteHabits {
+    display: flex;
+    gap: 20px;
+}
+
+.rewardDifficulty {
+    display: flex;
+    flex-direction: column;
+    grid-area: c;
+    border-left: 1px solid #cccc;
+    padding-left: 10px;
+    height: 100%;
+    gap: 20px
+}
+
+.backProgressBar {
+    border-radius: 10px;
+    background-color: #cccc;
+    width: 500px;
+    height: 30px;
+    align-self: center;
+    border: 2px solid #cccc
+}
+
+.progressBar{
+    background-color: skyblue;
+    height: 30px;
+    text-align: center;
+    border-radius: 10px;
+    word-break: normal;
+    color: rgb(0, 24, 38);
+    font-weight: bold;
+    
+}
+
+.progressWord {
+    margin-top: 30px;
+    align-self: center;
+}

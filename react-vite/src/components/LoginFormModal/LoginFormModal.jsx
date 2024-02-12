@@ -28,13 +28,35 @@ function LoginFormModal() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    const demoUser = {
+      email: "demo@aa.io",
+      password: "password"
+    }
+    setEmail(demoUser.email)
+    setPassword(demoUser.password)
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: demoUser.email,
+        password: demoUser.password
+      })
+    )
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+    }
+  };
+
   return (
-    <>
+    <div className="loginModalBox">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email
-          <input
+          <input 
+            className="loginInput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -45,6 +67,7 @@ function LoginFormModal() {
         <label>
           Password
           <input
+            className="loginInput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -52,9 +75,13 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button type="submit" className="submit">Log In</button>
       </form>
-    </>
+
+      <button className='DemoButton' type="button" onClick={handleDemoLogin}>
+          Demo User
+        </button>
+    </div>
   );
 }
 

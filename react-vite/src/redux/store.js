@@ -6,9 +6,13 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import habitsReducer from "./habits";
+import questReducer from "./quests";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  habits: habitsReducer,
+  quests: questReducer,
 });
 
 let enhancer;
