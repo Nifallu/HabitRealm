@@ -36,6 +36,11 @@ function QuestModal({fetchQuests, id, quest}){
             return setErrors({ name: "Name must be between 3 - 80 characters" });
         }
 
+        if (description.length > 3){
+            return setErrors({ description: "Description must be between 3 - 80 characters" });
+        }
+
+
         const serverResponse = await dispatch(createUpdateQuest(questData, id));
         if (serverResponse.errors) {
             setErrors(serverResponse.errors);
