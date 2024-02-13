@@ -36,8 +36,8 @@ function QuestModal({fetchQuests, id, quest}){
             return setErrors({ name: "Name must be between 3 - 80 characters" });
         }
 
-        if (description.length > 3){
-            return setErrors({ description: "Description must be between 3 - 80 characters" });
+        if (description.length < 3){
+            return setErrors({ description: "Description must be longer than 3 characters" });
         }
 
 
