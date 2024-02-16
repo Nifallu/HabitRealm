@@ -174,7 +174,7 @@ const QuestDetails =() => {
                     {quest.Quest ? (
                     <div className="backProgressBar">
                         <div className="progressBar"
-                            style={{width: `${quest.Quest.progress *5}px`}}
+                            style={{width: `${quest.Quest.progress}%`}}
                         >{quest.Quest.progress}%</div>
                         </div> ) : null }
                     <div className="questButtons">

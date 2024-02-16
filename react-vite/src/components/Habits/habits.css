@@ -4,7 +4,7 @@
     margin-bottom: 35px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 25px;
 }
 
 .habits {
@@ -16,10 +16,14 @@
     background-color: #2d2d2d;
     border-radius: 5px;
     padding: 20px;
-    gap: 5px;
+    gap: 10px;
     margin-bottom: 10px;
-    border: 1px solid #cccc
+    border: 1px solid #cccc;
+    box-shadow: 1px 1px 5px 3px #3c0a7d;
 }
+/* .habits:hover {
+    box-shadow: 1px 1px 5px 3px rgb(120, 93, 199);
+} */
 
 .habitName h3{
     margin-top: 0px;
@@ -46,6 +50,7 @@
 .incrementButtons button:hover {
     background-color: #3c0a7d;
     border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgb(31, 8, 145);
 }
 .updateDelete {
     display: flex;
@@ -65,17 +70,29 @@
 
 .habitQuests {
     margin-bottom: 20px;
+    box-shadow: 1px 1px 10px 0px rgb(31, 8, 145);
+    width: 90%;
+    padding: 5%;
+    align-items: center;
 }
 
 
 .habitBlock {
     margin-top: 60px;
+    box-shadow: none;
 }
 
 .habitQuestName {
     text-align: center;
+    cursor: pointer;
+}
+
+.habitQuestName:hover {
+    color: rgb(120, 93, 199);
 }
 
 .backProgressBar {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+    box-shadow: 1px 1px 5px 2px #3c0a7d;
 }

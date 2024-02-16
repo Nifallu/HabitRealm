@@ -9,6 +9,9 @@ button {
     font-family:'Roboto', sans-serif;
     font-weight: bold;
 }
+button:hover {
+    box-shadow: 3px 3px 5px 1px rebeccapurple;
+}
 
 li {
     list-style-type: none;
@@ -21,4 +24,11 @@ li {
 
 h1, h2, h3, h4 {
     font-family:'Roboto', sans-serif;
+    /* text-shadow: 1px 1px 2px rgb(120, 93, 199); */
+}
+
+hr {
+    height: 3px;
+    background-color: rgb(120, 93, 199);
+    border: none;
 }

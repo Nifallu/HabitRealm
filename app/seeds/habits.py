@@ -195,8 +195,98 @@ def seed_habits():
         frequency=7,
         count=0
     )
+
+    # Habits for Artisanal Crafting Expedition
+    habit25 = Habit(
+        name='Crafting Marvels',
+        user_id=3,
+        description='Create a unique handcrafted item related to the quest theme every week.',
+        frequency=7,
+        count=0
+    )
+
+    habit26 = Habit(
+        name='Artisanal Exploration',
+        user_id=3,
+        description='Experiment with a new crafting technique or material twice a week.',
+        frequency=3,
+        count=0
+    )
+
+# Habits for Enchanted Language Mastery
+    habit27 = Habit(
+        name='Language Quest Journal',
+        user_id=1,
+        description='Maintain a language learning journal, documenting progress and discoveries daily.',
+        frequency=1,
+        count=0
+    )
+
+    habit28 = Habit(
+        name='Cultural Immersion',
+        user_id=1,
+        description='Engage in a cultural activity related to the language being learned at least once a week.',
+        frequency=7,
+        count=0
+    )
+
+# Habits for Astronomical Stargazing Expedition
+    habit29 = Habit(
+        name='Celestial Logbook',
+        user_id=2,
+        description='Keep a logbook to record observations and thoughts during stargazing sessions.',
+        frequency=7,
+        count=0
+    )
+
+    habit30 = Habit(
+        name='Constellation Mastery',
+        user_id=2,
+        description='Learn and memorize a new constellation every week, identifying it during stargazing.',
+        frequency=7,
+        count=0
+    )
+
+# Habits for Sustainable Living Crusade
+    habit31 = Habit(
+        name='Eco-Friendly Habits',
+        user_id=3,
+        description='Adopt a new sustainable habit (e.g., composting, reducing waste) every two weeks.',
+        frequency=14,
+        count=0
+    )
+
+    habit32 = Habit(
+        name='Nature Appreciation Walks',
+        user_id=3,
+        description='Take a weekly nature walk to connect with the environment and appreciate its beauty.',
+        frequency=7,
+        count=0
+    )
+
+# Habits for Potion Brewing Mastery
+    habit33 = Habit(
+        name='Magical Mixology',
+        user_id=1,
+        description='Experiment with magical ingredient combinations for potion brewing twice a week.',
+        frequency=3,
+        count=0
+    )
+
+    habit34 = Habit(
+        name='Potion Brewing Documentation',
+        user_id=1,
+        description='Maintain a detailed potion brewing log, noting successes and areas for improvement.',
+        frequency=7,
+        count=0
+    )
     
-    db.session.add_all([habit1, habit2, habit3, habit4, habit5, habit6, habit7, habit8, habit9, habit10, habit11, habit12, habit13, habit14, habit15, habit16, habit17, habit18, habit19, habit20, habit21, habit22, habit23, habit24])
+    db.session.add_all([habit1, habit2, habit3, habit4, habit5, habit6, habit7, habit8, 
+                        habit9, habit10, habit11, habit12, habit13, habit14, habit15, 
+                        habit16, habit17, habit18, habit19, habit20, habit21, habit22, habit23, habit24,
+                        habit25, habit26, habit27, habit28, habit29,
+                        habit30, habit31, habit32, habit33, habit34
+                        ])
     db.session.commit()
 
 
