@@ -75,7 +75,7 @@ const Quests =() => {
                             <li className="description">{quest.description}</li>
                             <div className="rewardDifficulty">
                             <li>Difficulty: {quest.difficulty}</li>
-                            <li>Reward: {quest.reward_points}</li>
+                            <li>Reward: {quest.reward_points} <img src="Gem.png" alt="Gems"></img></li>
                             <li>Progress:  {quest.progress}%</li>
                             </div>
                             <div className="updateDeleteQuests">
