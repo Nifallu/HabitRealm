@@ -168,7 +168,7 @@ const QuestDetails =() => {
                     <p>{quest.Quest ? quest.Quest.description: "No Description"}</p>
                     <div className="difficultReward">
                         <p>{quest.Quest ? <p>Difficulty: {quest.Quest.difficulty}</p>: "No difficulty"}</p>
-                        <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points} <img src="Gem.png" alt="Gems"></img></p> :  "No Rewards"}</p>
+                        <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></p> :  "No Rewards"}</p>
                     </div>
                     <p className="progressWord">Progress</p>
                     {quest.Quest ? (
@@ -222,7 +222,7 @@ const QuestDetails =() => {
                                 </h4>
                                 <div className="difficultyReward">
                                 <li>Difficulty {quest.difficulty}</li>
-                                <li>Reward {quest.reward_points} <img src="Gem.jpg"></img></li>
+                                <li>Reward {quest.reward_points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></li>
                                 </div>
                                 <hr></hr>
                             </div>}
