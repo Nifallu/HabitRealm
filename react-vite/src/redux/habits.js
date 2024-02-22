@@ -109,7 +109,7 @@ export const updateCount = (habitId, action) => async (dispatch) => {
             payload: {habitId, action}
         })
 
-    } catch (error) {findIndex
+    } catch (error) {
         console.error("Error updating habit count:", error)
     }
 }
@@ -122,8 +122,8 @@ const habitsReducer = (state = initialState, action) => {
                 habits: action.payload,
             }
         case CREATE_HABIT:
-            console.log("Current State:", state);
-            console.log("Action Payload:", action.payload);
+            // console.log("Current State:", state);
+            // console.log("Action Payload:", action.payload);
             state = initialState
             if (action.error) {
                 console.log("errors", action.error)
@@ -150,6 +150,7 @@ const habitsReducer = (state = initialState, action) => {
             habits: filteredHabits,
             };
         case UPDATE_COUNT:
+            state.habits = [];
             const updatedHabits = state.habits.map((habit) => {
                 if(habit.id === action.payload.habitId) {
                     if(action.payload.action === "plus") {
