@@ -56,7 +56,7 @@ const Quests =() => {
     return (
         <div className="QuestBlock">
             <ul>
-                <h1>Quests</h1>
+                <h1 className="QuestHeader">Quests</h1>
                 {sessionUser ? <OpenModalMenuItem
                     itemText="Create Quest"
                     onItemClick={{closeMenu}}

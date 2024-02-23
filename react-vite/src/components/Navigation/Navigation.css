@@ -76,7 +76,7 @@ body {
     font-size: 20px;
     border-radius: 10px;
     padding: 8px;
-    width: 120px;
+    width: 220px;
     background-color: #2d2d2d;
     cursor: pointer;
     text-align: center;
@@ -97,4 +97,8 @@ body {
 
   .menuList {
     padding: 10px;
+  }
+
+  .AvatarButton:hover {
+    cursor: not-allowed;
   }
