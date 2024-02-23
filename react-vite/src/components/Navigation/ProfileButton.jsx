@@ -48,7 +48,7 @@ function ProfileButton() {
         <>
           <button className="menuButton" onClick={toggleMenu}>
             {/* <i className="fas fa-user-circle" /> */}
-            <img src="https://i.ibb.co/zQ5bmyQ/MyAvatar.png" alt="MyAvatar" border="0" width="200px"/>
+            <img src="https://i.ibb.co/FVL2wrL/MyAvatar.png" alt="MyAvatar" border="0" width="200px"/>
           </button>
           {showMenu && (
             <ul className={"profile-dropdown"} ref={ulRef}>
