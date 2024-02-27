@@ -26,16 +26,16 @@ https://habitrealmstarter.onrender.com
   4. open browser and navagate to your localhoast
 
 ## Technologies Used
-*Frontend: React, Redux
-*Backend: Flask, SQLAlchemy
-*Database: PostgressSQL
-*Styling: CSS
+* Frontend: React, Redux
+* Backend: Flask, SQLAlchemy
+ *Database: PostgressSQL
+* Styling: CSS
 
 
 ## Future Features
-- [] Avatat: Create and update an avatar using rewards
-- [] Rewards: Obtain gems to exchange for rewards to update your avatar.
-- [] Parties: create or join a group of friends to complete quests. 
+[] Avatat: Create and update an avatar using rewards
+[] Rewards: Obtain gems to exchange for rewards to update your avatar.
+[] Parties: create or join a group of friends to complete quests. 
 
 ## Challenges and Considerations
 
