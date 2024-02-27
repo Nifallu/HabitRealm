@@ -33,9 +33,9 @@ https://habitrealmstarter.onrender.com
 
 
 ## Future Features
-[] Avatat: Create and update an avatar using rewards
-[] Rewards: Obtain gems to exchange for rewards to update your avatar.
-[] Parties: create or join a group of friends to complete quests. 
+- Avatat: Create and update an avatar using rewards
+- Rewards: Obtain gems to exchange for rewards to update your avatar.
+- Parties: create or join a group of friends to complete quests. 
 
 ## Challenges and Considerations
 
