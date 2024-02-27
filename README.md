@@ -7,4 +7,4 @@ Loosely insipired by Habitica, Habit Realm combines habit-tracking functionality
 
 #### Live Site
 
-![Habit Realm](https://habitrealmstarter.onrender.com)
+https://habitrealmstarter.onrender.com
