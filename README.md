@@ -28,7 +28,7 @@ https://habitrealmstarter.onrender.com
 ## Technologies Used
 * Frontend: React, Redux
 * Backend: Flask, SQLAlchemy
- *Database: PostgressSQL
+* Database: PostgressSQL
 * Styling: CSS
 
 
