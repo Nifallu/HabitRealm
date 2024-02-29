@@ -9,6 +9,8 @@ class AvatarForm(FlaskForm):
     hair = StringField('Hair')
     top = StringField('Top')
     bottom = StringField('Bottom')
+    L_weapon=StringField('Left Weapon')
+    R_weapon=StringField('Right Weapon')
     current_health = IntegerField('Current Health', validators=[DataRequired()])
     max_health = IntegerField('Max Health', validators=[DataRequired()])
     level = IntegerField('Level', validators=[DataRequired()])

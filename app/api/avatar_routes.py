@@ -26,10 +26,6 @@ def edit_avatar():
     if form.validate_on_submit():
         user_avatar = current_user.avatar
 
-        if not user_avatar:
-            # Create a new Avatar if one does not exist for the user
-            user_avatar = Avatar(user=current_user)
-
         # Update Avatar fields based on the form data
         user_avatar.background = form.background.data
         user_avatar.body = form.body.data
@@ -37,6 +33,8 @@ def edit_avatar():
         user_avatar.hair = form.hair.data
         user_avatar.top = form.top.data
         user_avatar.bottom = form.bottom.data
+        user_avatar.L_weapon = form.L_weapon.data
+        user_avatar.R_weapon = form.R_weapon.data
         user_avatar.current_health = form.current_health.data
         user_avatar.max_health = form.max_health.data
         user_avatar.level = form.level.data
@@ -55,6 +53,8 @@ def edit_avatar():
         form.hair.data = user_avatar.hair
         form.top.data = user_avatar.top
         form.bottom.data = user_avatar.bottom
+        form.L_weapon.data = user_avatar.L_weapon
+        form.R_weapon.data = user_avatar.R_weapon
         form.current_health.data = user_avatar.current_health
         form.max_health.data = user_avatar.max_health
         form.level.data = user_avatar.level

@@ -14,6 +14,8 @@ class Avatar(db.Model):
     hair = db.Column(db.String)
     top = db.Column(db.String)
     bottom = db.Column(db.String)
+    L_weapon = db.Column(db.String)
+    R_weapon = db.Column(db.String)
     current_health = db.Column(db.Integer)
     max_health = db.Column(db.Integer)
     level = db.Column(db.Integer)
@@ -33,6 +35,8 @@ class Avatar(db.Model):
         self.hair = ""
         self.top = ""
         self.bottom = ""
+        self.L_weapon = ""
+        self.R_weapon = ""
         self.current_health = 100
         self.max_health = 100
         self.level = 1
@@ -47,6 +51,8 @@ class Avatar(db.Model):
             'hair': self.hair,
             'top': self.top,
             'bottom': self.bottom,
+            'L_weapon': self.L_weapon,
+            'R_weapon': self.R_weapon,
             'current_health': self.current_health,
             'max_health': self.max_health,
             'level': self.level,

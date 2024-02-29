@@ -11,6 +11,10 @@ class Reward(db.Model):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.textarea, nullable=False)
     cost = db.Column(db.Integer, nullable=False)
+    attack = db.Column(db.Integer)
+    defense = db.Column(db.Integer)
+    speed = db.Column(db.Integer)
+    accuracy = db.Column(db.Integer)
     image = db.Column(db.String, nullable=False)
     category = db.Column(db.String, nullable=False)
 
