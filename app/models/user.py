@@ -12,13 +12,18 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    # party_id = db.Column(db.Integer)
-    # avatar_id = db.Column(db.Integer)
-    # points = db.Column(db.Integer)
+    points = db.Column(db.Integer)
+    party_id = db.Column(db.Integer, db.ForeignKey('parties.id'))
 
     my_quests = (db.relationship('Quest', back_populates='creator'))
     habit = db.relationship('Habit', back_populates='user')
     quest = db.relationship('Quest', secondary='user_quests', back_populates='user')
+
+    rewards = db.relationship('Reward', secondary='user_rewards', back_populates='users')
+
+    avatar = db.relationship('Avatar', back_populates='user', uselist=False)
+
+    party = db.relationship('Party', back_populates='members')
 
     @property
     def password(self):
@@ -35,5 +40,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'rewards': [reward.id for reward in self.rewards],
+            'Avatar': self.avatar,
+            'party_id': self.party_id
         }

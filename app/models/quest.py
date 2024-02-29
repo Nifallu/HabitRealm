@@ -17,6 +17,7 @@ class Quest(db.Model):
     habit_counter= db.Column(db.Integer)
     progress = db.Column(db.Float)
     reward_points = db.Column(db.Integer)
+    complete = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
