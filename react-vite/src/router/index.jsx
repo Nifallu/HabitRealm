@@ -34,6 +34,9 @@ export const router = createBrowserRouter([
       {
         path: "/quests/:questId",
         element: <QuestDetails />
+      },
+      {
+        path: 
       }
 
     ],

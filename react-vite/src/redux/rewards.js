@@ -1,0 +1,96 @@
+const GET_REWARDS = 'rewards/getRewards';
+const ADD_REWARD = 'rewards/addReward';
+const UPDATE_REWARD = 'rewards/updateReward';
+const DELETE_REWARD = 'rewards/deleteReward';
+
+// Action creators
+export const getRewards = (rewards) => ({
+    type: GET_REWARDS,
+    payload: rewards
+});
+
+export const addReward = (reward) => ({
+    type: ADD_REWARD,
+    payload: reward
+});
+
+export const updateReward = (reward) => ({
+    type: UPDATE_REWARD,
+    payload: reward
+});
+
+export const deleteReward = (rewardId) => ({
+    type: DELETE_REWARD,
+    payload: rewardId
+});
+
+// Thunks
+export const thunkGetRewards = () => async (dispatch) => {
+    const response = await fetch("/rewards");
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getRewards(data));
+    }
+};
+
+export const thunkCreateReward = (rewardData) => async (dispatch) => {
+    const response = await fetch("/reward/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(rewardData)
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addReward(data));
+    }
+};
+
+export const thunkEditReward = (rewardId, rewardData) => async (dispatch) => {
+    const response = await fetch(`/reward/edit/${rewardId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(rewardData)
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateReward(data));
+    }
+};
+
+export const thunkDeleteReward = (rewardId) => async (dispatch) => {
+    const response = await fetch(`/reward/delete/${rewardId}`, {
+        method: "POST"
+    });
+
+    if (response.ok) {
+        dispatch(deleteReward(rewardId));
+    }
+};
+
+// Reducer
+const initialState = { rewards: [] };
+
+export default function rewardsReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_REWARDS:
+        return { ...state, rewards: action.payload };
+        case ADD_REWARD:
+        return { ...state, rewards: [...state.rewards, action.payload] };
+        case UPDATE_REWARD:
+        return {
+            ...state,
+            rewards: state.rewards.map((reward) =>
+            reward.id === action.payload.id ? action.payload : reward
+            )
+        };
+        case DELETE_REWARD:
+        return {
+            ...state,
+            rewards: state.rewards.filter((reward) => reward.id !== action.payload)
+        };
+        default:
+        return state;
+    }
+}
