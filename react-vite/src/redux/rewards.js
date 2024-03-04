@@ -26,15 +26,20 @@ export const deleteReward = (rewardId) => ({
 
 // Thunks
 export const thunkGetRewards = () => async (dispatch) => {
-    const response = await fetch("/rewards");
-    if (response.ok) {
+    try {
+        const response = await fetch("/api/rewards");
+        if (!response.ok) {
+            throw new Error(`Failed to fetch rewards. Status: ${response.status}`);
+        }
         const data = await response.json();
         dispatch(getRewards(data));
+    } catch (error) {
+        console.error("Error fetching rewards:", error.message);
     }
 };
 
 export const thunkCreateReward = (rewardData) => async (dispatch) => {
-    const response = await fetch("/reward/create", {
+    const response = await fetch("/api/reward/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(rewardData)
@@ -47,7 +52,7 @@ export const thunkCreateReward = (rewardData) => async (dispatch) => {
 };
 
 export const thunkEditReward = (rewardId, rewardData) => async (dispatch) => {
-    const response = await fetch(`/reward/edit/${rewardId}`, {
+    const response = await fetch(`/api/rewards/edit/${rewardId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(rewardData)
@@ -60,7 +65,7 @@ export const thunkEditReward = (rewardId, rewardData) => async (dispatch) => {
 };
 
 export const thunkDeleteReward = (rewardId) => async (dispatch) => {
-    const response = await fetch(`/reward/delete/${rewardId}`, {
+    const response = await fetch(`/api/rewards/delete/${rewardId}`, {
         method: "POST"
     });
 
@@ -74,7 +79,7 @@ const initialState = { rewards: [] };
 
 export default function rewardsReducer(state = initialState, action) {
     switch (action.type) {
-        case SET_REWARDS:
+        case GET_REWARDS:
         return { ...state, rewards: action.payload };
         case ADD_REWARD:
         return { ...state, rewards: [...state.rewards, action.payload] };

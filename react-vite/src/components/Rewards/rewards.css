@@ -1,0 +1,25 @@
+.item-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.category-container {
+    text-align: center;
+}
+
+.rewards-shop {
+    margin-top: 50px;
+}
+
+.reward-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+}
+
+.reward-item {
+    background-color: rgb(48, 47, 55);
+    padding: 15px;
+    border-radius: 15px;
+}

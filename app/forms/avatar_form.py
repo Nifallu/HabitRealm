@@ -5,7 +5,8 @@ from wtforms.validators import DataRequired, URL
 class AvatarForm(FlaskForm):
     background = StringField('Background', validators=[DataRequired()])
     body = StringField('Body', validators=[DataRequired()])
-    extras = StringField('Extras')  # You can adjust the field type as needed
+    skin = StringField('Skin', validators=[DataRequired()])
+    extras = StringField('Extras')
     hair = StringField('Hair')
     top = StringField('Top')
     bottom = StringField('Bottom')

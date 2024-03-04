@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-
+    
 class Avatar(db.Model):
     __tablename__ = 'Avatars'
 
@@ -10,6 +10,7 @@ class Avatar(db.Model):
     id = db.Column(db.Integer, nullable=False, primary_key=True)
     background = db.Column(db.String, nullable=False)
     body = db.Column(db.String, nullable=False)
+    skin = db.Column(db.String, nullable=False)
     extras = db.Column(db.String)
     hair = db.Column(db.String)
     top = db.Column(db.String)
@@ -29,8 +30,9 @@ class Avatar(db.Model):
         super(Avatar, self).__init__()
         self.user = user
         # Set default values for fields
-        self.background = "default_background"
-        self.body = "default_body"
+        self.background = "https://ibb.co/0ZC3rXY"
+        self.body = "https://ibb.co/349bVMM"
+        self.skin = ""
         self.extras = ""
         self.hair = ""
         self.top = ""
@@ -47,6 +49,7 @@ class Avatar(db.Model):
             'id': self.id,
             'background': self.background,
             'body': self.body,
+            'skin': self.skin,
             'extras': self.extras,
             'hair': self.hair,
             'top': self.top,

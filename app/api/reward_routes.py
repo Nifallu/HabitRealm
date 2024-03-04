@@ -5,19 +5,21 @@ from ..forms.reward_form import RewardForm
 
 reward_routes = Blueprint('rewards', __name__)
 
-@reward_routes.route('/rewards', methods=['GET'])
-@login_required
+@reward_routes.route('', methods=['GET'])
+# @login_required
 def get_rewards():
     rewards = Reward.query.all()
-    return render_template('rewards.html', rewards=rewards)
+    print("this")
+    rewards_data = [reward.to_dict() for reward in rewards]
+    return jsonify(rewards_data)
 
-@reward_routes.route('/reward/<int:reward_id>', methods=['GET'])
+@reward_routes.route('/<int:reward_id>', methods=['GET'])
 @login_required
 def get_reward(reward_id):
     reward = Reward.query.get_or_404(reward_id)
     return jsonify(reward.to_dict())
 
-@reward_routes.route('/reward/create', methods=['GET', 'POST'])
+@reward_routes.route('/create', methods=['GET', 'POST'])
 @login_required
 def create_reward():
     form = RewardForm()
@@ -43,7 +45,7 @@ def create_reward():
 
     return render_template('edit_reward.html', form=form)
 
-@reward_routes.route('/reward/edit/<int:reward_id>', methods=['GET', 'POST'])
+@reward_routes.route('/edit/<int:reward_id>', methods=['GET', 'POST'])
 @login_required
 def edit_reward(reward_id):
     reward = Reward.query.get_or_404(reward_id)
@@ -67,7 +69,7 @@ def edit_reward(reward_id):
 
     return render_template('edit_reward.html', form=form, reward=reward)
 
-@reward_routes.route('/reward/delete/<int:reward_id>', methods=['POST'])
+@reward_routes.route('/delete/<int:reward_id>', methods=['POST'])
 @login_required
 def delete_reward(reward_id):
     reward = Reward.query.get_or_404(reward_id)

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template, url_for, flash, redirect
 from flask_login import login_required, current_user
-from app.models import Avatar, db
+from app.models.avatar import Avatar, db
 from ..forms.avatar_form import AvatarForm
 
 avatar_routes = Blueprint('avatars', __name__)
@@ -29,6 +29,7 @@ def edit_avatar():
         # Update Avatar fields based on the form data
         user_avatar.background = form.background.data
         user_avatar.body = form.body.data
+        user_avatar.skin = form.skin.data
         user_avatar.extras = form.extras.data
         user_avatar.hair = form.hair.data
         user_avatar.top = form.top.data
@@ -49,6 +50,7 @@ def edit_avatar():
     if user_avatar:
         form.background.data = user_avatar.background
         form.body.data = user_avatar.body
+        form.skin.data = user_avatar.skin
         form.extras.data = user_avatar.extras
         form.hair.data = user_avatar.hair
         form.top.data = user_avatar.top

@@ -7,6 +7,9 @@ import Layout from './Layout';
 import Quests from '../components/Quests';
 import  Habits  from '../components/Habits'
 import QuestDetails from '../components/Quests/questDetails';
+import Rewards from '../components/Rewards/rewards'
+import RewardShop from '../components/Rewards/rewardsShop'
+
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +39,12 @@ export const router = createBrowserRouter([
         element: <QuestDetails />
       },
       {
-        path: 
+        path: "/rewards",
+        element: <Rewards />
+      }, 
+      {
+        path: "/rewards/shop",
+        element: <RewardShop />
       }
 
     ],

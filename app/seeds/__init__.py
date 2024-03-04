@@ -2,6 +2,7 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .habits import seed_habits, undo_habits
 from .quests import seed_quests, undo_quests
+from .rewards import seed_rewards, undo_rewards
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,9 +22,11 @@ def seed():
         undo_users()
         undo_habits()
         undo_quests()
+        undo_rewards()
     seed_users()
     seed_habits()
     seed_quests()
+    seed_rewards()
     
     # Add other seed functions here
 

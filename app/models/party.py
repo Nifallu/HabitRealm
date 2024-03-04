@@ -14,7 +14,7 @@ class Party(db.Model):
 
     quests = db.relationship('Quest', back_populates='party', cascade='all, delete-orphan')
 
-    members = db.relationship('User', back_populates='party', lazy='dynamic')
+    members = db.relationship('User', back_populates='party')
 
 
     def to_dict(self):

@@ -15,7 +15,7 @@ function Navigation() {
         <NavLink className="navLinks"to="/quests">Quests</NavLink>
       </li>
       <li>
-        <p className="Rewards">Rewards</p>
+        <NavLink className="navLinks" to="/rewards/Shop">Rewards Shop</NavLink>
       </li>
       <li className="profileButton">
         <ProfileButton />
