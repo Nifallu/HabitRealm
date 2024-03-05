@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User,Reward, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,21 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/update_points_rewards', methods=['POST'])
+@login_required
+def update_points_rewards(id):
+    """
+    Update points and rewards for the current logged-in user
+    """
+    user = User.query.get(id)
+
+    data = request.json
+    if 'points' in data and 'rewards' in data:
+        user.points = data['points']
+        user.rewards = Reward.query.filter(Reward.id.in_(data['rewards'])).all()
+        db.session.commit()
+
+        return jsonify(message="Points and rewards updated successfully"), 200
+    else:
+        return jsonify(error="Invalid request data"), 400

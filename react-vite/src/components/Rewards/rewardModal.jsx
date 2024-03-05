@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { updatePoints, updateRewards } from '../../redux/session';
+import { thunkUpdatePointsRewards } from '../../redux/session';
+import { useNavigate } from "react-router-dom";
+
 
 function RewardModal({ rewardId, rewardCost, rewardName }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const sessionUser = useSelector((state) => state.session.user);
     const [errorMessage, setErrorMessage] = useState(null);
+    const redirect = useNavigate()
 
     const handleRewardSubmission = () => {
         if (sessionUser.points >= rewardCost) {
         const updatedPoints = sessionUser.points - rewardCost;
         const updatedRewards = [...sessionUser.rewards, rewardId];
 
-        dispatch(updateRewards(updatedRewards));
-        dispatch(updatePoints(updatedPoints));
-
+        dispatch(thunkUpdatePointsRewards(sessionUser.id, updatedPoints, updatedRewards));
         closeModal();
         } else {
             setErrorMessage(`Insufficient Gems! You have: ${sessionUser.points}`);

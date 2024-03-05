@@ -75,6 +75,27 @@ export const thunkLogout = () => async (dispatch) => {
   dispatch(removeUser());
 };
 
+export const thunkUpdatePointsRewards = (userId, points, rewards) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/users/${userId}/update_points_rewards`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ points, rewards }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(updatePoints( points));
+      dispatch(updateRewards( rewards));
+    } else {
+      const errorMessages = await response.json();
+      console.error(errorMessages.error);
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+};
+
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
@@ -84,8 +105,10 @@ function sessionReducer(state = initialState, action) {
     case REMOVE_USER:
       return { ...state, user: null };
     case UPDATE_REWARDS:
+      console.log('updating rewards')
       return { ...state, user: { ...state.user, rewards: action.payload } };
     case UPDATE_POINTS:
+      console.log('updating points')
       return { ...state, user: { ...state.user, points: action.payload } };
     default:
       return state;

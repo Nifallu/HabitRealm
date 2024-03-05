@@ -22,9 +22,9 @@ class Avatar(db.Model):
     level = db.Column(db.Integer)
     experience_points = db.Column(db.Integer)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True, nullable=False)
+    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True, nullable=False)
 
-    user = db.relationship('User', back_populates='avatar', uselist=False)
+    # user = db.relationship('User', back_populates='avatar', uselist=False)
 
     def __init__(self, user=None):
         super(Avatar, self).__init__()
@@ -60,5 +60,5 @@ class Avatar(db.Model):
             'max_health': self.max_health,
             'level': self.level,
             'experience_points': self.experience_points,
-            'user_id': self.user_id
+            # 'user_id': self.user_id
         }

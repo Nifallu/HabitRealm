@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
 
     rewards = db.relationship('Reward', secondary='user_rewards', back_populates='users')
 
-    avatar = db.relationship('Avatar', back_populates='user', uselist=False)
+    # avatar = db.relationship('Avatar', back_populates='user', uselist=False)
 
     party = db.relationship('Party', back_populates='members')
 
@@ -43,6 +43,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'rewards': [reward.id for reward in self.rewards],
             'points': self.points,
-            'Avatar': self.avatar,
-            'party_id': self.party_id
+            # 'Avatar': self.avatar,
+            'party_id': self.party_id,
         }
