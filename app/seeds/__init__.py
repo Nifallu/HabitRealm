@@ -37,4 +37,5 @@ def undo():
     undo_users()
     undo_habits()
     undo_quests()
+    undo_rewards()
     # Add other undo functions here

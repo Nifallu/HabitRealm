@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('points', sa.Integer(), nullable=True),
+    sa.Column('points', sa.Integer(), nullable=False),
     sa.Column('party_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['party_id'], ['parties.id'], ),
     sa.PrimaryKeyConstraint('id'),

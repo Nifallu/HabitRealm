@@ -743,8 +743,8 @@ def seed_rewards():
 
 def undo_rewards():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.rewards RESTART IDENTITY CASCADE;")
+        db.session.execute(f"DELETE FROM {SCHEMA}.rewards CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM rewards"))
+        db.session.execute(text("DELETE FROM rewards;"))
 
     db.session.commit()

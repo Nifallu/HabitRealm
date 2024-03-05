@@ -19,6 +19,8 @@
 }
 
 .reward-item {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(48, 47, 55);
     padding: 15px;
     border-radius: 15px;

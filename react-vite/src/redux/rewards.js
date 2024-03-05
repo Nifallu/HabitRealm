@@ -98,4 +98,5 @@ export default function rewardsReducer(state = initialState, action) {
         default:
         return state;
     }
+    
 }

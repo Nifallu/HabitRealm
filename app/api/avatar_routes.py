@@ -5,7 +5,7 @@ from ..forms.avatar_form import AvatarForm
 
 avatar_routes = Blueprint('avatars', __name__)
 
-@avatar_routes.route('/avatar', methods=['GET'])
+@avatar_routes.route('', methods=['GET'])
 @login_required
 def get_avatar():
     """
@@ -18,7 +18,7 @@ def get_avatar():
         return jsonify({'error': 'Avatar not found for the current user'}), 404
 
 
-@avatar_routes.route('/avatar/edit', methods=['GET', 'POST'])
+@avatar_routes.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit_avatar():
     form = AvatarForm()

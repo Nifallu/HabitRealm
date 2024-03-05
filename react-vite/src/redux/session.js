@@ -1,5 +1,7 @@
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const UPDATE_REWARDS = 'session/updateRewards'
+const UPDATE_POINTS = 'session/updatePoints'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -8,6 +10,16 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER
+});
+
+export const updateRewards = (rewards) => ({
+  type: UPDATE_REWARDS,
+  payload: rewards,
+});
+
+export const updatePoints = (points) => ({
+  type: UPDATE_POINTS,
+  payload: points,
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
@@ -71,6 +83,10 @@ function sessionReducer(state = initialState, action) {
       return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
+    case UPDATE_REWARDS:
+      return { ...state, user: { ...state.user, rewards: action.payload } };
+    case UPDATE_POINTS:
+      return { ...state, user: { ...state.user, points: action.payload } };
     default:
       return state;
   }
