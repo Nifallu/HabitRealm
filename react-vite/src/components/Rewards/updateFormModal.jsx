@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { thunkUpdatePointsRewards } from '../../redux/session';
-import { thunkCreateReward, thunkGetRewards } from '../../redux/rewards'
+import { thunkEditReward, thunkGetRewards } from '../../redux/rewards'
 import { useNavigate } from "react-router-dom";
 
 
@@ -45,24 +44,31 @@ const categoryImages = {
 }
 
 
-function CreateRewardModal() {
+function UpdateRewardModal({ rewardData }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const sessionUser = useSelector((state) => state.session.user);
     const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        cost: 5,
-        attack: 0,
-        defense: 0,
-        speed: 0,
-        accuracy: 0,
-        image: '',
-        category: categoryOptions[0],
-        creator_id: sessionUser.id,
+        name: rewardData.name || '',
+        description: rewardData.description || '',
+        image: rewardData.image || '',
+        category: rewardData.category || 'background',
+        creator_id: rewardData.creator_id || sessionUser.id,
     });
     const [errorMessage, setErrorMessage] = useState(null);
     const redirect = useNavigate();
+
+    useEffect(() => {
+        if (rewardData) {
+            setFormData({
+                name: rewardData.name || '',
+                description: rewardData.description || '',
+                image: rewardData.image || '',
+                category: rewardData.category || 'background',
+                creator_id: rewardData.creator_id || sessionUser.id,
+            });
+            }
+        }, [rewardData]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -86,33 +92,9 @@ function CreateRewardModal() {
             image: e.target.value,
         });
     };
-
-    const handleStatChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: parseInt(value, 10),
-            cost: calculateCost({ ...prevFormData, [name]: parseInt(value, 10) }),
-        }));
-    };
-
-    const calculateCost = ({ attack, defense, speed, accuracy }) => {
-        const totalStats = parseInt(attack) + parseInt(defense) + parseInt(speed) + parseInt(accuracy);
-        return totalStats * 10;
-    };
     
-
-    const handleCreateReward = async () => {
+    const handleUpdateReward = async () => {
         try {
-            if (
-                formData.attack < 0 || formData.attack > 100 ||
-                formData.defense < 0 || formData.defense > 100 ||
-                formData.speed < 0 || formData.speed > 100 ||
-                formData.accuracy < 0 || formData.accuracy > 100
-            ) {
-                setErrorMessage('Stats must be between 0 and 100');
-                return;
-            }
             if (formData.name.length < 3 || formData.name.length > 40){
                 setErrorMessage('Name must be between 3 and 40 characters')
                 return;
@@ -125,23 +107,8 @@ function CreateRewardModal() {
                 setErrorMessage('Please select an image for the reward.');
                 return;
             }
-    
-            const totalStats = formData.attack + formData.defense + formData.speed + formData.accuracy;
-    
-            const cost = totalStats * 10 +5;
-            setFormData({
-                ...formData,
-                cost,
-            });
-    
-            if (sessionUser.points < cost) {
-                setErrorMessage(`Not enough Gems to create this reward. ${cost} required `);
-                return;
-            }
             
-            await dispatch(thunkCreateReward(formData));
-
-            await dispatch(thunkUpdatePointsRewards(sessionUser.id, sessionUser.points-cost));
+            await dispatch(thunkEditReward(rewardData.id, formData));
             await dispatch(thunkGetRewards())
             closeModal();
         } catch (error) {
@@ -163,7 +130,7 @@ function CreateRewardModal() {
                 </select>
             </label>
             <br />
-            <label>
+            <label className='rewardImages'>
                 Image:
                 {formData.category && categoryImages[formData.category].map((img) => (
                     <label key={img}>
@@ -195,60 +162,11 @@ function CreateRewardModal() {
                     value={formData.description}
                     onChange={handleInputChange} />
             </label>
-            <label>
-                Attack:
-                <input
-                    type="number"
-                    name="attack"
-                    value={formData.attack}
-                    onChange={handleStatChange}
-                    min="0"
-                    max="100"
-                />
-            </label>
-            <br />
-            <label>
-                Defense:
-                <input
-                    type="number"
-                    name="defense"
-                    value={formData.defense}
-                    onChange={handleStatChange}
-                    min="0"
-                    max="100"
-                />
-            </label>
-            <br />
-            <label>
-                Speed:
-                <input
-                    type="number"
-                    name="speed"
-                    value={formData.speed}
-                    onChange={handleStatChange}
-                    min="0"
-                    max="100"
-                />
-            </label>
-            <br />
-            <label>
-                Accuracy:
-                <input
-                    type="number"
-                    name="accuracy"
-                    value={formData.accuracy}
-                    onChange={handleStatChange}
-                    min="0"
-                    max="100"
-                />
-            </label>
-            <div>
-                <strong>Cost:</strong> {formData.cost}
-            </div>
+            
             {errorMessage && <div>{errorMessage}</div>}
-            <button onClick={handleCreateReward}>Create Reward</button>
+            <button onClick={handleUpdateReward}>Update Reward</button>
         </div>
     );
 }
 
-export default CreateRewardModal;
+export default UpdateRewardModal;

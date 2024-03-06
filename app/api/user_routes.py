@@ -33,10 +33,12 @@ def update_points_rewards(id):
     user = User.query.get(id)
 
     data = request.json
-    if 'points' in data and 'rewards' in data:
+    if 'points' in data:
         user.points = data['points']
-        user.rewards = Reward.query.filter(Reward.id.in_(data['rewards'])).all()
         db.session.commit()
+        if 'rewards' in data:
+            user.rewards = Reward.query.filter(Reward.id.in_(data['rewards'])).all()
+            db.session.commit()
 
         return jsonify(message="Points and rewards updated successfully"), 200
     else:

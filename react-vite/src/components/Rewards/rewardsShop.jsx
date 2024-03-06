@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import './rewards.css';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import RewardModal from './rewardModal'
+import CreateRewardModal from './createRewardModal';
 
 const RewardsShop = () => {
     const dispatch = useDispatch();
@@ -62,9 +63,18 @@ const RewardsShop = () => {
 
     return (
         <div className="rewards-shop">
-            <h1>Reward Shop</h1>
-            <NavLink to={"/rewards"}>My Items</NavLink>
-            {console.log(sessionUser)}
+            <div className='rewardHeading'>
+                <h1>Reward Shop</h1>
+                <h2>{sessionUser.points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></h2>
+                <NavLink to={"/rewards"} className={'myItems'}>My Items</NavLink>
+            </div>
+            <div className='createReward'>{sessionUser &&
+                <OpenModalMenuItem
+                    itemText="Create Reward"
+                    onItemClick={closeMenu}
+                    modalComponent={<CreateRewardModal />}
+                />}
+            </div>
             {/* Display rewards by category in the specified order */}
             {categoriesOrder.map(category => (
                 <div key={category} className="category-container">

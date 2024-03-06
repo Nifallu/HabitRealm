@@ -46,7 +46,6 @@ export const createHabit = (habitData, habitId=null, questId=null) => async (dis
         }
 
     const data = await response.json();
-    console.log("data", data)
 
     dispatch({
         type: CREATE_HABIT,
@@ -122,8 +121,6 @@ const habitsReducer = (state = initialState, action) => {
                 habits: action.payload,
             }
         case CREATE_HABIT:
-            // console.log("Current State:", state);
-            // console.log("Action Payload:", action.payload);
             state = initialState
             if (action.error) {
                 console.log("errors", action.error)

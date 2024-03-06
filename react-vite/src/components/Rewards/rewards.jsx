@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkGetRewards } from '../../redux/rewards';
+import { thunkGetRewards, thunkDeleteReward } from '../../redux/rewards';
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteRewardModal from './deleteRewardModal';
 import './rewards.css';
-
+import UpdateRewardModal from './updateFormModal.jsx';
 
 const Rewards = () => {
     const dispatch = useDispatch();
@@ -10,6 +12,8 @@ const Rewards = () => {
     const sessionUser = useSelector(state => state.session.user);
 
     const [showMenu, setShowMenu] = useState(false);
+    const [userRewards, setUserRewards] = useState([]);
+    const [organizedUserRewards, setOrganizedUserRewards] = useState({});
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -48,18 +52,23 @@ const Rewards = () => {
         // 'R_weapon'
     ];
 
+    useEffect(() => {
+        
+        setUserRewards(sessionUser ? rewards.filter(reward => sessionUser.rewards.includes(reward.id)) : []);
+    }, [rewards, sessionUser]);
+
+    useEffect(() => {
+        const organizedRewards = categoriesOrder.reduce((acc, category) => {
+            acc[category] = userRewards.filter(reward => reward.category === category);
+            return acc;
+        }, {});
+
+        setOrganizedUserRewards(organizedRewards);
+    }, [userRewards]);
+
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
-
-    // Filter rewards based on the user's rewards
-    const userRewards = sessionUser ? rewards.filter(reward => sessionUser.rewards.includes(reward.id)) : [];
-
-    // Organize user rewards by category
-    const organizedUserRewards = categoriesOrder.reduce((acc, category) => {
-        acc[category] = userRewards.filter(reward => reward.category === category);
-        return acc;
-    }, {});
 
     return (
         <div className="rewards-shop">
@@ -79,6 +88,20 @@ const Rewards = () => {
                                     <p>Speed: {reward.speed}</p>
                                     <p>Accuracy: {reward.accuracy}</p>
                                 </div>
+                                {sessionUser.id == reward.creator_id ? 
+                                <>
+                                <OpenModalMenuItem
+                                    itemText="Delete Reward"
+                                    onItemClick={closeMenu}
+                                    modalComponent={<DeleteRewardModal rewardId={reward.id}/>}
+                                />
+                                <OpenModalMenuItem
+                                itemText="Update Reward"
+                                onItemClick={closeMenu}
+                                modalComponent={<UpdateRewardModal rewardData={reward}/>}
+                                /> 
+                                </>
+                                : null}
                             </div>
                         ))}
                     </div>

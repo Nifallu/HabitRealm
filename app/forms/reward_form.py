@@ -8,8 +8,9 @@ class RewardForm(FlaskForm):
     cost = IntegerField('Cost', validators=[DataRequired()])
     attack = IntegerField('Attack')
     defense = IntegerField('Defense')
-    speed = IntegerField('Speed'),
+    speed = IntegerField('Speed')
     accuracy = IntegerField('Accuracy')
     image = StringField('Image URL', validators=[DataRequired(), URL()])
     category = StringField('Category', validators=[DataRequired()])
+    creator_id = IntegerField('Creator ID')
     submit = SubmitField('Save Reward')

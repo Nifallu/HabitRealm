@@ -39,7 +39,8 @@ export const thunkGetRewards = () => async (dispatch) => {
 };
 
 export const thunkCreateReward = (rewardData) => async (dispatch) => {
-    const response = await fetch("/api/reward/create", {
+    console.log("rewardData", rewardData)
+    const response = await fetch("/api/rewards/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(rewardData)
@@ -47,22 +48,24 @@ export const thunkCreateReward = (rewardData) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
+        console.log(data)
         dispatch(addReward(data));
     }
 };
 
 export const thunkEditReward = (rewardId, rewardData) => async (dispatch) => {
+    const { name, description, image } = rewardData; // Extract only the necessary fields
     const response = await fetch(`/api/rewards/edit/${rewardId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(rewardData)
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, description, image }),
     });
-
+  
     if (response.ok) {
-        const data = await response.json();
-        dispatch(updateReward(data));
+      const data = await response.json();
+      dispatch(updateReward(data));
     }
-};
+  };
 
 export const thunkDeleteReward = (rewardId) => async (dispatch) => {
     const response = await fetch(`/api/rewards/delete/${rewardId}`, {

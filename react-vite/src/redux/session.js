@@ -85,8 +85,13 @@ export const thunkUpdatePointsRewards = (userId, points, rewards) => async (disp
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(updatePoints( points));
-      dispatch(updateRewards( rewards));
+      if (points){
+        dispatch(updatePoints( points));
+      }
+      if (rewards){
+        dispatch(updateRewards( rewards));
+      }
+      
     } else {
       const errorMessages = await response.json();
       console.error(errorMessages.error);
@@ -105,10 +110,8 @@ function sessionReducer(state = initialState, action) {
     case REMOVE_USER:
       return { ...state, user: null };
     case UPDATE_REWARDS:
-      console.log('updating rewards')
       return { ...state, user: { ...state.user, rewards: action.payload } };
     case UPDATE_POINTS:
-      console.log('updating points')
       return { ...state, user: { ...state.user, points: action.payload } };
     default:
       return state;
