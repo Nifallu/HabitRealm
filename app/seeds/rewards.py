@@ -49,7 +49,7 @@ def seed_rewards():
         defense=0,
         speed=0,
         accuracy=0,
-        image='https://i.ibb.co/zbXwZ5P/background-blue.png',
+        image='https://i.ibb.co/6sMQDqN/background-green.png',
         category='background'
     )
 

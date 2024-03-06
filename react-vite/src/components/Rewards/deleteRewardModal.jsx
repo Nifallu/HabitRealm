@@ -20,7 +20,7 @@ function DeleteRewardModal({ rewardId }) {
 
     return (
         <div>
-            <p>Are you sure you want to delete this reward?</p>
+            <p className='deleteModalText'>Are you sure you want to delete this reward?</p>
             <button onClick={handleDeleteReward}>Delete Reward</button>
             <button onClick={()=> closeModal()}>Cancel</button>
         </div>

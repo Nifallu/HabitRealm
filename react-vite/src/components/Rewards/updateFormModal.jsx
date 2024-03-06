@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const categoryOptions = ['background', 'body', 'skin', 'extras', 'hair']
 const categoryImages = {
     background: ['https://i.ibb.co/JBwz8LH/background-red.png', 'https://i.ibb.co/1bF5v1W/background-purple.png', 
-                'https://i.ibb.co/zbXwZ5P/background-blue.png', 'https://i.ibb.co/zbXwZ5P/background-blue.png',
+                'https://i.ibb.co/zbXwZ5P/background-blue.png', 'https://i.ibb.co/6sMQDqN/background-green.png',
                 'https://i.ibb.co/rcYhxWX/background-mountain-waterfall.png', 'https://i.ibb.co/PhGq4Zd/background-underwater-cave.png',
                 'https://i.ibb.co/5Fnhnh1/background-iridescent-clouds.png', 'https://i.ibb.co/0Xwp4GY/background-sailboat-at-sunset.png',
                 'https://i.ibb.co/12TXVH4/background-beach-with-dunes.png', 'https://i.ibb.co/vZM3gbc/background-enchanted-music-room.png'],
@@ -118,10 +118,10 @@ function UpdateRewardModal({ rewardData }) {
     };
 
     return (
-        <div>
+        <div className='rewardModal'>
             <label>
                 Category:
-                <select name="category" value={formData.category} onChange={handleCategoryChange}>
+                <select name="category" value={formData.category} onChange={handleCategoryChange} className='rewardInput'>
                     {categoryOptions.map((category) => (
                         <option key={category} value={category}>
                             {category}
@@ -130,7 +130,7 @@ function UpdateRewardModal({ rewardData }) {
                 </select>
             </label>
             <br />
-            <label className='rewardImages'>
+            <label className='outRadioButtons'>
                 Image:
                 {formData.category && categoryImages[formData.category].map((img) => (
                     <label key={img}>
@@ -149,6 +149,7 @@ function UpdateRewardModal({ rewardData }) {
             <label>
                 Name:
                 <input
+                    className='rewardInput'
                     type="string"
                     name="name"
                     value={formData.name}
@@ -157,6 +158,7 @@ function UpdateRewardModal({ rewardData }) {
             <label>
                 Description:
                 <input
+                    className='rewardInput'
                     type="text"
                     name="description"
                     value={formData.description}

@@ -13,11 +13,12 @@ function HabitModal({fetchHabits, habitId, questId, habit} ) {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
+
     useEffect(() => {
         if (habit) {
             setName(habit.name || "");
             setDescription(habit.description || "");
-            setFrequency(habit.frequency || "");
+            setFrequency(habit.frequency || 1);
         }
     }, [habit]);
 
@@ -77,6 +78,7 @@ function HabitModal({fetchHabits, habitId, questId, habit} ) {
                 />
             </label>
             {errors.description && <p>{errors.description}</p>}
+            {questId ? 
             <label>
                 Count Reset Interval in Days
                 <input
@@ -86,7 +88,7 @@ function HabitModal({fetchHabits, habitId, questId, habit} ) {
                     onChange={(e) => setFrequency(e.target.value)}
                     required
                 />
-            </label>
+            </label>: null}
             {errors.frequency && <p>{errors.frequency}</p>}
             <button type="submit" className="submit">{habitId ? 'Update Habit': 'Create Habit'}</button>
         </form>

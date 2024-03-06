@@ -42,3 +42,32 @@
     text-decoration: none;
 }
 
+.rewardModal {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(48, 47, 55);
+    padding: 20px;
+    width: 450px;
+    border-radius: 10px;
+    text-align: center;
+    gap: 5px;
+}
+
+.rewardInput {
+    width: 100%;
+    color: black;
+}
+
+/* .inRadioButtons {
+    
+} */
+
+.outRadioButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.deleteModalText {
+    font-size: larger;
+    font-weight: bolder;
+}
