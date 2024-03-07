@@ -17,7 +17,7 @@ class Reward(db.Model):
     accuracy = db.Column(db.Integer)
     image = db.Column(db.String, nullable=False)
     category = db.Column(db.String, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    creator_id = db.Column(db.Integer)
 
     users = db.relationship('User', secondary='user_rewards', back_populates='rewards')
 
