@@ -46,9 +46,8 @@ def create_reward():
             current_user.rewards.append(new_reward)
             db.session.commit()
 
-
             flash('Reward created successfully', 'success')
-            return jsonify({'message': 'Reward created successfully'})
+            return jsonify({'id' : new_reward.id})
         
         errors = {field: error[0] for field, error in form.errors.items()}
         return jsonify({'error': 'Invalid form data', 'errors': errors})

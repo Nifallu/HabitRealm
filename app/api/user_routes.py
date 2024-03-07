@@ -40,6 +40,6 @@ def update_points_rewards(id):
             user.rewards = Reward.query.filter(Reward.id.in_(data['rewards'])).all()
             db.session.commit()
 
-        return jsonify(message="Points and rewards updated successfully"), 200
+        return jsonify(user.to_dict()), 200
     else:
         return jsonify(error="Invalid request data"), 400

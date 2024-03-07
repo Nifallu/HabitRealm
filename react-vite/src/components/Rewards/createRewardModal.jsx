@@ -62,6 +62,7 @@ function CreateRewardModal() {
         creator_id: sessionUser.id,
     });
     const [errorMessage, setErrorMessage] = useState(null);
+    const redirect = useNavigate()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -127,7 +128,7 @@ function CreateRewardModal() {
     
             const totalStats = formData.attack + formData.defense + formData.speed + formData.accuracy;
     
-            const cost = totalStats * 10 +5;
+            const cost = totalStats * 10 + 5;
             setFormData({
                 ...formData,
                 cost,
@@ -137,11 +138,16 @@ function CreateRewardModal() {
                 setErrorMessage(`Not enough Gems to create this reward. ${cost} required `);
                 return;
             }
-            
-            await dispatch(thunkCreateReward(formData));
 
-            await dispatch(thunkUpdatePointsRewards(sessionUser.id, sessionUser.points-cost));
+            const rewardId = await dispatch(thunkCreateReward(formData));
+            
+            const updatedRewards = [...sessionUser.rewards, rewardId];
+            
+            
+            await dispatch(thunkUpdatePointsRewards(sessionUser.id, sessionUser.points-cost, updatedRewards));
             await dispatch(thunkGetRewards())
+    
+
             closeModal();
         } catch (error) {
             console.error('Error creating reward:', error);
@@ -166,7 +172,6 @@ function CreateRewardModal() {
                 Image:
                 {formData.category && categoryImages[formData.category].map((img) => (
                     <label key={img} >
-                        {console.log(img)}
                         <input
                             className='inRadioButtons'
                             type="radio"
@@ -250,7 +255,7 @@ function CreateRewardModal() {
                 />
             </label>
             <div>
-                <strong>Cost:</strong> {formData.cost}
+                <strong>Cost:</strong> {formData.cost || 0}
             </div>
             {errorMessage && <div>{errorMessage}</div>}
             <button onClick={handleCreateReward}>Create Reward</button>

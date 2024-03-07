@@ -3,7 +3,7 @@ const REMOVE_USER = 'session/removeUser';
 const UPDATE_REWARDS = 'session/updateRewards'
 const UPDATE_POINTS = 'session/updatePoints'
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });

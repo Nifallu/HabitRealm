@@ -6,6 +6,7 @@ import './rewards.css';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import RewardModal from './rewardModal'
 import CreateRewardModal from './createRewardModal';
+import { thunkUpdatePointsRewards } from '../../redux/session';
 
 const RewardsShop = () => {
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const RewardsShop = () => {
 
     useEffect(() => {
         dispatch(thunkGetRewards());
-    }, []);
+    }, [sessionUser]);
 
     const categoriesOrder = [
         'background',
@@ -55,18 +56,27 @@ const RewardsShop = () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    const addPoints = async () => {
+        await dispatch(thunkUpdatePointsRewards(sessionUser.id, sessionUser.points+100)); 
+    }
+
     // Organize rewards by category
     const organizedRewards = categoriesOrder.reduce((acc, category) => {
         acc[category] = rewards.filter(reward => reward.category === category);
         return acc;
     }, {});
 
+
     return (
         <div className="rewards-shop">
             <div className='rewardHeading'>
                 <h1>Reward Shop</h1>
+                {sessionUser ? 
+                <>
                 <h2>{sessionUser.points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></h2>
                 <NavLink to={"/rewards"} className={'myItems'}>My Items</NavLink>
+                <button onClick={addPoints}>{`Add Gems (testing)`}</button>
+                </>: null}
             </div>
             <div className='createReward'>{sessionUser &&
                 <OpenModalMenuItem

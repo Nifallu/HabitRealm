@@ -53,8 +53,7 @@ const Rewards = () => {
     ];
 
     useEffect(() => {
-        
-        setUserRewards(sessionUser ? rewards.filter(reward => sessionUser.rewards.includes(reward.id)) : []);
+        setUserRewards(rewards.filter(reward => sessionUser.rewards.includes(reward.id)));
     }, [rewards, sessionUser]);
 
     useEffect(() => {

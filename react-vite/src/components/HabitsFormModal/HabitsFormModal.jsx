@@ -9,7 +9,7 @@ function HabitModal({fetchHabits, habitId, questId, habit} ) {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [frequency, setFrequency] = useState("");
+    const [frequency, setFrequency] = useState(1);
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
@@ -78,7 +78,7 @@ function HabitModal({fetchHabits, habitId, questId, habit} ) {
                 />
             </label>
             {errors.description && <p>{errors.description}</p>}
-            {questId ? 
+            { !questId ? 
             <label>
                 Count Reset Interval in Days
                 <input

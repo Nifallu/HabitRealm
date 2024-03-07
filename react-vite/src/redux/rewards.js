@@ -1,3 +1,4 @@
+import { setUser } from "./session";
 const GET_REWARDS = 'rewards/getRewards';
 const ADD_REWARD = 'rewards/addReward';
 const UPDATE_REWARD = 'rewards/updateReward';
@@ -39,7 +40,6 @@ export const thunkGetRewards = () => async (dispatch) => {
 };
 
 export const thunkCreateReward = (rewardData) => async (dispatch) => {
-    console.log("rewardData", rewardData)
     const response = await fetch("/api/rewards/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,8 +48,8 @@ export const thunkCreateReward = (rewardData) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log(data)
         dispatch(addReward(data));
+        return data.id
     }
 };
 
