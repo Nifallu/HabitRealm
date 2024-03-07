@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     points = db.Column(db.Integer, default=0, nullable=False)
-    party_id = db.Column(db.Integer, db.ForeignKey('parties.id'))
+    party_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('parties.id')))
 
     my_quests = (db.relationship('Quest', back_populates='creator'))
     habit = db.relationship('Habit', back_populates='user')
