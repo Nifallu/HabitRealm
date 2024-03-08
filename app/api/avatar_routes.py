@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, request, render_template, url_for, flash, redirect
 from flask_login import login_required, current_user
-from app.models import Avatar, db
+from app.models.avatar import Avatar, db
 from ..forms.avatar_form import AvatarForm
 
 avatar_routes = Blueprint('avatars', __name__)
 
-@avatar_routes.route('/avatar', methods=['GET'])
+@avatar_routes.route('', methods=['GET'])
 @login_required
 def get_avatar():
     """
@@ -18,7 +18,7 @@ def get_avatar():
         return jsonify({'error': 'Avatar not found for the current user'}), 404
 
 
-@avatar_routes.route('/avatar/edit', methods=['GET', 'POST'])
+@avatar_routes.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit_avatar():
     form = AvatarForm()
@@ -26,17 +26,16 @@ def edit_avatar():
     if form.validate_on_submit():
         user_avatar = current_user.avatar
 
-        if not user_avatar:
-            # Create a new Avatar if one does not exist for the user
-            user_avatar = Avatar(user=current_user)
-
         # Update Avatar fields based on the form data
         user_avatar.background = form.background.data
         user_avatar.body = form.body.data
+        user_avatar.skin = form.skin.data
         user_avatar.extras = form.extras.data
         user_avatar.hair = form.hair.data
         user_avatar.top = form.top.data
         user_avatar.bottom = form.bottom.data
+        user_avatar.L_weapon = form.L_weapon.data
+        user_avatar.R_weapon = form.R_weapon.data
         user_avatar.current_health = form.current_health.data
         user_avatar.max_health = form.max_health.data
         user_avatar.level = form.level.data
@@ -51,10 +50,13 @@ def edit_avatar():
     if user_avatar:
         form.background.data = user_avatar.background
         form.body.data = user_avatar.body
+        form.skin.data = user_avatar.skin
         form.extras.data = user_avatar.extras
         form.hair.data = user_avatar.hair
         form.top.data = user_avatar.top
         form.bottom.data = user_avatar.bottom
+        form.L_weapon.data = user_avatar.L_weapon
+        form.R_weapon.data = user_avatar.R_weapon
         form.current_health.data = user_avatar.current_health
         form.max_health.data = user_avatar.max_health
         form.level.data = user_avatar.level

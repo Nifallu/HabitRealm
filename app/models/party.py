@@ -12,8 +12,9 @@ class Party(db.Model):
     description = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    quests = db.relationship('Quest', back_populates='party', cascade='all, delete-orphan')
 
-    members = db.relationship('User', back_populates='party', lazy='dynamic')
+    members = db.relationship('User', back_populates='party')
 
 
     def to_dict(self):
@@ -22,5 +23,6 @@ class Party(db.Model):
             'name': self.name,
             'description': self.description,
             'created_at': self.created_at.isoformat(),
-            'members': [member.to_dict() for member in self.members]
+            'members': [member.to_dict() for member in self.members],
+            'quests': [quest.to_dict() for quest in self.quests]
         }

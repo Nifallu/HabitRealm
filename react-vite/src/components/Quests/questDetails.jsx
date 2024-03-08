@@ -99,16 +99,6 @@ const QuestDetails =() => {
                 console.log("Error joining quest:", error.message)
             }
         }
-        // const handleAbandon = async(questId) => {
-        //     if (window.confirm("Are you sure you want to abandon this quest?")){
-        //         try {
-        //             await dispatch(abandonQuest(questId, sessionUser.id))
-        //             fetchAQuest(questId)
-        //         } catch (error){
-        //             console.error("Error abandoning quest:", error.message)
-        //         }
-        //     }
-        // }
 
     return (
         <div>
@@ -135,7 +125,6 @@ const QuestDetails =() => {
                             <li className="habitDescription">{habit.description}</li>
                             {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ?
                             <div className="incrementButtons">
-                                {/* {console.log(quest.Quest.habit_counter, quest.Quest.goal, quest.Quest.progress)} */}
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "plus")}> + </button>
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "minus")}> - </button>
                             </div> : null}
@@ -153,7 +142,7 @@ const QuestDetails =() => {
                             <OpenModalMenuItem
                                 itemText="Update"
                                 onItemClick={closeMenu}
-                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={null} habit={habit} />}
+                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={quest.Quest.id} habit={habit} />}
                             />
                             </> : null }
                             </div>

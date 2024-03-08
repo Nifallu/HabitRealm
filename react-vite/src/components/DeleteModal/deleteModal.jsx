@@ -12,7 +12,6 @@ const DeleteQuestsHabits = ({fetches, habitId,  questId, questDetailPage}) =>{
     const dispatch=useDispatch();
 
     const handleDelete = async () => {
-        // console.log(habitId)
         try {
         if(habitId){
             await dispatch(deleteHabit(habitId));

@@ -12,8 +12,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    points = db.Column(db.Integer)
-    party_id = db.Column(db.Integer, db.ForeignKey('parties.id'))
+    points = db.Column(db.Integer, default=0, nullable=False)
+    party_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('parties.id')))
 
     my_quests = (db.relationship('Quest', back_populates='creator'))
     habit = db.relationship('Habit', back_populates='user')
@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
 
     rewards = db.relationship('Reward', secondary='user_rewards', back_populates='users')
 
-    avatar = db.relationship('Avatar', back_populates='user', uselist=False)
+    # avatar = db.relationship('Avatar', back_populates='user', uselist=False)
 
     party = db.relationship('Party', back_populates='members')
 
@@ -42,6 +42,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'rewards': [reward.id for reward in self.rewards],
-            'Avatar': self.avatar,
-            'party_id': self.party_id
+            'points': self.points,
+            # 'Avatar': self.avatar,
+            'party_id': self.party_id,
         }

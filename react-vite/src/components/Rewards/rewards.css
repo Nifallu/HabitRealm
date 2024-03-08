@@ -1,0 +1,73 @@
+.item-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.category-container {
+    text-align: center;
+}
+
+.rewards-shop {
+    margin-top: 50px;
+}
+
+.reward-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+}
+
+.reward-item {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(48, 47, 55);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.createReward {
+    margin-top: 20px;
+}
+
+.rewardHeading {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.myItems {
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+}
+
+.rewardModal {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(48, 47, 55);
+    padding: 20px;
+    width: 450px;
+    border-radius: 10px;
+    text-align: center;
+    gap: 5px;
+}
+
+.rewardInput {
+    width: 100%;
+    color: black;
+}
+
+/* .inRadioButtons {
+    
+} */
+
+.outRadioButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.deleteModalText {
+    font-size: larger;
+    font-weight: bolder;
+}
