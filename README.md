@@ -10,11 +10,13 @@ Loosely insipired by Habitica, Habit Realm combines habit-tracking functionality
 https://habitrealmstarter.onrender.com
 
 ## Features
- * Habit Tracking:  Create, Update, and Delete habits with ease.
- * Quest System: Join quests, collaborate with others, and make progress together. You can create quests, update quests, delete quests, and track completion progress for the quest.
  * User Authentication: Secure sign-up and login functionality.
-
-## ScreenShots
+ * Habit Tracking:  Create, Update, and Delete habits with ease.
+  ![Habits Page](https://i.ibb.co/jHQz5VF/Habits-Page.png)
+ * Quest System: Join quests, collaborate with others, and make progress together. You can create quests, update quests, delete quests, and track completion progress for the quest.
+  ![Quest Details Page](https://i.ibb.co/LS0Dqg0/Quest-Details-page.png)
+ * Rewards: Redeem rewards that will enhance the avatar once this functionality is implemented.
+   ![Rewards Page](https://i.ibb.co/sRG3Rxz/Rewards-page.png)
 
 ## Schema
 
@@ -34,9 +36,7 @@ https://habitrealmstarter.onrender.com
 
 ## Future Features
 - Avatat: Create and update an avatar using rewards
-- Rewards: Obtain gems to exchange for rewards to update your avatar.
-- Parties: create or join a group of friends to complete quests. 
-
-## Challenges and Considerations
+- Parties: create or join a group of friends to complete quests together. 
+- Analytics: Monitor user habit data for analysis, and incorporate health and other metrics into the Avatar. 
 
 
