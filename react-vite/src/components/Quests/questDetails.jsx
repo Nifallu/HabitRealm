@@ -142,7 +142,7 @@ const QuestDetails =() => {
                             <OpenModalMenuItem
                                 itemText="Update"
                                 onItemClick={closeMenu}
-                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={null} habit={habit} />}
+                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={quest.Quest.id} habit={habit} />}
                             />
                             </> : null }
                             </div>
