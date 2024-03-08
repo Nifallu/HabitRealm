@@ -31,7 +31,7 @@ Exchange your hard-earned rewards to elevate and enrich your avatar once this fe
 
 ## Schema
 
-![Schema}(https://i.ibb.co/wsx5D2Q/Database-Schema.png)
+![Schema](https://i.ibb.co/wsx5D2Q/Database-Schema.png)
 
 ## Installation
 
