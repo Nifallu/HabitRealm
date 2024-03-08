@@ -131,12 +131,27 @@ def seed_quests():
     habit8 = Habit.query.get(8)
     habit9 = Habit.query.get(9)
     habit11 = Habit.query.get(11)
+    habit25 = Habit.query.get(25)
+    habit26 = Habit.query.get(26)
+    habit27 = Habit.query.get(27)
+    habit28 = Habit.query.get(28)
+    habit29 = Habit.query.get(29)
+    habit30 = Habit.query.get(30)
+    habit31 = Habit.query.get(31)
+    habit32 = Habit.query.get(32)
+    habit33 = Habit.query.get(33)
+    habit34 = Habit.query.get(34)
 
     quest1.user.append(user1)
     quest2.user.append(user2)
     quest3.user.append(user3)
     quest4.user.append(user1)
     quest5.user.append(user2)
+    quest6.user.append(user3)
+    quest7.user.append(user1)
+    quest8.user.append(user2)
+    quest9.user.append(user3)
+    quest10.user.append(user1)
 
     #quest1'Epic Adventure of Wisdom'
     quest1.habit.append(habit2)
@@ -163,6 +178,26 @@ def seed_quests():
     quest5.habit.append(habit7)
     quest5.habit.append(habit11)
 
+    # quest6 'Artisanal Crafting Expedition'
+    quest6.habit.append(habit25)
+    quest6.habit.append(habit26)
+
+    #quest7 'Enchanted Language Mastery'
+    quest7.habit.append(habit27)
+    quest7.habit.append(habit28)
+
+    #quest8 'Astronomical Stargazing Expedition'
+    quest8.habit.append(habit29)
+    quest8.habit.append(habit30)
+
+    # quest9 'Sustainable Living Crusade'
+    quest9.habit.append(habit31)
+    quest9.habit.append(habit32)
+
+    # quest10 'Potion Brewing Mastery'
+    quest10.habit.append(habit33)
+    quest10.habit.append(habit34)
+
 
     db.session.add_all([quest1, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10])
     db.session.commit()
@@ -171,6 +206,8 @@ def undo_quests():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.quests RESTART IDENTITY CASCADE;")
     else:
+        db.session.execute("DELETE FROM user_quests")
+        db.session.execute("DELETE FROM quest_habits")
         db.session.execute(text("DELETE FROM quests"))
 
     db.session.commit()

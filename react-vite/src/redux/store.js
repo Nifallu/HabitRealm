@@ -8,11 +8,15 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import habitsReducer from "./habits";
 import questReducer from "./quests";
+import rewardsReducer from "./rewards";
+import userReducer from "./users";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   habits: habitsReducer,
   quests: questReducer,
+  rewards: rewardsReducer,
+  user: userReducer,
 });
 
 let enhancer;

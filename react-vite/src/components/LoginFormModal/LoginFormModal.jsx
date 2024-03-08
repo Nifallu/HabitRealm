@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { thunkLogin } from "../../redux/session";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -9,10 +9,13 @@ function LoginFormModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     const serverResponse = await dispatch(
       thunkLogin({
@@ -20,6 +23,8 @@ function LoginFormModal() {
         password,
       })
     );
+
+    setLoading(false);
 
     if (serverResponse) {
       setErrors(serverResponse);
@@ -32,16 +37,22 @@ function LoginFormModal() {
     const demoUser = {
       email: "demo@aa.io",
       password: "password"
-    }
-    setEmail(demoUser.email)
-    setPassword(demoUser.password)
+    };
+
+    setEmail(demoUser.email);
+    setPassword(demoUser.password);
+
+    setLoading(true);
 
     const serverResponse = await dispatch(
       thunkLogin({
         email: demoUser.email,
         password: demoUser.password
       })
-    )
+    );
+
+    setLoading(false);
+
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
@@ -75,12 +86,24 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit" className="submit">Log In</button>
+        <button type="submit" className="submit" disabled={loading}>
+          {loading ? (
+            'Logging In...'
+          ) : (
+            'Log In'
+          )}
+
+        </button>
+        {loading && (
+        <div className="loadingSpinner">
+          <i className="fas fa-spinner fa-spin"></i>
+        </div>
+        )}
       </form>
 
       <button className='DemoButton' type="button" onClick={handleDemoLogin}>
-          Demo User
-        </button>
+        Demo User
+      </button>
     </div>
   );
 }

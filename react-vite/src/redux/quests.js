@@ -21,7 +21,6 @@ export const joinQuest = (questId, userId) => async (dispatch)=> {
             method: "POST",
         })
 
-        console.log("Response Status:", response.status)
         if (!response.ok) {
             const responseData = await response.json()
             console.error("Failed to join Quest:", response.statusText, responseData);

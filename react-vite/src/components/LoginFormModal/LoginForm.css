@@ -8,6 +8,7 @@
     text-align: center;
     background-color: #2d2d2d;
     border-radius: 3px;
+    padding: 10px;
 }
 
 .loginInput {
@@ -18,7 +19,7 @@
 }
 
 .submit {
-    width: 30%;
+    width: 100px;
     padding: 5px;
     margin:auto;
     margin-top: 10px;

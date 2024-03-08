@@ -17,12 +17,16 @@ class Quest(db.Model):
     habit_counter= db.Column(db.Integer)
     progress = db.Column(db.Float)
     reward_points = db.Column(db.Integer)
+    complete = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     creator = db.relationship('User', back_populates="my_quests")
     user = db.relationship("User", secondary="user_quests", back_populates='quest')
     habit = db.relationship("Habit", secondary="quest_habits", back_populates="quest")
+
+    party_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('parties.id')))
+    party = db.relationship('Party', back_populates='quests')
 
     def to_dict(self):
         return {
@@ -37,6 +41,7 @@ class Quest(db.Model):
             'reward_points': self.reward_points,
             'user': [user.to_dict() for user in self.user],
             'habits': [habit.to_dict()for habit in self.habit],
+            'party_id': self.party_id,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at, 
         }

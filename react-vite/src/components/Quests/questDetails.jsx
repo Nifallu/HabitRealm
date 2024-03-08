@@ -1,8 +1,9 @@
 import {useState, useEffect} from "react";
 import QuestModal from "../QuestFormModal/questFormModal";
 import HabitModal from "../HabitsFormModal/HabitsFormModal";
+import AbandonQuest from "../AbandonModal/abandonModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { joinQuest, abandonQuest, getQuestHabits } from "../../redux/quests";
+import { joinQuest, getQuestHabits } from "../../redux/quests";
 import { useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -98,16 +99,6 @@ const QuestDetails =() => {
                 console.log("Error joining quest:", error.message)
             }
         }
-        const handleAbandon = async(questId) => {
-            if (window.confirm("Are you sure you want to abandon this quest?")){
-                try {
-                    await dispatch(abandonQuest(questId, sessionUser.id))
-                    fetchAQuest(questId)
-                } catch (error){
-                    console.error("Error abandoning quest:", error.message)
-                }
-            }
-        }
 
     return (
         <div>
@@ -134,7 +125,6 @@ const QuestDetails =() => {
                             <li className="habitDescription">{habit.description}</li>
                             {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ?
                             <div className="incrementButtons">
-                                {console.log(quest.Quest.habit_counter, quest.Quest.goal, quest.Quest.progress)}
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "plus")}> + </button>
                             <button onClick={()=>handleUpdateQuestProgress(quest.Quest.id, habit.id, "minus")}> - </button>
                             </div> : null}
@@ -152,7 +142,7 @@ const QuestDetails =() => {
                             <OpenModalMenuItem
                                 itemText="Update"
                                 onItemClick={closeMenu}
-                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={null} habit={habit} />}
+                                modalComponent={<HabitModal fetchHabits={fetchData} habitId={habit.id} questId={quest.Quest.id} habit={habit} />}
                             />
                             </> : null }
                             </div>
@@ -167,13 +157,13 @@ const QuestDetails =() => {
                     <p>{quest.Quest ? quest.Quest.description: "No Description"}</p>
                     <div className="difficultReward">
                         <p>{quest.Quest ? <p>Difficulty: {quest.Quest.difficulty}</p>: "No difficulty"}</p>
-                        <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points}</p>: "No Rewards"}</p>
+                        <p>{quest.Quest ? <p>Reward: {quest.Quest.reward_points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></p> :  "No Rewards"}</p>
                     </div>
                     <p className="progressWord">Progress</p>
                     {quest.Quest ? (
                     <div className="backProgressBar">
                         <div className="progressBar"
-                            style={{width: `${quest.Quest.progress *5}px`}}
+                            style={{width: `${quest.Quest.progress}%`}}
                         >{quest.Quest.progress}%</div>
                         </div> ) : null }
                     <div className="questButtons">
@@ -181,9 +171,17 @@ const QuestDetails =() => {
                     {quest.Quest && !quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                         <button onClick={() => handleJoin(quest.Quest.id)}>Join Quest</button>
                     ) : null}
-                        {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
+                        {/* {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? (
                             <button onClick={() => handleAbandon(quest.Quest.id)}>Abandon Quest</button>
-                        ) : null}
+                        ) : null} */}
+                        {quest.Quest && quest.Quest.user.some(user => user.id === sessionUser.id) ? 
+                        <>
+                        <OpenModalMenuItem
+                            itemText="Abandon Quest"
+                            onItemClick={closeMenu}
+                            modalComponent={<AbandonQuest fetches={fetchAQuest} questId={quest.Quest.id}/>}
+                        />
+                        </> : null }
                         {quest.Quest && sessionUser.id === quest.Quest.creator_id ?
                             <>
                                     <OpenModalMenuItem
@@ -213,7 +211,7 @@ const QuestDetails =() => {
                                 </h4>
                                 <div className="difficultyReward">
                                 <li>Difficulty {quest.difficulty}</li>
-                                <li>Reward {quest.reward_points}</li>
+                                <li>Reward {quest.reward_points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></li>
                                 </div>
                                 <hr></hr>
                             </div>}

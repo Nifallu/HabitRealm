@@ -148,7 +148,7 @@ const Habits = () =>{
                                             >{quest.name}</h3>                          
                                                 <div className="backProgressBar">
                                                     <div className="progressBar"
-                                                        style={{width: `${quest.progress *5}px`}}
+                                                        style={{width: `${quest.progress}%`}}
                                                     >{quest.progress}%</div>
                                                 </div>
                                             {Array.isArray(quest.habits) && quest.habits.length > 0 ? (

@@ -1,13 +1,25 @@
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const UPDATE_REWARDS = 'session/updateRewards'
+const UPDATE_POINTS = 'session/updatePoints'
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
 
 const removeUser = () => ({
   type: REMOVE_USER
+});
+
+export const updateRewards = (rewards) => ({
+  type: UPDATE_REWARDS,
+  payload: rewards,
+});
+
+export const updatePoints = (points) => ({
+  type: UPDATE_POINTS,
+  payload: points,
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
@@ -63,6 +75,32 @@ export const thunkLogout = () => async (dispatch) => {
   dispatch(removeUser());
 };
 
+export const thunkUpdatePointsRewards = (userId, points, rewards) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/users/${userId}/update_points_rewards`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ points, rewards }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (points){
+        dispatch(updatePoints( points));
+      }
+      if (rewards){
+        dispatch(updateRewards( rewards));
+      }
+      
+    } else {
+      const errorMessages = await response.json();
+      console.error(errorMessages.error);
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+};
+
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
@@ -71,6 +109,10 @@ function sessionReducer(state = initialState, action) {
       return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
+    case UPDATE_REWARDS:
+      return { ...state, user: { ...state.user, rewards: action.payload } };
+    case UPDATE_POINTS:
+      return { ...state, user: { ...state.user, points: action.payload } };
     default:
       return state;
   }

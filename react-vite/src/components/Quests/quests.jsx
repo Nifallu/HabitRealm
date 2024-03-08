@@ -56,7 +56,7 @@ const Quests =() => {
     return (
         <div className="QuestBlock">
             <ul>
-                <h1>Quests</h1>
+                <h1 className="QuestHeader">Quests</h1>
                 {sessionUser ? <OpenModalMenuItem
                     itemText="Create Quest"
                     onItemClick={{closeMenu}}
@@ -75,7 +75,7 @@ const Quests =() => {
                             <li className="description">{quest.description}</li>
                             <div className="rewardDifficulty">
                             <li>Difficulty: {quest.difficulty}</li>
-                            <li>Reward: {quest.reward_points}</li>
+                            <li>Reward: {quest.reward_points} <img src="https://i.ibb.co/b7SQRXV/Gem.png" alt="Gem"></img></li>
                             <li>Progress:  {quest.progress}%</li>
                             </div>
                             <div className="updateDeleteQuests">
