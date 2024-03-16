@@ -71,3 +71,17 @@
     font-size: larger;
     font-weight: bolder;
 }
+
+@media screen  and (max-width: 1100px){
+    .item-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .rewardHeading {
+        margin-top: 60px;
+    }
+    .rewardHeading h1 {
+        font-size: x-large;
+    }
+
+}
