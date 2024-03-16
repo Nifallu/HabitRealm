@@ -96,3 +96,10 @@
     width: 100%;
     box-shadow: 1px 1px 5px 2px #3c0a7d;
 }
+
+@media screen  and (max-width: 950px){
+    .habitBox {
+        display: flex;
+        flex-direction: column;
+    }
+}
